@@ -1,15 +1,37 @@
 <!DOCTYPE html>
-<html>
 <style>
-h1{
-    color: lightgreen;
-}
-p{
-    color: white;
-}
+    h1 {
+        color: lightgreen;
+    }
+
+    p {
+        color: white;
+    }
+
+    .button {
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 32px;
+        margin: 4px 2px;
+        transition-duration: 0.2s;
+        cursor: pointer;
+        background-color: #303030;
+        color: white;
+        border: 3px solid green;
+    }
+
+        .button:hover {
+            background-color: green;
+            color: white;
+        }
 </style>
+<html>
 <body style="background-color:#303030;">
-<h1>SamsterBirdies random website thing</h1>
-<p>Website exists! Eventually this will have more than just random text!</p>
+    <h1>SamsterBirdies random website thing</h1>
+    <a class="button" href="/index.html">Home</a>
+    <a class="button" href="/repo.html">Repo</a>
+    <p>Website exists! Eventually this will have more than just random text!</p>
 </body>
 </html>
