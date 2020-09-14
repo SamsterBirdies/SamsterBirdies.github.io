@@ -47,24 +47,38 @@
             color: white;
             border: 1px solid white;
         }
-    .border {
+    .border{
         border: 2px solid lightgreen;
     }
+    .buttonsmall{
+        padding: 2px 4px;
+        font-size: 20px;
+        border: 2px solid green;
+    }
+        .buttonsmall:hover {
+            background-color: green;
+            color: white;
+            border: 2px solid lightgreen;
+        }
 </style>
 <html>
 <body style="background-color:#303030;">
-    <h1><img class="border" src="./images/sb.webp" alt="sb.webp" width="50" height="50"> SamsterBirdies Repo</h1>
+    <h1><img class="border" src="./images/sb.webp" alt="sb.webp" width="50" height="50"> SamsterBirdies Tools</h1>
     <nav>
         <a class="button" href="./index.html">Home</a>|
-        <a class="button" href="./tools.html">Tools</a>
-        <a class="button buttonselected" href="./repo.html">Repo</a>
+        <a class="button buttonselected" href="./tools.html">Tools</a>
+        <a class="button" href="./repo.html">Repo</a>
     </nav>
-    <h2>Repos:</h2>
-    <a href="https://github.com/SamsterBirdies?tab=repositories">GitHub Repositories</a>
-    <a href="https://www.dropbox.com/sh/8mj6b9vuk1w6es0/AAAW7-paCisIb4-VLnO3zk8Pa?dl=0"><br>Dropbox</a>
-    <h2>Projects:</h2>
-    <p>Number-letter converter <a class="button buttondl" href="https://github.com/SamsterBirdies/number-letter-converter/releases/download/1.0/number-letter.py" download>.py</a></p>
-    <p>Commander folder creator <a class="button buttondl" href="https://github.com/SamsterBirdies/commanderfolders/releases/download/1.0/commanderfolders.py" download>.py</a>  <a class="button buttondl" href="https://github.com/SamsterBirdies/commanderfolders/releases/download/1.0/commanderfolders.exe" download>.exe</a></p>
-    <h2>Mods:</h2>
+    <h1>Everything on this page is a work in progress and 99.99% most likely isnt functional at all.</h1>
+    <h2>Number-Letter converter</h2>
+    <form>
+        <label style="color: white;" for="numberletterinput">Number or letter input:</label><br>
+        <input style="background-color: lightgrey;" type="text" id="numberletterinput" name="numberletterinput" size="80"><br>
+        <button class="button buttonsmall" type="submit" onclick="alert(fart + 'tonumber');">To number</button>
+        <button class="button buttonsmall" type="submit" onclick="alert(fart + 'toletter');">To letter</button>
+    </form>
+    <script>
+        var fart = "hi" //document.forms["numberletterinput"]["numberletterinput"].value;
+    </script>
 </body>
 </html>
