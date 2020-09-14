@@ -3,18 +3,15 @@
     h1 {
         color: lightgreen;
     }
-
     h2 {
         color: white;
         font-size: 24px;
     }
-
     p {
         color: white;
     }
-
     a {
-        color: lightgreen;
+        color: lightblue;
     }
 
     .button {
@@ -30,31 +27,38 @@
         color: white;
         border: 3px solid green;
     }
-
         .button:hover {
             background-color: green;
             color: white;
             border: 3px solid lightgreen;
         }
-
+    .buttonselected {
+        background-color: green;
+        color: white;
+        border: 3px solid lightgreen;
+    }
     .buttondl {
         padding: 1px 2px;
         font-size: 16px;
         border: 1px solid lightgreen;
         background-color: green;
     }
-
         .buttondl:hover {
             background-color: lightgreen;
             color: white;
             border: 1px solid white;
         }
+    .border{
+        border: 2px solid lightgreen;
+    }
 </style>
 <html>
 <body style="background-color:#303030;">
-    <h1>SamsterBirdies site</h1>
-    <a class="button" href="/index.html">Home</a>
-    <a class="button" href="/repo.html">Repo</a>
+    <h1><img class="border" src="/images/sb.webp" alt="sb.webp" width="50" height="50" > SamsterBirdies Home</h1>
+    <nav>
+        <a class="button buttonselected" href="/index.html">Home</a>|
+        <a class="button" href="/repo.html">Repo</a>
+    </nav>
     <p>Here I put whatever cool things I have for you.</p>
 </body>
 </html>
