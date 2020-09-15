@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<style>
+    h1 {
+        color: lightgreen;
+    }
+
+    h2 {
+        color: white;
+        font-size: 24px;
+    }
+
+    p {
+        color: white;
+    }
+
+    a {
+        color: lightblue;
+    }
+
+    .button {
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 32px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #303030;
+        color: white;
+        border: 3px solid green;
+    }
+
+        .button:hover {
+            background-color: green;
+            color: white;
+            border: 3px solid lightgreen;
+        }
+
+    .buttonselected {
+        background-color: green;
+        color: white;
+        border: 3px solid lightgreen;
+    }
+
+    .buttondl {
+        padding: 1px 2px;
+        font-size: 16px;
+        border: 1px solid lightgreen;
+        background-color: green;
+    }
+
+        .buttondl:hover {
+            background-color: lightgreen;
+            color: white;
+            border: 1px solid white;
+        }
+
+    .border {
+        border: 2px solid lightgreen;
+    }
+
+    .buttonsmall {
+        padding: 2px 4px;
+        font-size: 20px;
+        border: 2px solid green;
+    }
+
+        .buttonsmall:hover {
+            background-color: green;
+            color: white;
+            border: 2px solid lightgreen;
+        }
+    .buttonsmallselected {
+        background-color: green;
+        color: white;
+        border: 2px solid lightgreen;
+    }
+    .textareainput{
+        background-color:#303030;
+        color: white;
+        border:2px solid green;
+    }
+        .textareainput:hover{
+            border:2px solid lightgreen;
+        }
+</style>
+<html>
+<body style="background-color:#303030;">
+    <form>
+        <button class="button buttonsmall" type="button" onclick="SelectToNumber()" id="ButtonToNumber">To number</button>
+        <button class="button buttonsmall" type="button" onclick="SelectToLetter()"id="ButtonToLetter">To letter</button><br>
+        <label style="color: white;" for="numberletterinput">Number or letter input:</label><br>
+        <textarea class="textareainput" id="numberletterinput" oninput="Convert()"></textarea><br>
+    </form>
+    <p id="output_txt"></p>
+    <script>
+        var mode;
+        function SelectToNumber() {
+            mode = 1;
+            document.getElementById("ButtonToNumber").className = "button buttonsmall buttonsmallselected";
+            document.getElementById("ButtonToLetter").className = "button buttonsmall";
+            Convert();
+        }
+        function SelectToLetter() {
+            mode = 2;
+            document.getElementById("ButtonToLetter").className = "button buttonsmall buttonsmallselected";
+            document.getElementById("ButtonToNumber").className = "button buttonsmall";
+            Convert();
+        }
+        function Convert() {
+            if (mode == 1) {
+                ConvertToNumber();
+            }
+            if (mode == 2) {
+                ConvertToLetter();
+            }
+        }
+        function ConvertToNumber() {
+            let characters = " abcdefghijklmnopqrstuvwxyz";
+            let keysentence = "";
+            let userinput = document.getElementById("numberletterinput").value;
+            let doloop = true;
+            for (x of userinput) {
+                let i = 0;
+                while (doloop) {
+                    //alert("its doing something" + i)
+                    if (x == "\n") {
+                        keysentence += ("\n");
+                        break
+                    }
+                    if (x == characters[i]) {
+                        keysentence += (" " + i);
+                        break
+                    }
+                    i++;
+                    if (i > 26) {
+                        if (x != "\n") {
+                            //alert("Error: " + "\"" + x + "\"" + " is not a letter");
+                        }
+                        break
+                    }
+                }
+            }
+            document.getElementById("output_txt").innerHTML = keysentence;
+        }
+        function ConvertToLetter() {
+
+            let characters = " abcdefghijklmnopqrstuvwxyz";
+            let keysentence = "";
+            let i = 0;
+            let userinput = document.getElementById("numberletterinput").value;
+            keysentence += characters[userinput];
+            for (x of characters) {
+                keysentence += (i + x);
+                i++;
+            }
+            alert(keysentence);
+        }
+    </script>
+</body>
+</html>
