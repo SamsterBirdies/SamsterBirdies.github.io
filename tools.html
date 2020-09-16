@@ -60,6 +60,21 @@
             color: white;
             border: 2px solid lightgreen;
         }
+    #target {
+        width: 400px;
+        height: 400px;
+        overflow-y: auto;
+        overflow-x: auto;
+        resize: both;
+        position: relative;
+        z-index: 2;
+        border: 3px double green;
+    }
+    .iframe {
+        width: 100%;
+        height: 95%;
+        border:none;
+    }
 </style>
 <html>
 <body style="background-color:#303030;">
@@ -69,16 +84,7 @@
         <a class="button buttonselected" href="./tools.html">Tools</a>
         <a class="button" href="./repo.html">Repo</a>
     </nav>
-    <h1>Everything on this page is a work in progress and 99.99% most likely isnt functional at all.</h1>
     <h2>Number-Letter converter</h2>
-    <form>
-        <label style="color: white;" for="numberletterinput">Number or letter input:</label><br>
-        <input style="background-color: lightgrey;" type="text" id="numberletterinput" name="numberletterinput" size="80"><br>
-        <button class="button buttonsmall" type="submit" onclick="alert(fart + 'tonumber');">To number</button>
-        <button class="button buttonsmall" type="submit" onclick="alert(fart + 'toletter');">To letter</button>
-    </form>
-    <script>
-        var fart = "hi" //document.forms["numberletterinput"]["numberletterinput"].value;
-    </script>
+    <div id="target"><iframe class="iframe" src="./scripts/numberletter.html" title="Number-Letter converter"/></div>
 </body>
 </html>

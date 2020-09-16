@@ -87,14 +87,26 @@
 <html>
 <body style="background-color:#303030;">
     <form>
+        <label style="color: white;" for="wscinput">Numbers seperated by:</label>
+        <textarea style="resize: none;" class="textareainput" id="wscinput" oninput="DoWsc()" maxlength="1" cols="1" rows="1"></textarea><br>
         <button class="button buttonsmall" type="button" onclick="SelectToNumber()" id="ButtonToNumber">To number</button>
-        <button class="button buttonsmall" type="button" onclick="SelectToLetter()"id="ButtonToLetter">To letter</button><br>
-        <label style="color: white;" for="numberletterinput">Number or letter input:</label><br>
-        <textarea class="textareainput" id="numberletterinput" oninput="Convert()"></textarea><br>
+        <button class="button buttonsmall" type="button" onclick="SelectToLetter()" id="ButtonToLetter">To letter</button><br>
+        <label style="color: white;" for="numberletterinput">Input:</label><br>
+        <textarea class="textareainput" id="numberletterinput" oninput="Convert()" cols="30" rows="4"></textarea><br>
     </form>
+    <button class="button buttonsmall" type="button" onclick="CopyOutput()" id="ButtonCopy">Copy output</button><br>
+    <label style="color: white;" for="output_txt">Output:</label>
     <p id="output_txt"></p>
+    <p id="debug_txt"></p>
     <script>
+        var wsc = " ";
         var mode;
+        var outputTxt = "";
+        var doDebug = false;
+        function DoWsc() {
+            wsc = document.getElementById("wscinput").value;
+            Convert();
+        }
         function SelectToNumber() {
             mode = 1;
             document.getElementById("ButtonToNumber").className = "button buttonsmall buttonsmallselected";
@@ -116,45 +128,93 @@
             }
         }
         function ConvertToNumber() {
-            let characters = " abcdefghijklmnopqrstuvwxyz";
-            let keysentence = "";
-            let userinput = document.getElementById("numberletterinput").value;
-            let doloop = true;
-            for (x of userinput) {
+            var characters = " abcdefghijklmnopqrstuvwxyz";
+            var keysentence = "";
+            var userinput = document.getElementById("numberletterinput").value;
+            var doloop = true;
+            for (x of userinput.toLowerCase()) {
                 let i = 0;
                 while (doloop) {
-                    //alert("its doing something" + i)
                     if (x == "\n") {
                         keysentence += ("\n");
                         break
                     }
                     if (x == characters[i]) {
-                        keysentence += (" " + i);
+                        keysentence += (i + wsc);
                         break
                     }
                     i++;
                     if (i > 26) {
                         if (x != "\n") {
-                            //alert("Error: " + "\"" + x + "\"" + " is not a letter");
                         }
                         break
                     }
                 }
             }
             document.getElementById("output_txt").innerHTML = keysentence;
+            outputTxt = keysentence;
         }
         function ConvertToLetter() {
-
-            let characters = " abcdefghijklmnopqrstuvwxyz";
-            let keysentence = "";
-            let i = 0;
-            let userinput = document.getElementById("numberletterinput").value;
-            keysentence += characters[userinput];
-            for (x of characters) {
-                keysentence += (i + x);
-                i++;
+            var debug = "";
+            var characters = " abcdefghijklmnopqrstuvwxyz";
+            var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+            var keysentence = "";
+            var keylist = [];
+            var ii = 0;
+            var next = false;
+            var firstcharacter = true;
+            var userinput = document.getElementById("numberletterinput").value;
+            for (x of userinput) {
+                if (x == wsc && firstcharacter) {
+                    debug += "Ignoring whitespace since character has not been added yet.<br>";
+                } else if (x == wsc) {
+                    next = true;
+                    debug += "Setting next to true because of whitespace.<br>";
+                } else if (numbers.includes(x)) {
+                    if (firstcharacter) {
+                        keylist.push(x);
+                        next = false;
+                        firstcharacter = false;
+                        debug += "First entered character.<br>";
+                    }else if (next) {
+                        keylist.push(x);
+                        ii++;
+                        next = false;
+                        debug += "first character in array entry.<br>";
+                    } else {
+                        keylist[ii] = ((keylist[ii] * 10) + Number(x));
+                        debug += "Multiplying array entry by 10 and adding character.<br>";
+                    }
+                } else {
+                    debug += "Ignoring unrecognized character.<br>"
+                }
+                lastkey = x;
             }
-            alert(keysentence);
+            for (x of keylist) {
+                if (x <= 26) {
+                    keysentence += characters[x];
+                } else {
+                    debug += "OUTPUT: Ignoring entry higher than 26: " + x + ".<br>";
+                }
+            }
+            keylist = [];
+            document.getElementById("output_txt").innerHTML = keysentence;
+            outputTxt = keysentence;
+            if (doDebug) { document.getElementById("debug_txt").innerHTML = debug; }
+        }
+        //Thanks to Kevin Marszalek for the copy text workaround tutorial (as shown below)! https://actualwizard.com/how-to-copy-text-to-the-clipboard-with-html-and-javascript
+        function CopyOutput() {
+            var hiddenElement = document.createElement("div"); //create hidden element
+            hiddenElement.innerHTML = outputTxt;
+            hiddenElement.style.position = "absolute";
+            hiddenElement.style.left = "-9999px";
+            document.body.appendChild(hiddenElement);
+            window.getSelection().removeRange(document.getSelection().getRangeAt(0)); //remove selection
+            var copy = document.createRange(); //copy hidden element
+            copy.selectNode(hiddenElement);
+            window.getSelection().addRange(copy);
+            document.execCommand("copy");
+            document.body.removeChild(hiddenElement);
         }
     </script>
 </body>
