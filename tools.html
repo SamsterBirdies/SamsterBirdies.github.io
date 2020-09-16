@@ -11,8 +11,25 @@
         color: white;
     }
     a {
-        color: lightblue;
+        color: white;
     }
+    l {
+        color: lightblue;
+        padding: 1px 2px;
+        border: 1px dashed #252525;
+    }
+
+        l:hover {
+            color: lightblue;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+        l:active {
+            color: white;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
     .button {
         padding: 4px 8px;
         text-align: center;
@@ -20,32 +37,59 @@
         display: inline-block;
         font-size: 32px;
         margin: 4px 2px;
-        transition-duration: 0.2s;
         cursor: pointer;
-        background-color: #303030;
+        background-color: #454545;
         color: white;
         border: 3px solid green;
     }
+
         .button:hover {
-            background-color: green;
+            background-color: #606060;
             color: white;
             border: 3px solid lightgreen;
         }
+
+        .button:active {
+            background-color: lightgreen;
+            color: white;
+            border: 3px solid white;
+        }
+
     .buttonselected {
         background-color: green;
         color: white;
         border: 3px solid lightgreen;
     }
+
+        .buttonselected:hover {
+            background-color: green;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .button:active {
+        background-color: lightgreen;
+        color: white;
+        border: 3px solid white;
+    }
+
     .buttondl {
         padding: 1px 2px;
         font-size: 16px;
-        border: 1px solid lightgreen;
-        background-color: green;
+        border: 1px solid green;
+        background-color: #454545;
     }
+
         .buttondl:hover {
-            background-color: lightgreen;
+            background-color: #606060;
             color: white;
+            border: 1px solid lightgreen;
+        }
+
+        .buttondl:active {
+            background-color: lightgreen;
             border: 1px solid white;
+            color: white;
         }
     .border{
         border: 2px solid lightgreen;
@@ -71,13 +115,13 @@
         border: 3px double green;
     }
     .iframe {
-        width: 100%;
-        height: 95%;
+        width: 99%;
+        height: 96%;
         border:none;
     }
 </style>
 <html>
-<body style="background-color:#303030;">
+<body style="background-color:#252525;">
     <h1><img class="border" src="./images/sb.webp" alt="sb.webp" width="50" height="50"> SamsterBirdies Tools</h1>
     <nav>
         <a class="button" href="./index.html">Home</a>|

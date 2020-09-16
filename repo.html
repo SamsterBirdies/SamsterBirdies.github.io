@@ -11,8 +11,23 @@
         color: white;
     }
     a {
-        color: lightblue;
+        color: white;
     }
+    l {
+        color: lightblue;
+        padding: 1px 2px;
+        border: 1px dashed #252525;
+    }
+        l:hover {
+            color: lightblue;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+        l:active {
+            color: white;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
     .button {
         padding: 4px 8px;
         text-align: center;
@@ -20,39 +35,66 @@
         display: inline-block;
         font-size: 32px;
         margin: 4px 2px;
-        transition-duration: 0.2s;
         cursor: pointer;
-        background-color: #303030;
+        background-color: #454545;
         color: white;
         border: 3px solid green;
     }
+
         .button:hover {
-            background-color: green;
+            background-color: #606060;
             color: white;
             border: 3px solid lightgreen;
         }
+
+        .button:active {
+            background-color: lightgreen;
+            color: white;
+            border: 3px solid white;
+        }
+
     .buttonselected {
         background-color: green;
         color: white;
         border: 3px solid lightgreen;
     }
+
+        .buttonselected:hover {
+            background-color: green;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .button:active {
+        background-color: lightgreen;
+        color: white;
+        border: 3px solid white;
+    }
+
     .buttondl {
         padding: 1px 2px;
         font-size: 16px;
-        border: 1px solid lightgreen;
-        background-color: green;
+        border: 1px solid green;
+        background-color: #454545;
     }
+
         .buttondl:hover {
-            background-color: lightgreen;
+            background-color: #606060;
             color: white;
+            border: 1px solid lightgreen;
+        }
+
+        .buttondl:active {
+            background-color: lightgreen;
             border: 1px solid white;
+            color: white;
         }
     .border {
         border: 2px solid lightgreen;
     }
 </style>
 <html>
-<body style="background-color:#303030;">
+<body style="background-color:#252525;">
     <h1><img class="border" src="./images/sb.webp" alt="sb.webp" width="50" height="50"> SamsterBirdies Repo</h1>
     <nav>
         <a class="button" href="./index.html">Home</a>|
@@ -60,8 +102,8 @@
         <a class="button buttonselected" href="./repo.html">Repo</a>
     </nav>
     <h2>Repos:</h2>
-    <a href="https://github.com/SamsterBirdies?tab=repositories">GitHub Repositories</a>
-    <a href="https://www.dropbox.com/sh/8mj6b9vuk1w6es0/AAAW7-paCisIb4-VLnO3zk8Pa?dl=0"><br>Dropbox</a>
+    <l href="https://github.com/SamsterBirdies?tab=repositories">GitHub Repositories</l><br>
+    <l href="https://www.dropbox.com/sh/8mj6b9vuk1w6es0/AAAW7-paCisIb4-VLnO3zk8Pa?dl=0">Dropbox</l>
     <h2>Projects:</h2>
     <p>Number-letter converter <a class="button buttondl" href="https://github.com/SamsterBirdies/number-letter-converter/releases/download/1.0/number-letter.py" download>.py</a><a class="button buttondl" href="./scripts/numberletter.html" download>.html</a></p>
     <p>Commander folder creator <a class="button buttondl" href="https://github.com/SamsterBirdies/commanderfolders/releases/download/1.0/commanderfolders.py" download>.py</a>  <a class="button buttondl" href="https://github.com/SamsterBirdies/commanderfolders/releases/download/1.0/commanderfolders.exe" download>.exe</a></p>
