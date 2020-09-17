@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<style>
+    h1 {
+        color: lightgreen;
+    }
+
+    h2 {
+        color: white;
+        font-size: 24px;
+    }
+
+    p {
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+
+    l {
+        color: lightblue;
+        padding: 1px 2px;
+        border: 1px dashed #252525;
+    }
+
+        l:hover {
+            color: lightblue;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+        l:active {
+            color: white;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+    .button {
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 32px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #454545;
+        color: white;
+        border: 3px solid green;
+    }
+
+        .button:hover {
+            background-color: #606060;
+            color: white;
+            border: 3px solid lightgreen;
+        }
+
+        .button:active {
+            background-color: lightgreen;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .buttonselected {
+        background-color: green;
+        color: white;
+        border: 3px solid lightgreen;
+    }
+
+        .buttonselected:hover {
+            background-color: green;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .button:active {
+        background-color: lightgreen;
+        color: white;
+        border: 3px solid white;
+    }
+
+    .buttondl {
+        padding: 1px 2px;
+        font-size: 16px;
+        border: 1px solid green;
+        background-color: #454545;
+    }
+
+        .buttondl:hover {
+            background-color: #606060;
+            color: white;
+            border: 1px solid lightgreen;
+        }
+
+        .buttondl:active {
+            background-color: lightgreen;
+            border: 1px solid white;
+            color: white;
+        }
+
+    .border {
+        border: 2px solid lightgreen;
+    }
+
+    .buttonsmall {
+        padding: 2px 4px;
+        font-size: 20px;
+        border: 2px solid green;
+    }
+
+        .buttonsmall:hover {
+            background-color: #606060;
+            color: white;
+            border: 2px solid lightgreen;
+        }
+
+        .buttonsmall:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+        }
+
+    .buttonsmallselected {
+        background-color: green;
+        color: white;
+        border: 2px solid lightgreen;
+    }
+
+        .buttonsmallselected:hover {
+            background-color: green;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .buttonsmallselected:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+            color: white;
+        }
+
+    .textareainput {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
+    }
+
+        .textareainput:hover {
+            border: 2px solid lightgreen;
+        }
+
+    .imagecontainer {
+        border: none;
+        position: relative;
+    }
+
+    .img1 {
+        border: none;
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+    }
+
+    .img2 {
+        border: none;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 291px;
+        height: 32px;
+        background: #454545;
+        color: green;
+        border: 2px solid green;
+    }
+
+        .slider:hover {
+            border: 2px solid lightgreen;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 36px;
+            height: 28px;
+            background: green;
+            cursor: pointer;
+            border: 2px solid lightgreen;
+        }
+
+            .slider::-webkit-slider-thumb:hover {
+                border: 2px solid white;
+            }
+
+            .slider::-webkit-slider-thumb:active {
+                background: lightgreen;
+                border: 2px solid white;
+            }
+
+    #target {
+        width: 864px;
+        height: 486px;
+        overflow-y: auto;
+        overflow-x: auto;
+        resize: both;
+        position: relative;
+        z-index: 2;
+        border: 2px solid green;
+    }
+</style>
+<title>Shader Comparer</title>
+<html>
+<body style="background-color:#252525;">
+    <class id="ui">
+        <label for="opacityslider" style="color: white">Opacity</label><br>
+        <input type="range" min="0" max="255" value="0" class="slider" id="opacityslider" oninput="ChangeOpacity()">
+        <form style="color:white; font-size:18px">
+            Scene: 
+            <select id="scene" class="button buttonsmall" style="font-size:16px" oninput="SceneSelect()">
+                <option value="forest">Forest</option>
+                <option value="indoor">Indoor</option>
+                <option value="cave">Cave</option>
+                <option value="night">Night</option>
+                <option value="rain">Rain</option>
+                <option value="sunrise">Sunrise</option>
+            </select>
+            Pack 1:
+                    <select id="pack1"class="button buttonsmall" style="font-size:16px" oninput="Pack1Select()">
+                        <option value="chocapic">Chocapic13 v6</option>
+                        <option value="sildurs">Sildurs</option>
+                        <option value="seus">SEUS v10.1</option>
+                    </select>
+            Pack 2:
+                    <select id="pack2"class="button buttonsmall" style="font-size:16px" oninput="Pack2Select()">
+                        <option value="chocapic">Chocapic13 v6</option>
+                        <option value="sildurs">Sildurs</option>
+                        <option value="seus">SEUS v10.1</option>
+                    </select>
+        </form>
+    </class><br>
+    <div id="target">
+        <img class="img1" src="./shaders/forestchocapic.webp" id="image1" />
+        <img class="img2" src="./shaders/forestchocapic.webp" id="image2" />
+    </div>
+    <script>
+        var scene = "forest";
+        var pack1 = "chocapic";
+        var pack2 = "chocapic";
+        function ChangeOpacity() {
+            var opacity = (255 - document.getElementById("opacityslider").value) / 255;
+            document.getElementById("image1").style.opacity = opacity;
+        }
+        function SceneSelect() {
+            scene = document.getElementById("scene").value;
+            Changeimgs();
+        }
+        function Pack1Select() {
+            pack1 = document.getElementById("pack1").value;
+            Changeimg1();
+        }
+        function Pack2Select() {
+            pack2 = document.getElementById("pack2").value;
+            Changeimg2();
+        }
+        function Changeimgs() {
+            Changeimg1();
+            Changeimg2();
+        }
+        function Changeimg1() {
+            document.getElementById("image1").src = "./shaders/" + scene + pack1 + ".webp";
+        }
+        function Changeimg2() {
+            document.getElementById("image2").src = "./shaders/" + scene + pack2 + ".webp";
+        }
+    </script>
+</body>
+</html>
