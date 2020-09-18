@@ -17,19 +17,19 @@
         color: white;
     }
 
-    l {
+    .link {
         color: lightblue;
         padding: 1px 2px;
         border: 1px dashed #252525;
     }
 
-        l:hover {
+        .link:hover {
             color: lightblue;
             padding: 1px 2px;
             border: 1px dashed grey;
         }
 
-        l:active {
+        .link:active {
             color: white;
             padding: 1px 2px;
             border: 1px dashed grey;
@@ -213,7 +213,7 @@
 <html>
 <body style="background-color:#252525;">
     <class id="ui">
-        <label for="opacityslider" style="color: white">Opacity</label><br>
+        <label for="opacityslider" style="color: white">Pack 1 < ----- Fader ----- > Pack2</label><br>
         <input type="range" min="0" max="255" value="0" class="slider" id="opacityslider" oninput="ChangeOpacity()">
         <form style="color:white; font-size:18px">
             Scene: 
@@ -243,6 +243,7 @@
         <img class="img1" src="./shaders/forestchocapic.webp" id="image1" />
         <img class="img2" src="./shaders/forestchocapic.webp" id="image2" />
     </div>
+    <p>Note: These images have lossy compression. Download lossless version <a class="link" href="https://download-link-doesnt-exist-yet.com">here</a>.</p>
     <script>
         var scene = "forest";
         var pack1 = "chocapic";
