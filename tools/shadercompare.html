@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<style>
+    h1 {
+        color: lightgreen;
+    }
+
+    h2 {
+        color: white;
+        font-size: 24px;
+    }
+
+    p {
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+
+    .link {
+        color: lightblue;
+        padding: 1px 2px;
+        border: 1px dashed #252525;
+    }
+
+        .link:hover {
+            color: lightblue;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+        .link:active {
+            color: white;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+    .button {
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 32px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #454545;
+        color: white;
+        border: 3px solid green;
+    }
+
+        .button:hover {
+            background-color: #606060;
+            color: white;
+            border: 3px solid lightgreen;
+        }
+
+        .button:active {
+            background-color: lightgreen;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .buttonselected {
+        background-color: green;
+        color: white;
+        border: 3px solid lightgreen;
+    }
+
+        .buttonselected:hover {
+            background-color: green;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .button:active {
+        background-color: lightgreen;
+        color: white;
+        border: 3px solid white;
+    }
+
+    .buttondl {
+        padding: 1px 2px;
+        font-size: 16px;
+        border: 1px solid green;
+        background-color: #454545;
+    }
+
+        .buttondl:hover {
+            background-color: #606060;
+            color: white;
+            border: 1px solid lightgreen;
+        }
+
+        .buttondl:active {
+            background-color: lightgreen;
+            border: 1px solid white;
+            color: white;
+        }
+
+    .border {
+        border: 2px solid lightgreen;
+    }
+
+    .buttonsmall {
+        padding: 2px 4px;
+        font-size: 20px;
+        border: 2px solid green;
+    }
+
+        .buttonsmall:hover {
+            background-color: #606060;
+            color: white;
+            border: 2px solid lightgreen;
+        }
+
+        .buttonsmall:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+        }
+
+    .buttonsmallselected {
+        background-color: green;
+        color: white;
+        border: 2px solid lightgreen;
+    }
+
+        .buttonsmallselected:hover {
+            background-color: green;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .buttonsmallselected:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+            color: white;
+        }
+
+    .textareainput {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
+    }
+
+        .textareainput:hover {
+            border: 2px solid lightgreen;
+        }
+
+    .imagecontainer {
+        overflow-y: auto;
+        overflow-x: auto;
+        resize: both;
+        position: relative;
+        z-index: 2;
+        border: 2px solid green;
+    }
+
+    .img1 {
+        border: none;
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+    }
+
+    .img2 {
+        border: none;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 291px;
+        height: 32px;
+        background: #454545;
+        color: green;
+        border: 2px solid green;
+    }
+
+        .slider:hover {
+            border: 2px solid lightgreen;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 36px;
+            height: 28px;
+            background: green;
+            cursor: pointer;
+            border: 2px solid lightgreen;
+        }
+
+            .slider::-webkit-slider-thumb:hover {
+                border: 2px solid white;
+            }
+
+            .slider::-webkit-slider-thumb:active {
+                background: lightgreen;
+                border: 2px solid white;
+            }
+</style>
+<title>Shader Comparer</title>
+<html>
+<body style="background-color:#252525;">
+    <class id="ui">
+        <label for="mode" style="color: white">Mode:</label>
+        <select id="mode" class="button buttonsmall" style="font-size:16px" oninput="ChangeMode()">
+            <option value="overlay">Overlay</option>
+            <option value="sxs">Side by side</option>
+            <option value="stacked">Stacked</option>
+        </select>
+        <label for="opacityslider" style="color: white" id="opacitysliderlabel1">Pack 1<</label>
+        <input type="range" min="0" max="255" value="0" class="slider" id="opacityslider" oninput="ChangeOpacity()">
+        <label for="opacityslider" style="color: white" id="opacitysliderlabel2">>Pack 2</label>
+        <form style="color:white; font-size:18px">
+            Scene:
+            <select id="scene" class="button buttonsmall" style="font-size:16px" oninput="SceneSelect()">
+                <option value="forest">Forest</option>
+                <option value="indoor">Indoor</option>
+                <option value="cave">Cave</option>
+                <option value="night">Night</option>
+                <option value="rain">Rain</option>
+                <option value="sunrise">Sunrise</option>
+                <option value="nether">Nether</option>
+            </select>
+            Pack 1:
+            <select id="pack1" class="button buttonsmall" style="font-size:16px" oninput="PackSelect(1)">
+                <option value="none">None</option>
+                <option value="seus">SEUS</option>
+                <option value="chocapic">Chocapic13</option>
+                <option value="sildurs">Sildurs</option>
+                <option value="continuum">Continuum</option>
+                <option value="luma">Project Luma</option>
+                <option value="beyondbelief">Beyond Belief</option>
+                <option value="voyager">Voyager</option>
+            </select>
+            <select id="pack1vnone" class="button buttonsmall" style="font-size:16px;display:inline" oninput="PackvSelect(1,'none')">
+                <option value=""></option>
+            </select>
+            <select id="pack1vchocapic" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(1,'chocapic')">
+                <option value="9">v9</option>
+                <option value="7.1">v7.1</option>
+                <option value="6">v6</option>
+                <option value="4">v4</option>
+            </select>
+            <select id="pack1vsildurs" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(1,'sildurs')">
+                <option value="1.281">v1.281</option>
+                <option value="1.153">1.153</option>
+                <option value="1.03">v1.03</option>
+                <option value="enhanced1.11">Enhanced Default v1.11</option>
+            </select>
+            <select id="pack1vseus" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(1,'seus')">
+                <option value="renewed1.0.1">Renewed v1.0.1</option>
+                <option value="11">v11</option>
+                <option value="10.2">v10.2</option>
+                <option value="10.1">v10.1</option>
+            </select>
+            <select id="pack1vcontinuum" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(1,'continuum')">
+                <option value="1.3">v1.3</option>
+                <option value="2.0.4">v2.0.4</option>
+            </select>
+            <select id="pack1vluma" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(1,'luma')">
+                <option value="1.32">v1.32</option>
+            </select>
+            <select id="pack1vbeyondbelief" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(1,'beyondbelief')">
+                <option value="1.1.3">Legacy Final v1.1.3</option>
+            </select>
+            <select id="pack1vvoyager" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(1,'voyager')">
+                <option value="1.6">v1.6</option>
+            </select>
+            Pack 2:
+            <select id="pack2" class="button buttonsmall" style="font-size:16px" oninput="PackSelect(2)">
+                <option value="none">None</option>
+                <option value="seus">SEUS</option>
+                <option value="chocapic">Chocapic13</option>
+                <option value="sildurs">Sildurs</option>
+                <option value="continuum">Continuum</option>
+                <option value="luma">Project Luma</option>
+                <option value="beyondbelief">Beyond Belief</option>
+                <option value="voyager">Voyager</option>
+            </select>
+            <select id="pack2vnone" class="button buttonsmall" style="font-size:16px;display:inline" oninput="PackvSelect(2,'none')">
+                <option value=""></option>
+            </select>
+            <select id="pack2vchocapic" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(2,'chocapic')">
+                <option value="9">v9</option>
+                <option value="7.1">v7.1</option>
+                <option value="6">v6</option>
+                <option value="4">v4</option>
+            </select>
+            <select id="pack2vsildurs" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(2,'sildurs')">
+                <option value="1.281">v1.281</option>
+                <option value="1.153">1.153</option>
+                <option value="1.03">v1.03</option>
+                <option value="enhanced1.11">Enhanced Default v1.11</option>
+            </select>
+            <select id="pack2vseus" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(2,'seus')">
+                <option value="renewed1.0.1">Renewed v1.0.1</option>
+                <option value="11">v11</option>
+                <option value="10.2">v10.2</option>
+                <option value="10.1">v10.1</option>
+            </select>
+            <select id="pack2vcontinuum" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(2,'continuum')">
+                <option value="1.3">v1.3</option>
+                <option value="2.0.4">v2.0.4</option>
+            </select>
+            <select id="pack2vluma" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(2,'luma')">
+                <option value="1.32">v1.32</option>
+            </select>
+            <select id="pack2vbeyondbelief" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(2,'beyondbelief')">
+                <option value="1.1.3">Legacy Final v1.1.3</option>
+            </select>
+            <select id="pack2vvoyager" class="button buttonsmall" style="font-size:16px;display:none" oninput="PackvSelect(2,'voyager')">
+                <option value="1.6">v1.6</option>
+            </select>
+
+        </form>
+    </class><br>
+    <div id="imagediv" class="imagecontainer" style="width: 864px; height: 486px;">
+        <img class="img1" src="./shaders/forestnone.webp" alt="Pack 1 image" id="image1" />
+        <img class="img2" src="./shaders/forestnone.webp" alt="Pack 2 image"id="image2" />
+    </div>
+    <p>Drag corner to resize images</p>
+    <script>
+        var scene = "forest";
+        var pack = ["none", "none"];
+        var packlist = ["none", "chocapic", "sildurs", "seus", "continuum", "luma", "beyondbelief", "voyager"];
+        var packv = ["", ""];
+
+        function ChangeMode() {
+            function FaderToggle(state) {
+                document.getElementById("opacityslider").style.display = state;
+                document.getElementById("opacitysliderlabel1").style.display = state;
+                document.getElementById("opacitysliderlabel2").style.display = state;
+            }
+            function ResizeDiv(x, y) {
+                var imagediv = document.getElementById("imagediv");
+                imagediv.style.width = x + "px";
+                imagediv.style.height = y + "px";
+            }
+            var selection = document.getElementById("mode").value;
+            var img1 = document.getElementById("image1");
+            var img2 = document.getElementById("image2");
+            if (selection == "overlay") {
+                FaderToggle("inline");
+                img1.style.position = "absolute";
+                img1.style.width = "100%";
+                img1.style.height = "100%";
+                img2.style.position = "absolute";
+                img2.style.width = "100%";
+                img2.style.height = "100%";
+                ChangeOpacity();
+                ResizeDiv(864, 486);
+            } else if (selection == "sxs") {
+                FaderToggle("none");
+                img1.style.position = "static";
+                img1.style.width = "50%";
+                img1.style.height = "99%";
+                img2.style.position = "absolute";
+                img2.style.width = "50%";
+                img2.style.height = "99%";
+                img1.style.opacity = 1;
+                ResizeDiv(1728, 486);
+            } else if (selection == "stacked") {
+                FaderToggle("none");
+                img1.style.position = "static";
+                img1.style.width = "100%";
+                img1.style.height = "49%";
+                img2.style.position = "static";
+                img2.style.width = "100%";
+                img2.style.height = "49%";
+                img1.style.opacity = 1;
+                ResizeDiv(864, 972);
+            } else {
+
+            }
+        }
+        function ChangeOpacity() {
+            var opacity = (255 - document.getElementById("opacityslider").value) / 255;
+            document.getElementById("image1").style.opacity = opacity;
+        }
+        function SceneSelect() {
+            scene = document.getElementById("scene").value;
+            Changeimgs();
+        }
+        function PackSelect(side) {
+            pack[side - 1] = document.getElementById("pack" + side).value;
+            ChangeV(side);
+            PackvSelect(side,pack[side - 1])
+        }
+        function PackvSelect(side, pack) {
+            packv[side - 1] = document.getElementById("pack" + side + "v" + pack).value;
+            Changeimg(side);
+        }
+        function ChangeV(side) {
+            for (var x of packlist) {
+                document.getElementById("pack" + side + "v" + x).style.display = "none";
+            }
+            document.getElementById("pack" + side + "v" + pack[side - 1]).style.display = "inline";
+        }
+        function Changeimgs() {
+            Changeimg(1);
+            Changeimg(2);
+        }
+        function Changeimg(side) {
+            document.getElementById("image" + side).src = "./shaders/" + scene + pack[side - 1] + packv[side - 1] + ".webp";
+        }
+    </script>
+</body>
+</html>

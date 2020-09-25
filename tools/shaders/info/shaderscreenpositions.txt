@@ -1,0 +1,39 @@
+In SURVIVE world save:
+	Open to lan and enable cheats.
+	Set FOV to 80.
+	type /gamerule dodaylightcycle false
+	Set chunk distance to 16.
+	For each of the scenes, the directions are below.
+	You should be standing on a diamond block for each TP.
+	Make sure you are not flying, since that changes the FOV.
+	Clouds off.
+
+Forest:
+	/tp @s -15.5 69 257.5 2.5 -11.5
+	/time set noon
+	/weather clear 1000000
+Rain:
+	/tp @s -17.5 63 209.5 -7.5 -3
+	/time set noon
+	/weather rain 1000000
+Sunrise:
+	/tp @s -31.5 73 208.5 -54.5 2
+	/time set 100
+	/weather clear 1000000
+Cave:
+	/tp @s 223.5 11 135.5 -3.5 -6.5
+	/time set night
+	/weather clear 100000
+Night:
+	/tp @s -37.5 73 211.5 -16 -5
+	/time set 15000
+	/weather clear 100000
+Nether:
+	/tp @s -136.5 73 -45.5 170 20
+	/time set day
+	/weather clear 100000
+Indoor:
+	/tp @s -91.5 63 164.5 -164 -5
+	/time set day
+	/weather clear
+	

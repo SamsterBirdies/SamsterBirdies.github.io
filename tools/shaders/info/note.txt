@@ -1,0 +1,11 @@
+chocapic13 v4 has water reflections turned off, and has water texture enabled.
+
+sildurs v1.03 has no reflections.
+
+images are lossless .webp
+
+This comparison does not showcase specific features. Example: lightmaps, light bouncing, dynamic clouds, etc.
+
+Some shader packs have dynamic clouds that change the overall brightness of the scene and introduce crepuscular rays.
+
+All shader pack versions are of the highest quality version with default preset options, unless otherwise mentioned.

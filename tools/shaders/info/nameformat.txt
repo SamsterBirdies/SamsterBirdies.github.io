@@ -1,0 +1,3 @@
+Names should be in this format: scene + pack + version.
+
+Example: forestchocapic4, caveseus10.1.
