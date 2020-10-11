@@ -103,7 +103,7 @@
 
     .buttonsmall {
         padding: 2px 4px;
-        font-size: 16px;
+        font-size: 20px;
         border: 2px solid green;
     }
 
@@ -136,56 +136,67 @@
             color: white;
         }
 
-    .iframediv {
-        width: 400px;
-        height: 400px;
-        overflow-y: auto;
-        overflow-x: auto;
-        resize: both;
-        position: relative;
-        z-index: 2;
-        border: 3px double green;
+    .textareainput {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
     }
 
-    .iframe {
-        width: 99%;
-        height: 96%;
-        border: none;
-    }
-
-    .tools {
-    }
-</style>
-<title>Tools - SamsterBirdies</title>
-<link rel="icon" href="./images/favicon.webp" />
-<script>
-    function ToolEnable(src, title, desc, width, height) {
-        document.getElementById("ToolTitle").innerHTML = title;
-        document.getElementById("ToolDesc").innerHTML = desc;
-        document.getElementById("iframediv").style = "width:" + width + "; height:" + height;
-        document.getElementById("iFrame").title = title;
-        document.getElementById("iFrame").src = "./tools/" + src + ".html";
-        for (disable of document.getElementsByClassName("button buttonsmallselected")) {
-            disable.className = "button buttonsmall";
+        .textareainput:hover {
+            border: 2px solid lightgreen;
         }
-        document.getElementById(src + "Button").className = "button buttonsmall buttonsmallselected";
-    }
-</script>
+</style>
+<title>Binary Converter</title>
 <html>
 <body style="background-color:#252525;">
-    <h1><img class="border" src="./images/sb.webp" alt="sb.webp" width="50" height="50"> SamsterBirdies Tools</h1>
-    <nav>
-        <a class="button" href="./index.html">Home</a>
-        <a class="button buttonselected" href="./tools.html">Tools</a>
-        <a class="button" href="./repo.html">Repo</a>
-    </nav>
-    <nav>
-        <button class="button buttonsmall" type="button" onclick="ToolEnable('numberletter', 'Number-Letter converter','Convert numbers to letters and vice versa.', '500px', '500px')" id="numberletterButton">Number-Letter converter</button>
-        <button class="button buttonsmall" type="button" onclick="ToolEnable('shadercompare', 'Shader Comparer','Compare different shader packs. Drag corner to resize window','1200px', '800px')" id="shadercompareButton">Shader Comparer</button>
-    </nav>
-    <h2 id="ToolTitle"></h2>
-    <p id="ToolDesc"></p>
-    <div id="iframediv" class="iframediv"><iframe id="iFrame" class="iframe" src="./tools/blank.html" title="Number-Letter converter"></iframe></div>
-	<p>Drag corner to resize window</p>
+    <form>
+		<label style="color: white;" for="wscinput" id="wscinputdesc"><br>Seperated by:</label>
+		<textarea style="resize: none;" class="textareainput" id="wscinput" oninput="DoWsc()" maxlength="1" cols="1" rows="1"></textarea>
+		<br>
+		<select id="Optionid" class="button buttonsmall" style="font-size:16px;" oninput="ChangeInput()">
+			<option value="num">Number</option>
+			<option value="letter">Letter</option>
+		</select>
+		<button class="button buttonsmall" style="font-size:16px;" type="button" onclick="InvertInput()" id="InvertInputid">to</button>
+		<a>Binary</a>
+		<br>
+		<label style="color: white;" for="input">Input:</label>
+		<br>
+		<textarea class="textareainput" id="input" oninput="Convert()" cols="30" rows="4" spellcheck="false"></textarea>
+		<br>
+    </form>
+	<label style="color: white;" for="output_txt">Output:</label>
+    <p id="output_txt"></p>
+<script>
+	//variables
+	var debug = true; function Log(info){if (debug){console.log(info);}}
+	var invert = false;
+	var option = "num";
+	var wsc = " "
+	//options
+	function InvertInput(){
+        invert = !invert;
+		if (invert){
+			document.getElementById("InvertInputid").innerHTML = "from";
+		} else {
+			document.getElementById("InvertInputid").innerHTML = "to";
+		}
+		Log("invert="+invert);
+    }
+    function DoWsc() {
+		wsc = document.getElementById("wscinput").value;
+		Log("wsc="+wsc);
+    }
+    function ChangeInput() {
+		option = document.getElementById("Optionid").value
+		Log("'option' set to "+option);
+    }
+    //main functions
+    function Convert() {
+
+    }
+	//change "to binary" to dropdown with signed 8bit, unsigned16bit,32, etc. Also a hex option.
+	//create function for sorting accepted values into a list seperated by wsc.
+</script>
 </body>
 </html>

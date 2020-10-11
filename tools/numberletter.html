@@ -160,6 +160,9 @@
             <option value="0">abcdef</option>
             <option value="1">qwerty</option>
 			<option value="2">qwertz</option>
+			<option value="3">azerty</option>
+			<option value="4">dvorak</option>
+			<option value="5">colemak</option>
         </select>
 		
         <label style="color: white; display: none;" for="numshift" id="numshiftdesc"><br>Number shift:</label>
@@ -190,7 +193,14 @@
         var numshift = 0;
 		var invert = false;
         var optionsList = ["wscinput", "numshift", "chardrop", "invert"];
-        var charactersList = [" abcdefghijklmnopqrstuvwxyz", " qwertyuiopasdfghjklzxcvbnm", " qwertzuiopasdfghjklyxcvbnm"];
+        var charactersList = [
+		" abcdefghijklmnopqrstuvwxyz", //abcdef = 0
+		" qwertyuiopasdfghjklzxcvbnm", //qwerty = 1
+		" qwertzuiopasdfghjklyxcvbnm", //qwertz = 2
+		" azertyuiopqsdfghjklmwxcvbn", //azerty = 3
+		" pyfgcrlaoeuidhtnsqjkxbmwvz", //dvorak = 4
+		" qwfpgjluyarstdhneiozxcvbkm" //colemak = 5
+		];
         var characters = charactersList[0];
 		//options
         function ToggleOptions() {
