@@ -103,7 +103,7 @@
 
     .buttonsmall {
         padding: 2px 4px;
-        font-size: 16px;
+        font-size: 20px;
         border: 2px solid green;
     }
 
@@ -136,57 +136,59 @@
             color: white;
         }
 
-    .iframediv {
-        width: 400px;
-        height: 400px;
-        overflow-y: auto;
-        overflow-x: auto;
-        resize: both;
-        position: relative;
-        z-index: 2;
-        border: 3px double green;
+    .textareainput {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
     }
 
-    .iframe {
-        width: 99%;
-        height: 96%;
-        border: none;
-    }
-
-    .tools {
-    }
-</style>
-<title>Tools - SamsterBirdies</title>
-<link rel="icon" href="./images/favicon.webp" />
-<script>
-    function ToolEnable(src, title, desc, width, height) {
-        document.getElementById("ToolTitle").innerHTML = title;
-        document.getElementById("ToolDesc").innerHTML = desc;
-        document.getElementById("iframediv").style = "width:" + width + "; height:" + height;
-        document.getElementById("iFrame").title = title;
-        document.getElementById("iFrame").src = "./tools/" + src + ".html";
-        for (disable of document.getElementsByClassName("button buttonsmallselected")) {
-            disable.className = "button buttonsmall";
+        .textareainput:hover {
+            border: 2px solid lightgreen;
         }
-        document.getElementById(src + "Button").className = "button buttonsmall buttonsmallselected";
-    }
-</script>
+</style>
+<title>dB converter</title>
 <html>
 <body style="background-color:#252525;">
-    <h1><img class="border" src="./images/sb.webp" alt="sb.webp" width="50" height="50"> SamsterBirdies Tools</h1>
-    <nav>
-        <a class="button" href="./index.html">Home</a>
-        <a class="button buttonselected" href="./tools.html">Tools</a>
-        <a class="button" href="./repo.html">Repo</a>
-    </nav>
-    <nav>
-        <button class="button buttonsmall" type="button" onclick="ToolEnable('numberletter', 'Number-Letter converter','Convert numbers to letters and vice versa.', '500px', '500px')" id="numberletterButton">Number-Letter converter</button>
-        <button class="button buttonsmall" type="button" onclick="ToolEnable('shadercompare', 'Shader Comparer','Compare different shader packs. Drag corner to resize window','1200px', '800px')" id="shadercompareButton">Shader Comparer</button>
-		<button class="button buttonsmall" type="button" onclick="ToolEnable('dbconvert', 'Decibel/Amplitude converter','Convert Decibel and Amplitude.','500px', '550px')" id="dbconvertButton">dB/Amplitude converter</button>
-    </nav>
-    <h2 id="ToolTitle"></h2>
-    <p id="ToolDesc"></p>
-    <div id="iframediv" class="iframediv"><iframe id="iFrame" class="iframe" src="./tools/blank.html" title="Number-Letter converter"></iframe></div>
-	<p>Drag corner to resize window</p>
+	<label style="color: white;" for="dbBox" id="dbBoxdesc">Decibels:</label>
+	<br>
+	<textarea style="resize: none;" class="textareainput" id="dbBox" oninput="ConvertdB()" maxlength="20" cols="20" rows="1"></textarea>
+	<br>
+	<label style="color: white;" for="dbBox" id="ampBoxdesc">Amplitude:</label>
+	<br>
+	<textarea style="resize: none;" class="textareainput" id="ampBox" oninput="ConvertAmp()" maxlength="20" cols="20" rows="1"></textarea>
+	<br>
+	<label style="color: white;" for="quickchart" id="quickchartdesc">Quick chart:</label>
+	<table style="border: 2px solid green; color: white" id="quickchart">
+		<tr><th>Decibels -</th><th> Amplitude -</th><th> Decibels -</th><th>Amplitude</th></tr>
+		<tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+		<tr><td>1</td><td>~1.12</td><td>-1</td><td>~ -0.89</td></tr>
+		<tr><td>2</td><td>~1.26</td><td>-2</td><td>~ -0.79</td></tr>
+		<tr><td>3</td><td>~1.41</td><td>-3</td><td>~ -0.71</td></tr>
+		<tr><td>4</td><td>~1.58</td><td>-4</td><td>~ -0.63</td></tr>
+		<tr><td>5</td><td>~1.78</td><td>-5</td><td>~ -0.56</td></tr>
+		<tr><td>6</td><td>~2</td><td>-6</td><td>~ -0.5</td></tr>
+		<tr><td>7</td><td>~2.24</td><td>-7</td><td>~ -0.45</td></tr>
+		<tr><td>8</td><td>~2.51</td><td>-8</td><td>~ -0.4</td></tr>
+		<tr><td>9</td><td>~2.82</td><td>-9</td><td>~ -0.35</td></tr>
+		<tr><td>10</td><td>~3.16</td><td>-10</td><td>~ -0.32</td></tr>
+		<tr><td>15</td><td>~5.62</td><td>-15</td><td>~ -0.18</td></tr>
+		<tr><td>20</td><td>10</td><td>-20</td><td>-0.1</td></tr>
+		<tr><td>40</td><td>100</td><td>-40</td><td>-0.01</td></tr>
+		<tr><td>100</td><td>100,000</td><td>-100</td><td>~ -0.00001</td></tr>
+	</table>
+<script>
+var db = 0;
+var amp = 1;
+function ConvertdB(){
+	db = document.getElementById("dbBox").value;
+	amp = 10**(db/20)
+	document.getElementById("ampBox").value = amp;
+}
+function ConvertAmp(){
+	amp = document.getElementById("ampBox").value;
+	db = 20 * Math.log10(amp);
+	document.getElementById("dbBox").value = db;
+}
+</script>
 </body>
 </html>
