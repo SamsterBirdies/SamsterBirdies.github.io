@@ -146,86 +146,94 @@
             border: 2px solid lightgreen;
         }
 </style>
-<title>RGB/Hex color converter</title>
+<title>Base Number Converter</title>
 <html>
 <body style="background-color:#252525;">
-	<label style="color: red;" for="rBox" id="rBoxdesc">R:</label><textarea style="resize: none;" class="textareainput" id="rBox" oninput="ConvertRGB()" maxlength="3" cols="3" rows="1" value ="0" placeholder="0"></textarea><br>
-	<label style="color: lightgreen;" for="gBox" id="gBoxdesc">G:</label><textarea style="resize: none;" class="textareainput" id="gBox" oninput="ConvertRGB()" maxlength="3" cols="3" rows="1" value="0" placeholder="0"></textarea><br>
-	<label style="color: lightblue;" for="bBox" id="bBoxdesc">B:</label><textarea style="resize: none;" class="textareainput" id="bBox" oninput="ConvertRGB()" maxlength="3" cols="3" rows="1" value="0" placeholder="0"></textarea><br>
+	<label style="color: white" for="inBaseBox" id="inBaseBoxDesc">Input base:</label><textarea style="resize: none;" class="textareainput" id="inBaseBox" oninput="InputBaseFN()" maxlength="2" cols="2" rows="1" placeholder="10"></textarea><br>
+	<label style="color: white" for="outBaseBox"id="outBaseBoxDesc">Output base:</label><textarea style="resize: none;" class="textareainput" id="outBaseBox" oninput="OutputBaseFN()"maxlength="2" cols="2" rows="1"placeholder="2"></textarea><br>
+	<label style="color: white;" for="inputBox">Input:</label>
 	<br>
-	<label style="color: white;" for="hexBox" id="hexBoxdesc">Hex: #</label><textarea style="resize: none;" class="textareainput" id="hexBox" oninput="ConvertHex()" maxlength="6" cols="8" rows="1" value="000000" placeholder="000000"></textarea>
+	<textarea class="textareainput" id="inputBox" oninput="Convert()" cols="30" rows="4" spellcheck="false"></textarea>
 	<br>
+	<label style="color: white;" for="outputBox">Output:</label>
 	<br>
-	<label style="color: white;" for="colorDiv" id="colorDivdesc">Color sample:</label>
-	<div style="background-color:#000000;" id="colorDiv"><a style="color: white">white</a><a style="color:black">black</a></div>
+	<textarea class="textareainput" id="outputBox" cols="30" rows="4" spellcheck="false"></textarea>
 <script>
-	var hex = "000000";
-	var hexlist = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
-	var debug = false;
-	function Log(input){
+	//Variables
+	var debug = true;
+	var inBase = 10;
+	var outBase = 2;
+	var characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	//Functions
+	function Log(msg){
 		if (debug){
-			console.log(input);
+			console.log(msg);
 		}
 	}
-	function ConvertRGB(){
-		function ConvertValue(input){
-			var o1 = Math.floor(parseInt(input)/16);
-			Log("o1= "+o1);
-			var o2 = input%16;
-			Log("o2= "+o2);
-			var o3 = hexlist[o1] + hexlist[o2];
-			Log("o3="+o3);
-			return o3;
+	function InputBaseFN(){
+		inBase = document.getElementById("inBaseBox").value;
+		Convert();
+	}
+	function OutputBaseFN(){
+		outBase = document.getElementById("outBaseBox").value;
+		Convert();
+	}
+	function ConvertToTen(input,base){
+		var output = 0;
+		for (x of input){
+			output *= base;
+			output += characters.indexOf(x);
 		}
-		function InvalidInput(input){
-			if (input >= 0 && input <= 255){
-				return input;
-			}else if(input > 255){
-				return 255;
-			}else{
-				return 0;
+		return output;
+	}
+	function ConvertTenToBase(input,base){
+		output = "";
+		var remainder = input;
+		var temp;
+		var i = 0
+		while (true){
+			remainder = Math.floor(remainder/outBase);
+			if (remainder > inBase){
+				output += remainder%outBase;
+				break
+			} else {
+				output += remainder;
+			}
+			if (i>9999){
+				break
 			}
 		}
-		var inRed = InvalidInput(parseInt(document.getElementById("rBox").value));
-		var inGreen = InvalidInput(parseInt(document.getElementById("gBox").value));
-		var inBlue = InvalidInput(parseInt(document.getElementById("bBox").value));
-		Log("After InvalidInput: inRed="+inRed+";inGreen="+inGreen+";inBlue="+inBlue);
-		hex = ConvertValue(inRed) + ConvertValue(inGreen) + ConvertValue(inBlue);
-		document.getElementById("hexBox").value = hex;
-		document.getElementById("colorDiv").style = "background-color:" + "#" + hex;
 	}
-	function ConvertHex(){
-		function ConvertValue(start){
-			var total = 0;
+	function Convert(){
+		var input = document.getElementById("inputBox").value;
+		//test to make sure all inputs are valid.
+		var c=0;
+		for (x of input){
+			if (characters.indexOf(x) <= inBase - 1 && characters.indexOf(x) >= 0){
+				c++;
+			}
+		}
+		Log("Valid characters:"+c);
+		//Choosing a conversion process.
+		if (inBase > 36 || inBase < 2 || outBase > 36 || inBase < 2){
+			document.getElementById("outputBox").value = "Base must be within 2-36";
+		} else if (c == input.length){ //Valid inputs, Do conversion.
+			var baseTen = ConvertToTen(input,inBase);
+			Log(baseTen);
+			var output = ConvertTenToBase(input,outBase);
+		} else if (c <= input.length){
+			var validcharacters = "Invalid character. Valid characters are: \"";
 			var i = 0;
-			for (x of hexlist){
-				if (x == hex[start]){
-					total = i*16;
+			for (x of characters){
+				if (i <= inBase - 1){
+					validcharacters += x;
+					i++;
 				}
-				i++;
 			}
-			i = 0;
-			for (x of hexlist){
-				if (x == hex[start + 1]){
-					total += i;
-				}
-				i++;
-			}
-			return total;
-		}
-		hex = document.getElementById("hexBox").value;
-		var i=0;
-		for (x of hex){
-			if (hexlist.includes(x)){
-				i += 1;
-			}
-		}
-		if (i==6 && hex.length == 6){
-			Log("Hex requirement satisfied, starting conversion process.");
-			document.getElementById("rBox").value = ConvertValue(0);
-			document.getElementById("gBox").value = ConvertValue(2);
-			document.getElementById("bBox").value = ConvertValue(4);
-			document.getElementById("colorDiv").style = "background-color:" + "#" + hex;
+			validcharacters += "\"";
+			document.getElementById("outputBox").value = validcharacters;
+		} else {
+			document.getElementById("outputBox").value = "Unknown error";
 		}
 	}
 </script>
