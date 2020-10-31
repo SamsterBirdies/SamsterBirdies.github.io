@@ -149,8 +149,8 @@
 <title>Base Number Converter</title>
 <html>
 <body style="background-color:#252525;">
-	<label style="color: white" for="inBaseBox" id="inBaseBoxDesc">Input base:</label><textarea style="resize: none;" class="textareainput" id="inBaseBox" oninput="InputBaseFN()" maxlength="2" cols="2" rows="1" placeholder="10"></textarea><br>
-	<label style="color: white" for="outBaseBox"id="outBaseBoxDesc">Output base:</label><textarea style="resize: none;" class="textareainput" id="outBaseBox" oninput="OutputBaseFN()"maxlength="2" cols="2" rows="1"placeholder="2"></textarea><br>
+	<label style="color: white" for="inBaseBox" id="inBaseBoxDesc">Input base:</label><textarea style="resize: none;" class="textareainput" id="inBaseBox" oninput="InputBaseFN()" maxlength="2" cols="2" rows="1"></textarea><br>
+	<label style="color: white" for="outBaseBox"id="outBaseBoxDesc">Output base:</label><textarea style="resize: none;" class="textareainput" id="outBaseBox" oninput="OutputBaseFN()"maxlength="2" cols="2" rows="1"></textarea><br>
 	<label style="color: white;" for="inputBox">Input:</label>
 	<br>
 	<textarea class="textareainput" id="inputBox" oninput="Convert()" cols="30" rows="4" spellcheck="false"></textarea>
@@ -160,9 +160,9 @@
 	<textarea class="textareainput" id="outputBox" cols="30" rows="4" spellcheck="false"></textarea>
 <script>
 	//Variables
-	var debug = true;
-	var inBase = 10;
-	var outBase = 2;
+	var debug = false;
+	var inBase = 0;
+	var outBase = 0;
 	var characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	//Functions
 	function Log(msg){
@@ -187,22 +187,21 @@
 		return output;
 	}
 	function ConvertTenToBase(input,base){
-		output = "";
+		var output = "";
 		var remainder = input;
 		var temp;
-		var i = 0
-		while (true){
-			remainder = Math.floor(remainder/outBase);
-			if (remainder > inBase){
-				output += remainder%outBase;
+		var remainderold;
+		for (var i = 0;i<999;i++){
+			if (remainder < base){
+				output = characters[remainder]+output;
 				break
 			} else {
-				output += remainder;
-			}
-			if (i>9999){
-				break
+				remainderold = remainder;
+				remainder = Math.floor(remainder / base);
+				output = characters[remainderold%base]+output;
 			}
 		}
+		return output;
 	}
 	function Convert(){
 		var input = document.getElementById("inputBox").value;
@@ -215,12 +214,13 @@
 		}
 		Log("Valid characters:"+c);
 		//Choosing a conversion process.
-		if (inBase > 36 || inBase < 2 || outBase > 36 || inBase < 2){
+		if (inBase > 36 || inBase < 2 || outBase > 36 || outBase < 2){
 			document.getElementById("outputBox").value = "Base must be within 2-36";
 		} else if (c == input.length){ //Valid inputs, Do conversion.
 			var baseTen = ConvertToTen(input,inBase);
 			Log(baseTen);
-			var output = ConvertTenToBase(input,outBase);
+			var output = ConvertTenToBase(baseTen,outBase);
+			document.getElementById("outputBox").value = output;
 		} else if (c <= input.length){
 			var validcharacters = "Invalid character. Valid characters are: \"";
 			var i = 0;
