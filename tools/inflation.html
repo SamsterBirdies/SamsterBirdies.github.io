@@ -175,12 +175,13 @@
 	26.9,26.8,27.2,28.1,28.9,29.1,29.6,29.9,30.2,30.6,31.0,31.5,32.4,33.4,34.8,36.7,38.8,40.5,41.8,44.4,
 	49.3,53.8,56.9,60.6,65.2,72.6,82.4,90.9,96.5,99.6,103.9,107.6,109.6,113.6,118.3,124.0,130.7,136.2,140.3,
 	144.5,148.2,152.4,156.9,160.5,163.0,166.6,172.2,177.1,179.9,184.0,188.9,195.3,201.6,207.342,215.303,
-	214.537,218.056,224.939,229.594,232.957,236.736,237.017,240.007,245.120,251.107,255.657];
-	var debug = true;
+	214.537,218.056,224.939,229.594,232.957,236.736,237.017,240.007,245.120,251.107,255.657,258.811];
+	const debug = false;
 	var inputUSD;
 	var inputYear;
 	var outputUSD;
 	var outputYear;
+	const lastYear = 2020
 	//functions
 	function Log(msg){if (debug){console.log(msg);}}
 	
@@ -189,8 +190,8 @@
 		inputYear = document.getElementById("inputYearBox").value;
 		outputYear = document.getElementById("outputYearBox").value;
 		document.getElementById("outputUSDoutput").innerHTML = "Output USD: "+ (inputUSD*(cpiList[outputYear - 1913]/cpiList[inputYear - 1913])).toFixed(2);;
-		if (inputYear < 1913 || inputYear > 2019 || outputYear < 1913 || outputYear > 2019){
-			document.getElementById("statusNote").innerHTML = "Valid data exists for year range 1913-2019";
+		if (inputYear < 1913 || inputYear > lastYear || outputYear < 1913 || outputYear > lastYear){
+			document.getElementById("statusNote").innerHTML = "Valid data exists for year range 1913-"+lastYear;
 		} else {
 			document.getElementById("statusNote").innerHTML = "";
 		}
@@ -203,7 +204,7 @@
 			zoomEnabled: false,
 			theme: "dark2",
 			backgroundColor: "#202020",
-			title:{text: "CPI levels 1913-2019",fontSize: 20},
+			title:{text: "CPI levels 1913-"+lastYear ,fontSize: 20},
 			data: graphData,
 		});
 		chart.render();
@@ -211,7 +212,7 @@
 	var graphData = [];
 	var graphDataSeries = { type: "line" };
 	var graphDataPoints = [];
-	for (var i = 1913; i < 2020; i++) {
+	for (var i = 1913; i < lastYear + 1; i++) {
 		graphDataPoints.push({
 			x: i,
 			y: cpiList[i-1913]
