@@ -145,13 +145,49 @@
         .textareainput:hover {
             border: 2px solid lightgreen;
         }
+	.slider {
+		-webkit-appearance: none;
+		width: 255px;
+		height: 16px;
+		background: #454545;
+		color: green;
+		border: 2px solid green;
+	}
+	
+		.slider:hover {
+			border: 2px solid lightgreen;
+		}
+	
+		.slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			width: 16px;
+			height: 16px;
+			background: green;
+			cursor: pointer;
+			border: 2px solid lightgreen;
+		}
+	
+			.slider::-webkit-slider-thumb:hover {
+				border: 2px solid white;
+			}
+	
+			.slider::-webkit-slider-thumb:active {
+				background: lightgreen;
+				border: 2px solid white;
+			}
 </style>
 <title>RGB/Hex color converter</title>
 <html>
 <body style="background-color:#252525;">
-	<label style="color: red;" for="rBox" id="rBoxdesc">R:</label><textarea style="resize: none;" class="textareainput" id="rBox" oninput="ConvertRGB()" maxlength="3" cols="3" rows="1" value ="0" placeholder="0"></textarea><br>
-	<label style="color: lightgreen;" for="gBox" id="gBoxdesc">G:</label><textarea style="resize: none;" class="textareainput" id="gBox" oninput="ConvertRGB()" maxlength="3" cols="3" rows="1" value="0" placeholder="0"></textarea><br>
-	<label style="color: lightblue;" for="bBox" id="bBoxdesc">B:</label><textarea style="resize: none;" class="textareainput" id="bBox" oninput="ConvertRGB()" maxlength="3" cols="3" rows="1" value="0" placeholder="0"></textarea><br>
+	<label style="color: red;" for="rBox" id="rBoxdesc">R:</label><textarea style="resize: none;" class="textareainput" id="rBox" oninput="RGBboxEntry()" maxlength="3" cols="3" rows="1" value ="0" placeholder="0"></textarea>
+	<input type="range" min="0" max="255" value="0" class="slider" id="redSlider" oninput="MoveSlider()">
+	<br>
+	<label style="color: lightgreen;" for="gBox" id="gBoxdesc">G:</label><textarea style="resize: none;" class="textareainput" id="gBox" oninput="RGBboxEntry()" maxlength="3" cols="3" rows="1" value="0" placeholder="0"></textarea>
+	<input type="range" min="0" max="255" value="0" class="slider" id="greenSlider" oninput="MoveSlider()">
+	<br>
+	<label style="color: lightblue;" for="bBox" id="bBoxdesc">B:</label><textarea style="resize: none;" class="textareainput" id="bBox" oninput="RGBboxEntry()" maxlength="3" cols="3" rows="1" value="0" placeholder="0"></textarea>
+	<input type="range" min="0" max="255" value="0" class="slider" id="blueSlider" oninput="MoveSlider()">
+	<br>
 	<br>
 	<label style="color: white;" for="hexBox" id="hexBoxdesc">Hex: #</label><textarea style="resize: none;" class="textareainput" id="hexBox" oninput="ConvertHex()" maxlength="6" cols="8" rows="1" value="000000" placeholder="000000"></textarea>
 	<br>
@@ -166,6 +202,12 @@
 		if (debug){
 			console.log(input);
 		}
+	}
+	function RGBboxEntry(){
+		document.getElementById("redSlider").value = document.getElementById("rBox").value;
+		document.getElementById("greenSlider").value = document.getElementById("gBox").value;
+		document.getElementById("blueSlider").value = document.getElementById("bBox").value;
+		ConvertRGB();
 	}
 	function ConvertRGB(){
 		function ConvertValue(input){
@@ -222,11 +264,23 @@
 		}
 		if (i==6 && hex.length == 6){
 			Log("Hex requirement satisfied, starting conversion process.");
-			document.getElementById("rBox").value = ConvertValue(0);
-			document.getElementById("gBox").value = ConvertValue(2);
-			document.getElementById("bBox").value = ConvertValue(4);
+			var r = ConvertValue(0);
+			var g = ConvertValue(2);
+			var b = ConvertValue(4);
+			document.getElementById("rBox").value = r;
+			document.getElementById("gBox").value = g;
+			document.getElementById("bBox").value = b;
+			document.getElementById("redSlider").value = r;
+			document.getElementById("greenSlider").value = g;
+			document.getElementById("blueSlider").value = b;
 			document.getElementById("colorDiv").style = "background-color:" + "#" + hex;
 		}
+	}
+	function MoveSlider(){
+		document.getElementById("rBox").value = document.getElementById("redSlider").value;
+		document.getElementById("gBox").value = document.getElementById("greenSlider").value;
+		document.getElementById("bBox").value = document.getElementById("blueSlider").value;
+		ConvertRGB();
 	}
 </script>
 </body>
