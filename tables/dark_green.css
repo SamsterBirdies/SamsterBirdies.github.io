@@ -160,14 +160,14 @@ a {
         border: 2px solid lightgreen;
     }
 
-tr:nth-child(even) {
-	background-color: #292929;
+table {
+	border: 2px solid green; 
+	color: white;
+	background-color:#305030;
 }
-tr:nth-child(odd) {
-	background-color: #212121;
-}
-
-.window {
-	max-width: 3840px;
-	margin: auto;
-}
+	tr:nth-child(even) {
+		background-color: #292929;
+	}
+	tr:nth-child(odd) {
+		background-color: #212121;
+	}

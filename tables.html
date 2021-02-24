@@ -15,6 +15,29 @@
 		<a class="button" href="./about.html">About</a>
     </nav>
 	
-	<p>coming soon!</p>
+	<nav>
+		<button class="button buttonsmall" type="button" onclick="TableEnable('audiobitdepth','200px', '250px')" id="audiobitdepthButton">Audio Bit-Depth</button>
+		<button class="button buttonsmall" type="button" onclick="TableEnable('dbamp','400px', '450px')" id="dbampButton">dB to Amplitude</button>
+		<button class="button buttonsmall" type="button" onclick="TableEnable('int_types_csharp','500px', '280px')" id="int_types_csharpButton">C# Integer Types</button>
+	</nav>
+	
+	<p>Table Link: <a class="link" href="" id="tableLink"></a></p>
+	
+	<div id="iframediv" class="iframediv">
+		<iframe id="iFrame" class="iframe" src="./tables/blank.html" title="Table"></iframe>
+	</div>
 </body>
+<script>
+	 function TableEnable(src, width, height) {
+		document.getElementById("iframediv").style = "width:" + width + "; height:" + height;
+		document.getElementById("iFrame").title = document.getElementById(src+"Button");
+		document.getElementById("iFrame").src = "./tables/" + src + ".html";
+		for (disable of document.getElementsByClassName("button buttonsmallselected")) {
+			disable.className = "button buttonsmall";
+		}
+		document.getElementById(src + "Button").className = "button buttonsmall buttonsmallselected";
+		document.getElementById("tableLink").href = "https://www.samsterbirdies.com/tables/"+src;
+		document.getElementById("tableLink").innerHTML = "www.samsterbirdies.com/tables/"+src;
+	}
+</script>
 </html>
