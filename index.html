@@ -4,9 +4,9 @@
 	<link rel="stylesheet" href="dark_green.css">
 	<title>SamsterBirdies</title>
 	<link rel="icon" href="./images/favicon.webp" />
+	<script src="./scripts/dvd.js"></script>
 <head>
-<body style="background-color:#252525;">
-	<div class="window">
+<body style="background-color:#252525;" onload="startDVD()";>
 		<h1><img class="border" src="./images/sb.webp" alt="sb.webp" width="50" height="50" > SamsterBirdies Home</h1>
 		<nav>
 			<a class="button buttonselected" href="./index.html">Home</a>
@@ -16,12 +16,9 @@
 			<a class="button" href="./about.html">About</a>
 		</nav>
 		<p>This is a home page. There are some cool tools and charts and fun things to download in this wobsite.</p>
-		<br>
-		<!--
-		<h2>Site preferences:</h2>
-		<label style="color: white;" for="centerOption" id="centerOptionLabel">Center site in pixels:</label>
-		<textarea style="resize: none;" class="textareainput" id="centerOption" oninput="Center()" cols="6" rows="1"></textarea>
-		-->
-	</div>
+		<p>There isn't much purpose for a homepage. So watch the dvd then I suppose.</p>
+		
+		<canvas id="dvdCanvas" width="500" height="400" style="border: 1px solid green;"></canvas>
+		<div style="display: none;"><img src="./images/dvd.webp" alt="DVD" id="dvd"></div>
 </body>
 </html>
