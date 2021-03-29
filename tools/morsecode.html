@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<style>
+    h1 {
+        color: lightgreen;
+    }
+
+    h2 {
+        color: white;
+        font-size: 24px;
+    }
+
+    p {
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+
+    .link {
+        color: lightblue;
+        padding: 1px 2px;
+        border: 1px dashed #252525;
+    }
+
+        .link:hover {
+            color: lightblue;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+        .link:active {
+            color: white;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+    .button {
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 32px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #454545;
+        color: white;
+        border: 3px solid green;
+    }
+
+        .button:hover {
+            background-color: #606060;
+            color: white;
+            border: 3px solid lightgreen;
+        }
+
+        .button:active {
+            background-color: lightgreen;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .buttonselected {
+        background-color: green;
+        color: white;
+        border: 3px solid lightgreen;
+    }
+
+        .buttonselected:hover {
+            background-color: green;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .button:active {
+        background-color: lightgreen;
+        color: white;
+        border: 3px solid white;
+    }
+
+    .buttondl {
+        padding: 1px 2px;
+        font-size: 16px;
+        border: 1px solid green;
+        background-color: #454545;
+    }
+
+        .buttondl:hover {
+            background-color: #606060;
+            color: white;
+            border: 1px solid lightgreen;
+        }
+
+        .buttondl:active {
+            background-color: lightgreen;
+            border: 1px solid white;
+            color: white;
+        }
+
+    .border {
+        border: 2px solid lightgreen;
+    }
+
+    .buttonsmall {
+        padding: 2px 4px;
+        font-size: 20px;
+        border: 2px solid green;
+    }
+
+        .buttonsmall:hover {
+            background-color: #606060;
+            color: white;
+            border: 2px solid lightgreen;
+        }
+
+        .buttonsmall:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+        }
+
+    .buttonsmallselected {
+        background-color: green;
+        color: white;
+        border: 2px solid lightgreen;
+    }
+
+        .buttonsmallselected:hover {
+            background-color: green;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .buttonsmallselected:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+            color: white;
+        }
+
+    .textareainput {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
+    }
+
+        .textareainput:hover {
+            border: 2px solid lightgreen;
+        }
+	
+table {
+	border: 2px solid green; 
+	color: white;
+	background-color:#305030;
+}
+	tr:nth-child(even) {
+		background-color: #292929;
+	}
+	tr:nth-child(odd) {
+		background-color: #212121;
+	}
+</style>
+<title>Morse Code</title>
+<html>
+<body style="background-color:#252525;">
+	
+	<label style="color: white;" for="txtinput" id="txtinputdesc">Text:<br></label>
+		<textarea class="textareainput" id="txtinput" oninput="ToMorse()" cols="70" rows="5"></textarea>
+	<br>
+	<label style="color: white;" for="morseinput" id="morseinputdesc">Morse code:<br></label>
+		<textarea class="textareainput" id="morseinput" oninput="ToTxt()" cols="70" rows="5"></textarea>
+		<p>"." = dot, "-" = dash, " " = silence the length of a dash, "_" = silence the length of seven dots.</p>
+	<p id="errors"></p>
+	<button onclick="PlayMorseAudio()" type="button" class="button buttonsmall">Play Morse Code</button>
+	<audio id="morsedot">
+		<source src="./assets/morsedot.wav" type="audio/wav">
+	</audio>
+	<audio id="morsedash">
+		<source src="./assets/morsedash.wav" type="audio/wav">
+	</audio>
+	<p>International Morse Code Table:</p>
+	<table>
+		<tr><td>Letters</td><td>Numbers</td><td>Symbols</td></tr>
+		<tr>
+		<td style="vertical-align: top">
+		<table>
+			<tr><td>a</td><td>.-</td></tr>
+			<tr><td>b</td><td>-...</td></tr>
+			<tr><td>c</td><td>-.-.</td></tr>
+			<tr><td>d</td><td>-..</td></tr>
+			<tr><td>e</td><td>.</td></tr>
+			<tr><td>f</td><td>..-.</td></tr>
+			<tr><td>g</td><td>--.</td></tr>
+			<tr><td>h</td><td>....</td></tr>
+			<tr><td>i</td><td>..</td></tr>
+			<tr><td>j</td><td>.---</td></tr>
+			<tr><td>k</td><td>-.-</td></tr>
+			<tr><td>l</td><td>.-..</td></tr>
+			<tr><td>m</td><td>--</td></tr>
+			<tr><td>n</td><td>-.</td></tr>
+			<tr><td>o</td><td>---</td></tr>
+			<tr><td>p</td><td>.--.</td></tr>
+			<tr><td>q</td><td>--.-</td></tr>
+			<tr><td>r</td><td>.-.</td></tr>
+			<tr><td>s</td><td>...</td></tr>
+			<tr><td>t</td><td>-</td></tr>
+			<tr><td>u</td><td>..-</td></tr>
+			<tr><td>v</td><td>...-</td></tr>
+			<tr><td>w</td><td>.--</td></tr>
+			<tr><td>x</td><td>-..-</td></tr>
+			<tr><td>y</td><td>-.--</td></tr>
+			<tr><td>z</td><td>--..</td></tr>
+		</table>
+		</td>
+		<td style="vertical-align: top">
+		<table>
+			<tr><td>1</td><td>.----</td></tr>
+			<tr><td>2</td><td>..---</td></tr>
+			<tr><td>3</td><td>...--</td></tr>
+			<tr><td>4</td><td>....-</td></tr>
+			<tr><td>5</td><td>.....</td></tr>
+			<tr><td>6</td><td>-....</td></tr>
+			<tr><td>7</td><td>--...</td></tr>
+			<tr><td>8</td><td>---..</td></tr>
+			<tr><td>9</td><td>----.</td></tr>
+			<tr><td>0</td><td>-----</td></tr>
+		</table>
+		</td>
+		<td style="vertical-align: top">
+		<table>
+			<tr><td>.</td><td>.-.-.-</td></tr>
+			<tr><td>,</td><td>--..--</td></tr>
+			<tr><td>?</td><td>..--..</td></tr>
+			<tr><td>'</td><td>.----.</td></tr>
+			<tr><td>!</td><td>-.-.--</td></tr>
+			<tr><td>/</td><td>-..-.</td></tr>
+			<tr><td>:</td><td>---...</td></tr>
+			<tr><td>;</td><td>-.-.-.</td></tr>
+			<tr><td>=</td><td>-...-</td></tr>
+			<tr><td>+</td><td>.-.-.</td></tr>
+			<tr><td>-</td><td>-....-</td></tr>
+			<tr><td>_</td><td>..--.-</td></tr>
+			<tr><td>"</td><td>.-..-.</td></tr>
+			<tr><td>@</td><td>.--.-.</td></tr>
+			<tr><td> </td><td>_</td></tr>
+		</table>
+		</td>
+		</tr>
+	</table>
+</body>
+<script>
+	const alphabet = "abcdefghijklmnopqrstuvwxyz1234567890.,?'!/:;=+-_\"@ ";
+	const morseInternational = [
+		".-", //a
+		"-...", //b
+		"-.-.", //c
+		"-..", //d
+		".", //e
+		"..-.", //f
+		"--.", //g
+		"....", //h
+		"..", //i 
+		".---", //j 
+		"-.-", //k 
+		".-..", //l 
+		"--", //m 
+		"-.", //n 
+		"---", //o 
+		".--.", //p
+		"--.-", //q
+		".-.", //r
+		"...", //s 
+		"-", //t 
+		"..-", //u
+		"...-", //v 
+		".--", //w 
+		"-..-", //x 
+		"-.--", //y 
+		"--..", //z 
+		".----", //1 
+		"..---", //2 
+		"...--", //3
+		"....-", //4
+		".....", //5
+		"-....", //6
+		"--...", //7
+		"---..", //8
+		"----.", //9
+		"-----", //0
+		".-.-.-", //.
+		"--..--", //,
+		"..--..", //?
+		".----.", //'
+		"-.-.--", //!
+		"-..-.", ///
+		"---...", //:
+		"-.-.-.", //;
+		"-...-", //=
+		".-.-.", //+
+		"-....-", //-
+		"..--.-", //_
+		".-..-.", //"
+		".--.-.", //@
+		"_" // space
+	]
+	//convienence functions
+	function getKeyByValue(list, value){
+		var i = 0;
+		for (x of list){
+			if (x == value){
+				return i;
+			}
+			i++;
+		}
+		return null;
+	}
+	//conversion functions
+	function ToMorse(){
+		document.getElementById("errors").innerHTML = "";
+		var input = document.getElementById("txtinput").value;
+		var output = "";
+		for (x of input){
+			if (getKeyByValue(alphabet, x) != null){
+				output += morseInternational[getKeyByValue(alphabet, x)] + " ";
+			} else {
+				document.getElementById("errors").innerHTML = "Error: Invalid characters.";
+			}
+		}
+		document.getElementById("morseinput").value = output;
+	}
+	function ToTxt(){
+		document.getElementById("errors").innerHTML = "";
+		var input = (document.getElementById("morseinput").value).split(" ");
+		var output = "";
+		for (x of input){
+			if(getKeyByValue(morseInternational, x) != null){
+				output += alphabet[getKeyByValue(morseInternational, x)];
+			} else {
+				document.getElementById("errors").innerHTML = "Error: Invalid morse code.";
+			}
+		}
+		document.getElementById("txtinput").value = output;
+	}
+	//Morse code audio functions
+	function PlayDot(){
+		var dot = document.getElementById("morsedot");
+		dot.play();
+	}
+	function PlayDash(){
+		var dash = document.getElementById("morsedash");
+		dash.play();
+	}
+	function PlayDotFast(){
+		var dot = document.getElementById("morsedotfast");
+		dot.play();
+	}
+	function PlayDashFast(){
+		var dash = document.getElementById("morsedashfast");
+		dash.play();
+	}
+	//Issues: Sound playing time is not consistent enough. Have to stick with slow speed of 100ms per unit. (tried 50ms, was not functional)
+	function PlayMorseAudio(){
+		var input = (document.getElementById("morseinput").value).split("");
+		
+		var i = 0;
+		for (x of input){
+			if (x == "."){
+				//console.log("playing dot after " + i + "ms");
+				setTimeout(PlayDot, i);
+				i += 200;
+			} else if (x == "-"){
+				//console.log("playing dash after " + i + "ms");
+				setTimeout(PlayDash, i);
+				i += 400;
+			} else if (x == " "){
+				i += 200;
+			} else if (x == "_"){
+				i += 200;
+			}
+		}
+		//console.log("Total sound time: " + i + "ms");
+	}
+</script>
+</html>
