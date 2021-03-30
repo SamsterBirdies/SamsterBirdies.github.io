@@ -169,11 +169,15 @@ table {
 		<textarea class="textareainput" id="morseinput" oninput="ToTxt()" cols="70" rows="5"></textarea>
 		<p>"." = dot, "-" = dash, " " = silence the length of a dash, "_" = silence the length of seven dots.</p>
 	<p id="errors"></p>
+	<label style="color: white;" for="speedinput">ms per unit:</label>
+	<input class="textareainput" id="speedinput" type="number" value="100" maxlength="5" cols="6"/>
+	<label style="color: white;" for="speedinput">Increase the time per unit if playback is inconsistent</label>
+	<br>
 	<button onclick="PlayMorseAudio()" type="button" class="button buttonsmall">Play Morse Code</button>
-	<audio id="morsedot">
+	<audio id="morsedot" preload="auto">
 		<source src="./assets/morsedot.wav" type="audio/wav">
 	</audio>
-	<audio id="morsedash">
+	<audio id="morsedash" preload="auto">
 		<source src="./assets/morsedash.wav" type="audio/wav">
 	</audio>
 	<p>International Morse Code Table:</p>
@@ -247,6 +251,7 @@ table {
 	</table>
 </body>
 <script>
+	//audio data DOM
 	const alphabet = "abcdefghijklmnopqrstuvwxyz1234567890.,?'!/:;=+-_\"@ ";
 	const morseInternational = [
 		".-", //a
@@ -340,43 +345,35 @@ table {
 		document.getElementById("txtinput").value = output;
 	}
 	//Morse code audio functions
-	function PlayDot(){
-		var dot = document.getElementById("morsedot");
-		dot.play();
-	}
-	function PlayDash(){
-		var dash = document.getElementById("morsedash");
-		dash.play();
-	}
-	function PlayDotFast(){
-		var dot = document.getElementById("morsedotfast");
-		dot.play();
-	}
-	function PlayDashFast(){
-		var dash = document.getElementById("morsedashfast");
-		dash.play();
-	}
-	//Issues: Sound playing time is not consistent enough. Have to stick with slow speed of 100ms per unit. (tried 50ms, was not functional)
+
+	//ISSUE: HTML audio object methods are very slow and inconsistent. Have had issues with anything higher than 75ms per unit. Slower devices might need up to 200ms per unit.
 	function PlayMorseAudio(){
 		var input = (document.getElementById("morseinput").value).split("");
+		var dot = document.getElementById("morsedot");
+		var dash = document.getElementById("morsedash");
 		
-		var i = 0;
+		var speed = document.getElementById("speedinput").value;
+		dot.playbackRate = 100/speed;
+		dash.playbackRate = 100/speed;
+		dot.preload = "auto";
+		dash.preload = "auto";
+		
+		var i = 500;
 		for (x of input){
 			if (x == "."){
 				//console.log("playing dot after " + i + "ms");
-				setTimeout(PlayDot, i);
-				i += 200;
+				setTimeout(function(){dot.play()}, i);
+				i += (2*speed);
 			} else if (x == "-"){
 				//console.log("playing dash after " + i + "ms");
-				setTimeout(PlayDash, i);
-				i += 400;
+				setTimeout(function(){dash.play()}, i);
+				i += (4*speed);
 			} else if (x == " "){
-				i += 200;
+				i += (2*speed);
 			} else if (x == "_"){
-				i += 200;
+				i += (2*speed);
 			}
 		}
-		//console.log("Total sound time: " + i + "ms");
 	}
 </script>
 </html>
