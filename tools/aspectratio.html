@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<style>
+    h1 {
+        color: lightgreen;
+    }
+
+    h2 {
+        color: white;
+        font-size: 24px;
+    }
+
+    p {
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+
+    .link {
+        color: lightblue;
+        padding: 1px 2px;
+        border: 1px dashed #252525;
+    }
+
+        .link:hover {
+            color: lightblue;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+        .link:active {
+            color: white;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+    .button {
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 32px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #454545;
+        color: white;
+        border: 3px solid green;
+    }
+
+        .button:hover {
+            background-color: #606060;
+            color: white;
+            border: 3px solid lightgreen;
+        }
+
+        .button:active {
+            background-color: lightgreen;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .buttonselected {
+        background-color: green;
+        color: white;
+        border: 3px solid lightgreen;
+    }
+
+        .buttonselected:hover {
+            background-color: green;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .button:active {
+        background-color: lightgreen;
+        color: white;
+        border: 3px solid white;
+    }
+
+    .buttondl {
+        padding: 1px 2px;
+        font-size: 16px;
+        border: 1px solid green;
+        background-color: #454545;
+    }
+
+        .buttondl:hover {
+            background-color: #606060;
+            color: white;
+            border: 1px solid lightgreen;
+        }
+
+        .buttondl:active {
+            background-color: lightgreen;
+            border: 1px solid white;
+            color: white;
+        }
+
+    .border {
+        border: 2px solid lightgreen;
+    }
+
+    .buttonsmall {
+        padding: 2px 4px;
+        font-size: 20px;
+        border: 2px solid green;
+    }
+
+        .buttonsmall:hover {
+            background-color: #606060;
+            color: white;
+            border: 2px solid lightgreen;
+        }
+
+        .buttonsmall:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+        }
+
+    .buttonsmallselected {
+        background-color: green;
+        color: white;
+        border: 2px solid lightgreen;
+    }
+
+        .buttonsmallselected:hover {
+            background-color: green;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .buttonsmallselected:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+            color: white;
+        }
+
+    .textareainput {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
+    }
+
+        .textareainput:hover {
+            border: 2px solid lightgreen;
+        }
+</style>
+<title>Aspect Ratio tool</title>
+<html>
+<body style="background-color:#252525;">
+	<label style="color: white" for="ratioBox">Ratio:</label>
+	<input type="text" class="textareainput" id="ratioBox" oninput="Convert('r')" placeholder="Ratio, example: 16:9"/>
+	<br>
+	<label style="color: white;" for="widthBox">Width:</label>
+	<input type="number" class="textareainput" id="widthBox" oninput="Convert('w')" placeholder="In pixels, example: 1920"/>
+	<br>
+	<label style="color: white;" for="heightBox">Height:</label>
+	<input type="number" class="textareainput" id="heightBox" oninput="Convert('h')" placeholder="In pixels, example: 1080"/>
+	<br>
+	<label style="color: white;" for="multipleBox">Multiple:</label>
+	<input type="number" class="textareainput" id="multipleBox" oninput="Convert('m')" placeholder="Perfect muliple, example: 64"/>
+	<br>
+	<p id="status">Input a valid ratio</p>
+</body>
+<script>
+	var status = 1 //0 = OK. 1 = invalid ratio entry.
+	
+	function Convert(mode){
+		var wBox = document.getElementById("widthBox");
+		var hBox = document.getElementById("heightBox");
+		var rBox = document.getElementById("ratioBox");
+		var mBox = document.getElementById("multipleBox");
+		var stat = document.getElementById("status");
+		if (mode == 'r'){ //just clears the boxes, and tests if the ratio was entered correctly.
+			wBox.value = null;
+			hBox.value = null;
+			mBox.value = null;
+			
+			let validNum = "0123456789";
+			let ratios = rBox.value.split(":");
+			let errCount = 0;
+			if (ratios.length == 2){ //should have 2 values
+				if (ratios[0] < 1 || ratios[1] < 1){
+					errCount++;
+				}
+				for (numbers of ratios){
+					for (number of numbers){
+						if (validNum.indexOf(number) == -1){ //if invalid character
+							errCount++;
+						}
+					}
+				}
+			} else { 
+				errCount++; 
+			}
+			//sets the state
+			if (errCount > 0){
+				stat.innerHTML = "Error: Invalid ratio entry.";
+				status = 1;
+			} else {
+				stat.innerHTML = "";
+				status = 0;
+				//specific ratio tips
+				if (rBox.value == "21:9"){
+					stat.innerHTML = 'Warning: "21:9" ratio is often 64:27, 43:18, or 12:5 marketed as "21:9". More info: https://en.wikipedia.org/wiki/21:9_aspect_ratio';
+				}
+			}
+		}
+		if (mode == 'w'){
+			let ratios = rBox.value.split(":");
+			if (status == 0){
+				hBox.value = wBox.value / (Number(ratios[0])/Number(ratios[1]));
+				mBox.value = wBox.value / Number(ratios[0]);
+			}
+		}
+		if (mode == 'h'){
+			let ratios = rBox.value.split(":");
+			if (status == 0){
+				wBox.value = hBox.value * (Number(ratios[0])/Number(ratios[1]));
+				mBox.value = hBox.value / Number(ratios[1]);
+			}
+		}
+		if (mode == 'm'){
+			let ratios = rBox.value.split(":");
+			if (status == 0){
+				wBox.value = Number(ratios[0]) * mBox.value;
+				hBox.value = Number(ratios[1]) * mBox.value;
+			}
+		}
+	}
+</script>
+</html>

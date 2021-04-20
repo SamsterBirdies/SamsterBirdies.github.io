@@ -1,0 +1,7 @@
+Additions/Fixes:
+-add a comparing slider thingie to the shader comparer.
+-Make the homepage not stupid.
+
+New projects:
+-create resolution aspect ratio calculator with tables. (16:9, 4:3, etc.).
+-create reviews tab with some cheap reviews. (just a way to organize my thoughts and share them).
