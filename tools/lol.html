@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<label for="txtinput">Enter your name:<br></label>
+		<textarea id="txtinput" cols="10" rows="1"></textarea>
+		<input type="button" value="ok" onclick="run()"/>
+	<br>
+	<p id="errors"></p>
+</body>
+<script>
+	function run(){
+		document.getElementById("errors").innerHTML = document.getElementById("txtinput").value + " is gay";
+	}
+</script>
+</html>
