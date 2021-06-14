@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<style>
+	h1 {
+		color: lightgreen;
+	}
+
+	h2 {
+		color: white;
+		font-size: 24px;
+	}
+
+	p {
+		color: white;
+	}
+
+	a {
+		color: white;
+	}
+
+	.button {
+		padding: 4px 8px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 18px;
+		margin: 4px 2px;
+		cursor: pointer;
+		background-color: #454545;
+		color: white;
+		border: 2px solid green;
+	}
+		.button:hover {
+			background-color: #606060;
+			color: white;
+			border: 2px solid lightgreen;
+		}
+		.button:active {
+			background-color: lightgreen;
+			color: white;
+			border: 2px solid white;
+		}
+
+	.textareainput {
+		background-color: #191919;
+		color: white;
+		border: 2px solid green;
+	}
+		.textareainput:hover {
+			border: 2px solid lightgreen;
+		}
+
+</style>
+<title>Random Forts Commanders and Weapons</title>
+<html>
+<body style="background-color: #252525">
+	<!-- split side by side commanders and weapons -->
+	<table>
+		<tr>
+			<!-- Commander -->
+			<td style="vertical-align: Top">
+				<button class="button" type="button" onclick="RandomCommander()" id="rdmCMD">Random Commander</button>
+				<p id="rdmRowsCMD"></p>
+			</td>
+			<!-- Weapons -->
+			<td style="vertical-align: Top">
+				<button class="button" type="button" onclick="RandomWeapon()" id="rdmWPN">Random Weapon</button>
+				<p id="rdmRowsWPN"></p>
+			</td>
+		</tr>
+	</table>
+</body>
+<script>
+	function RandomCommander(){
+		var commanders =
+		[
+			'ScatterShot','Seep','Shockenaugh',
+			'Buster','Moonshine','Phantom',
+			'Firebird','Warthog','Eagle Eye',
+			'Hurricane','Overdrive','Architect',
+			'Pinchfist','Spook','Armourdillo'
+		];
+		var rdmrows = document.getElementById('rdmRowsCMD');
+		rdmrows.innerHTML = commanders[Math.floor(Math.random() * commanders.length)] + "<br><br>" + rdmrows.innerHTML;
+	}
+	function RandomWeapon(){
+		var weapons =
+		[
+			'Machinegun','Minigun','Sniper','AP Sniper', //no tech or upgrade
+			'Incendiary Mortar','Heavy Mortar','Buzzsaw','Swarm Missiles','Warhead', //workshop
+			'Flak','Shotgun','EMP Rocket','Rocket','Smoke Bomb', //armory
+			'20mm Cannnon','Cannon','Howitzer', //munitions
+			'Firebeam','Magnabeam','Plasma Laser' //factory
+		];
+		var rdmrows = document.getElementById('rdmRowsWPN');
+		rdmrows.innerHTML = weapons[Math.floor(Math.random() * weapons.length)] + "<br><br>" + rdmrows.innerHTML;
+	}
+	
+</script>
+</html>
