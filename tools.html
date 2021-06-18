@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<style>
+	.buttontool {
+	}
+</style>
 <html>
 <head>
 	<link rel="stylesheet" href="dark_green.css">
@@ -14,18 +18,24 @@
         <a class="button" href="./repo.html">Repo</a>
 		<a class="button" href="./about.html">About</a>
     </nav>
+	<nav>
+		<textarea class="textareainput" id="searchInputBox" oninput="Search()" cols="30" rows="1" spellcheck="false" placeholder="Search tools" style="resize: none;"></textarea>
+		<button class="button buttonsmall" type="button" onclick="ToggleToolButtons()" id="toolToggleButton">Hide buttons</button>
+	</nav>
+	<!--tool buttons-->
     <nav>
-		<button class="button buttonsmall" type="button" onclick="ToolEnable('aspectratio', 'Easily calculate resolutions for the aspect ratio','400px', '300px')" id="aspectratioButton">Aspect Ratio</button>
-		<button class="button buttonsmall" type="button" onclick="ToolEnable('basenumconvert', 'Convert a number from one base to another.','400px', '400px')" id="basenumconvertButton">Base Number Converter</button>
-		<button class="button buttonsmall" type="button" onclick="ToolEnable('dbconvert', 'Convert Decibels to Amplitude and vice versa.','350px', '550px')" id="dbconvertButton">dB/Amplitude</button>
-		<button class="button buttonsmall" type="button" onclick="ToolEnable('morsecode', 'Turn text into morse code and vice versa.', '650px', '1100px')" id="morsecodeButton">Morse code/txt</button>
-        <button class="button buttonsmall" type="button" onclick="ToolEnable('numberletter', 'Convert numbers to letters and vice versa.', '500px', '500px')" id="numberletterButton">Number-Letter converter</button>
-		<button class="button buttonsmall" type="button" onclick="ToolEnable('randomforts', 'Generate random commanders and weapons.', '450px', '600px')" id="randomfortsButton">Random Forts</button>
-		<button class="button buttonsmall" type="button" onclick="ToolEnable('rgbhex', 'Convert RGB values into Hex HTML color values and preview color. And vice versa.','370px', '250px')" id="rgbhexButton">RGB/Hex Color picker</button>
-        <button class="button buttonsmall" type="button" onclick="ToolEnable('shadercompare', 'Compare different Minecraft shader packs. Drag corner to resize window','1200px', '800px')" id="shadercompareButton">Shader Comparer</button>
-		<button class="button buttonsmall" type="button" onclick="ToolEnable('inflation', 'Convert USD prices across two given years, accounting for inflation.', '550px', '650px')" id="inflationButton">USD Inflation tool</button>
+		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('aspectratio', 'Easily calculate resolutions for the aspect ratio','400px', '300px')" id="aspectratioButton">Aspect Ratio</button>
+		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('basenumconvert', 'Convert a number from one base to another.','400px', '400px')" id="basenumconvertButton">Base Number Converter</button>
+		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('dbconvert', 'Convert Decibels to Amplitude and vice versa.','350px', '550px')" id="dbconvertButton">dB/Amplitude</button>
+		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('morsecode', 'Turn text into morse code and vice versa.', '650px', '1100px')" id="morsecodeButton">Morse code/txt</button>
+        <button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('numberletter', 'Convert numbers to letters and vice versa.', '500px', '500px')" id="numberletterButton">Number-Letter converter</button>
+		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('randomforts', 'Generate random commanders and weapons.', '450px', '600px')" id="randomfortsButton">Random Forts</button>
+		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('rgbhex', 'Convert RGB values into Hex HTML color values and preview color. And vice versa.','370px', '250px')" id="rgbhexButton">RGB/Hex Color picker</button>
+        <button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('shadercompare', 'Compare different Minecraft shader packs. Drag corner to resize window','1200px', '800px')" id="shadercompareButton">Shader Comparer</button>
+		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('inflation', 'Convert USD prices across two given years, accounting for inflation.', '550px', '650px')" id="inflationButton">USD Inflation tool</button>
     </nav>
     <p id="ToolDesc"></p>
+
     <div id="iframediv" class="iframediv"><iframe id="iFrame" class="iframe" src="./tools/blank.html" title="Number-Letter converter"></iframe></div>
 	<p>Drag corner to resize window</p>
 	<p>Tool Link:
@@ -33,16 +43,49 @@
 </body>
 <script>
     function ToolEnable(src, desc, width, height) {
+		//Enables a tool and shows it in the window.
         document.getElementById("ToolDesc").innerHTML = desc;
         document.getElementById("iframediv").style = "width:" + width + "; height:" + height;
         document.getElementById("iFrame").title = document.getElementById(src+"Button");
         document.getElementById("iFrame").src = "./tools/" + src + ".html";
-        for (disable of document.getElementsByClassName("button buttonsmallselected")) {
-            disable.className = "button buttonsmall";
+        for (disable of document.getElementsByClassName("button buttonsmallselected buttontool")) {
+            disable.className = "button buttonsmall buttontool";
         }
-        document.getElementById(src + "Button").className = "button buttonsmall buttonsmallselected";
+        document.getElementById(src + "Button").className = "button buttonsmall buttonsmallselected buttontool";
 		document.getElementById("toolLink").href = "https://www.samsterbirdies.com/tools/"+src;
 		document.getElementById("toolLink").innerHTML = "www.samsterbirdies.com/tools/"+src;
     }
+	function Search(){
+		//Will hide buttons that dont match the search. Will be useful if a bunch of new tools ever get added in the future.
+		var searchWords = document.getElementById("searchInputBox").value.split(" ");
+		for (button of document.getElementsByClassName("buttontool")){
+			let matches = true;
+			for (word of searchWords){
+				if (button.innerHTML.toLowerCase().search(word.toLowerCase()) == -1){ //lowercase regex search
+					matches = false;
+				}
+			}
+			if (matches) {
+				button.style.display = "inline";
+			} else {
+				button.style.display = "none";
+			}
+		}
+	}
+	function ToggleToolButtons(){
+		//Toggles whether the tool buttons will display or not. Will be useful if a bunch of new tools ever get added in the future.
+		for (button of document.getElementsByClassName("buttontool")){
+			if (document.getElementById("toolToggleButton").innerHTML == "Hide buttons"){
+				button.style.display = "none";
+			}else{
+				button.style.display = "inline";
+			}
+		}
+		if (document.getElementById("toolToggleButton").innerHTML == "Hide buttons"){
+			document.getElementById("toolToggleButton").innerHTML = "Show buttons";
+		}else{
+			document.getElementById("toolToggleButton").innerHTML = "Hide buttons";
+		}
+	}
 </script>
 </html>
