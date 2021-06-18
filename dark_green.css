@@ -1,24 +1,32 @@
 h1 {
     color: lightgreen;
+	font-family: "Papyrus","Calibri","Helvetica",sans-serif;
 }
 
 h2 {
     color: white;
     font-size: 24px;
+	font-family: "Calibri","Helvetica",sans-serif;
 }
 
 p {
     color: white;
+	font-family: "Calibri","Helvetica",sans-serif;
+	font-size: 16px
 }
 
 a {
     color: white;
+	font-family: "Calibri","Helvetica",sans-serif;
+	font-size: 16px
 }
 
 .link {
     color: lightgreen;
     padding: 1px 2px;
     border: 1px dashed #252525;
+	font-family: "Calibri","Helvetica",sans-serif;
+	font-size: 16px
 }
 
     .link:hover {
@@ -38,12 +46,13 @@ a {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 32px;
+    font-size: 26px;
     margin: 4px 2px;
     cursor: pointer;
     background-color: #454545;
     color: white;
     border: 3px solid green;
+	font-family: "Calibri","Helvetica",sans-serif;
 }
 
     .button:hover {
@@ -154,6 +163,8 @@ a {
     background-color: #191919;
     color: white;
     border: 2px solid green;
+	font-family: "Calibri","Helvetica",sans-serif;
+	font-size: 16px;
 }
 
     .textareainput:hover {
@@ -164,6 +175,8 @@ table {
 	border: 2px solid green; 
 	color: white;
 	background-color:#305030;
+	font-family: "Calibri","Helvetica",sans-serif;
+	font-size: 16px
 }
 	tr:nth-child(even) {
 		background-color: #292929;
@@ -171,3 +184,7 @@ table {
 	tr:nth-child(odd) {
 		background-color: #212121;
 	}
+label {
+	font-family: "Calibri","Helvetica",sans-serif;
+	font-size: 16px
+}

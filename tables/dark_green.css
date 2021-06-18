@@ -1,18 +1,22 @@
 h1 {
     color: lightgreen;
+	font-family: "Papyrus","Calibri","Helvetica",sans-serif;
 }
 
 h2 {
     color: white;
     font-size: 24px;
+	font-family: "Calibri","Helvetica",sans-serif;
 }
 
 p {
     color: white;
+	font-family: "Calibri","Helvetica",sans-serif;
 }
 
 a {
     color: white;
+	font-family: "Calibri","Helvetica",sans-serif;
 }
 
 .link {
@@ -164,6 +168,7 @@ table {
 	border: 2px solid green; 
 	color: white;
 	background-color:#305030;
+	font-family: "Calibri","Helvetica",sans-serif;
 }
 	tr:nth-child(even) {
 		background-color: #292929;

@@ -51,19 +51,20 @@
 
 </style>
 <title>Random Forts Commanders and Weapons</title>
+<link rel="stylesheet" href="../dark_green.css">
 <html>
 <body style="background-color: #252525">
 	<!-- split side by side commanders and weapons -->
-	<table>
+	<table style="border-collapse: collapse">
 		<tr>
 			<!-- Commander -->
-			<td style="vertical-align: Top">
-				<button class="button" type="button" onclick="RandomCommander()" id="rdmCMD">Random Commander</button>
+			<td style="vertical-align: Top;">
+				<button class="button" type="button" onclick="RandomCommander()" id="rdmCMD" style="font-size: 20px;">Random Commander</button>
 				<p id="rdmRowsCMD"></p>
 			</td>
 			<!-- Weapons -->
-			<td style="vertical-align: Top">
-				<button class="button" type="button" onclick="RandomWeapon()" id="rdmWPN">Random Weapon</button>
+			<td style="vertical-align: Top;">
+				<button class="button" type="button" onclick="RandomWeapon()" id="rdmWPN" style="font-size: 20px;">Random Weapon</button>
 				<p id="rdmRowsWPN"></p>
 			</td>
 		</tr>
