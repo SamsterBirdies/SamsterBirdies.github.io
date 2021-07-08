@@ -1,190 +1,190 @@
-h1 {
-    color: lightgreen;
-	font-family: "Papyrus","Calibri","Helvetica",sans-serif;
-}
-
-h2 {
-    color: white;
-    font-size: 24px;
-	font-family: "Calibri","Helvetica",sans-serif;
-}
-
-p {
-    color: white;
-	font-family: "Calibri","Helvetica",sans-serif;
-	font-size: 16px
-}
-
-a {
-    color: white;
-	font-family: "Calibri","Helvetica",sans-serif;
-	font-size: 16px
-}
-
-.link {
-    color: lightgreen;
-    padding: 1px 2px;
-    border: 1px dashed #252525;
-	font-family: "Calibri","Helvetica",sans-serif;
-	font-size: 16px
-}
-
-    .link:hover {
-        color: lightgreen;
-        padding: 1px 2px;
-        border: 1px dashed grey;
-    }
-
-    .link:active {
-        color: white;
-        padding: 1px 2px;
-        border: 1px dashed grey;
-    }
-
-.button {
-    padding: 4px 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 26px;
-    margin: 4px 2px;
-    cursor: pointer;
-    background-color: #454545;
-    color: white;
-    border: 3px solid green;
-	font-family: "Calibri","Helvetica",sans-serif;
-}
-
-    .button:hover {
-        background-color: #606060;
-        color: white;
-        border: 3px solid lightgreen;
-    }
-
-    .button:active {
-        background-color: lightgreen;
-        color: white;
-        border: 3px solid white;
-    }
-
-.buttonselected {
-    background-color: green;
-    color: white;
-    border: 3px solid lightgreen;
-}
-
-    .buttonselected:hover {
-        background-color: green;
-        color: white;
-        border: 3px solid white;
-    }
-
-.button:active {
-    background-color: lightgreen;
-    color: white;
-    border: 3px solid white;
-}
-
-.buttondl {
-    padding: 1px 2px;
-    font-size: 16px;
-    border: 1px solid green;
-    background-color: #454545;
-}
-
-    .buttondl:hover {
-        background-color: #606060;
-        color: white;
-        border: 1px solid lightgreen;
-    }
-
-    .buttondl:active {
-        background-color: lightgreen;
-        border: 1px solid white;
-        color: white;
-    }
-
-.border {
-    border: 2px solid lightgreen;
-}
-.buttonsmall {
-       padding: 2px 4px;
-       font-size: 16px;
-       border: 2px solid green;
-   }
-
-    .buttonsmall:hover {
-        background-color: #606060;
-        color: white;
-        border: 2px solid lightgreen;
-    }
-
-    .buttonsmall:active {
-        background-color: lightgreen;
-        border: 2px solid white;
-    }
-
-.buttonsmallselected {
-    background-color: green;
-    color: white;
-    border: 2px solid lightgreen;
-}
-
-    .buttonsmallselected:hover {
-        background-color: green;
-        color: white;
-        border: 2px solid white;
-    }
-
-    .buttonsmallselected:active {
-        background-color: lightgreen;
-        border: 2px solid white;
-        color: white;
-    }
-
-.iframediv {
-    width: 400px;
-    height: 400px;
-    overflow-y: auto;
-    overflow-x: auto;
-    resize: both;
-    position: relative;
-    z-index: 2;
-    border: 3px double green;
-}
-
-.iframe {
-    width: 99%;
-    height: 96%;
-    border: none;
-}
-
-.textareainput {
-    background-color: #191919;
-    color: white;
-    border: 2px solid green;
-	font-family: "Calibri","Helvetica",sans-serif;
-	font-size: 16px;
-}
-
-    .textareainput:hover {
-        border: 2px solid lightgreen;
-    }
-
-table {
-	border: 2px solid green; 
-	color: white;
-	background-color:#305030;
-	font-family: "Calibri","Helvetica",sans-serif;
-	font-size: 16px
-}
-	tr:nth-child(even) {
-		background-color: #292929;
-	}
-	tr:nth-child(odd) {
-		background-color: #212121;
-	}
-label {
-	font-family: "Calibri","Helvetica",sans-serif;
-	font-size: 16px
-}
+h1 {
+    color: lightgreen;
+	font-family: "Papyrus","Calibri","Helvetica",sans-serif;
+}
+
+h2 {
+    color: white;
+    font-size: 24px;
+	font-family: "Calibri","Helvetica",sans-serif;
+}
+
+p {
+    color: white;
+	font-family: "Calibri","Helvetica",sans-serif;
+	font-size: 16px
+}
+
+a {
+    color: white;
+	font-family: "Calibri","Helvetica",sans-serif;
+	font-size: 16px
+}
+
+.link {
+    color: lightgreen;
+    padding: 1px 2px;
+    border: 1px dashed #252525;
+	font-family: "Calibri","Helvetica",sans-serif;
+	font-size: 16px
+}
+
+    .link:hover {
+        color: lightgreen;
+        padding: 1px 2px;
+        border: 1px dashed grey;
+    }
+
+    .link:active {
+        color: white;
+        padding: 1px 2px;
+        border: 1px dashed grey;
+    }
+
+.button {
+    padding: 4px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 26px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: #454545;
+    color: white;
+    border: 3px solid green;
+	font-family: "Calibri","Helvetica",sans-serif;
+}
+
+    .button:hover {
+        background-color: #606060;
+        color: white;
+        border: 3px solid lightgreen;
+    }
+
+    .button:active {
+        background-color: lightgreen;
+        color: white;
+        border: 3px solid white;
+    }
+
+.buttonselected {
+    background-color: green;
+    color: white;
+    border: 3px solid lightgreen;
+}
+
+    .buttonselected:hover {
+        background-color: green;
+        color: white;
+        border: 3px solid white;
+    }
+
+.button:active {
+    background-color: lightgreen;
+    color: white;
+    border: 3px solid white;
+}
+
+.buttondl {
+    padding: 1px 2px;
+    font-size: 16px;
+    border: 1px solid green;
+    background-color: #454545;
+}
+
+    .buttondl:hover {
+        background-color: #606060;
+        color: white;
+        border: 1px solid lightgreen;
+    }
+
+    .buttondl:active {
+        background-color: lightgreen;
+        border: 1px solid white;
+        color: white;
+    }
+
+.border {
+    border: 2px solid lightgreen;
+}
+.buttonsmall {
+       padding: 2px 4px;
+       font-size: 16px;
+       border: 2px solid green;
+   }
+
+    .buttonsmall:hover {
+        background-color: #606060;
+        color: white;
+        border: 2px solid lightgreen;
+    }
+
+    .buttonsmall:active {
+        background-color: lightgreen;
+        border: 2px solid white;
+    }
+
+.buttonsmallselected {
+    background-color: green;
+    color: white;
+    border: 2px solid lightgreen;
+}
+
+    .buttonsmallselected:hover {
+        background-color: green;
+        color: white;
+        border: 2px solid white;
+    }
+
+    .buttonsmallselected:active {
+        background-color: lightgreen;
+        border: 2px solid white;
+        color: white;
+    }
+
+.iframediv {
+    width: 400px;
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: auto;
+    resize: both;
+    position: relative;
+    z-index: 2;
+    border: 3px double green;
+}
+
+.iframe {
+    width: 99%;
+    height: 96%;
+    border: none;
+}
+
+.textareainput {
+    background-color: #191919;
+    color: white;
+    border: 2px solid green;
+	font-family: "Calibri","Helvetica",sans-serif;
+	font-size: 16px;
+}
+
+    .textareainput:hover {
+        border: 2px solid lightgreen;
+    }
+
+table {
+	border: 2px solid green; 
+	color: white;
+	background-color:#305030;
+	font-family: "Calibri","Helvetica",sans-serif;
+	font-size: 16px
+}
+	tr:nth-child(even) {
+		background-color: #292929;
+	}
+	tr:nth-child(odd) {
+		background-color: #212121;
+	}
+label {
+	font-family: "Calibri","Helvetica",sans-serif;
+	font-size: 16px
+}

@@ -1,406 +1,406 @@
-<!DOCTYPE html>
-<style>
-    h1 {
-        color: lightgreen;
-    }
-
-    h2 {
-        color: white;
-        font-size: 24px;
-    }
-
-    p {
-        color: white;
-    }
-
-    a {
-        color: white;
-    }
-
-    .link {
-        color: lightblue;
-        padding: 1px 2px;
-        border: 1px dashed #252525;
-    }
-
-        .link:hover {
-            color: lightblue;
-            padding: 1px 2px;
-            border: 1px dashed grey;
-        }
-
-        .link:active {
-            color: white;
-            padding: 1px 2px;
-            border: 1px dashed grey;
-        }
-
-    .button {
-        padding: 4px 8px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 32px;
-        margin: 4px 2px;
-        cursor: pointer;
-        background-color: #454545;
-        color: white;
-        border: 3px solid green;
-    }
-
-        .button:hover {
-            background-color: #606060;
-            color: white;
-            border: 3px solid lightgreen;
-        }
-
-        .button:active {
-            background-color: lightgreen;
-            color: white;
-            border: 3px solid white;
-        }
-
-    .buttonselected {
-        background-color: green;
-        color: white;
-        border: 3px solid lightgreen;
-    }
-
-        .buttonselected:hover {
-            background-color: green;
-            color: white;
-            border: 3px solid white;
-        }
-
-    .button:active {
-        background-color: lightgreen;
-        color: white;
-        border: 3px solid white;
-    }
-
-    .buttondl {
-        padding: 1px 2px;
-        font-size: 16px;
-        border: 1px solid green;
-        background-color: #454545;
-    }
-
-        .buttondl:hover {
-            background-color: #606060;
-            color: white;
-            border: 1px solid lightgreen;
-        }
-
-        .buttondl:active {
-            background-color: lightgreen;
-            border: 1px solid white;
-            color: white;
-        }
-
-    .border {
-        border: 2px solid lightgreen;
-    }
-
-    .buttonsmall {
-        padding: 2px 4px;
-        font-size: 20px;
-        border: 2px solid green;
-    }
-
-        .buttonsmall:hover {
-            background-color: #606060;
-            color: white;
-            border: 2px solid lightgreen;
-        }
-
-        .buttonsmall:active {
-            background-color: lightgreen;
-            border: 2px solid white;
-        }
-
-    .buttonsmallselected {
-        background-color: green;
-        color: white;
-        border: 2px solid lightgreen;
-    }
-
-        .buttonsmallselected:hover {
-            background-color: green;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .buttonsmallselected:active {
-            background-color: lightgreen;
-            border: 2px solid white;
-            color: white;
-        }
-
-    .textareainput {
-        background-color: #191919;
-        color: white;
-        border: 2px solid green;
-    }
-
-        .textareainput:hover {
-            border: 2px solid lightgreen;
-        }
-</style>
-<title>Number-Letter Converter</title>
-<link rel="stylesheet" href="../dark_green.css">
-<html>
-<body style="background-color:#252525;">
-    <form>
-        <button class="button buttonsmall" type="button" onclick="ToggleOptions()" id="Options">Options</button>
-
-        <label style="color: white; display: none;" for="wscinput" id="wscinputdesc"><br>Numbers seperated by:</label>
-        <textarea style="resize: none; display: none;" class="textareainput" id="wscinput" oninput="DoWsc()" maxlength="1" cols="1" rows="1"></textarea>
-		
-		<label style="color: white; display: none;" for="chardrop" id="chardropdesc"><br>Alphabet:</label>
-        <select id="chardrop" class="button buttonsmall" style="font-size:16px; display: none;" oninput="ChangeCharacters()">
-            <option value="0">abcdef</option>
-            <option value="1">qwerty</option>
-			<option value="2">qwertz</option>
-			<option value="3">azerty</option>
-			<option value="4">dvorak</option>
-			<option value="5">colemak</option>
-        </select>
-		
-        <label style="color: white; display: none;" for="numshift" id="numshiftdesc"><br>Number shift:</label>
-        <textarea style="resize: none; display: none;" class="textareainput" id="numshift" value="0" oninput="NumShift()" maxlength="2" cols="1" rows="1"></textarea>
-		<button class="button buttonsmall" style="font-size:16px;display:none;" type="button" onclick="ChangeInvert()" id="invert">Invert</button>
-		<label style="color: white; display: none;" for="numshift" id="numshiftdesc2">a = 1, z = 26</label>
-		
-		<br>
-        <button class="button buttonsmall" type="button" onclick="SelectToNumber()" id="ButtonToNumber">To number</button>
-        <button class="button buttonsmall" type="button" onclick="SelectToLetter()" id="ButtonToLetter">To letter</button>
-        <br>
-        <label style="color: white;" for="numberletterinput">Input:</label>
-        <br>
-        <textarea class="textareainput" id="numberletterinput" oninput="Convert()" cols="30" rows="4" spellcheck="false"></textarea>
-        <br>
-    </form>
-    <button class="button buttonsmall" type="button" onclick="CopyOutput()" id="ButtonCopy">Copy output</button><br>
-    <label style="color: white;" for="output_txt">Output:</label>
-    <p id="output_txt"></p>
-    <p id="debug_txt"></p>
-    <script>
-		//variables
-        var wsc = " ";
-        var mode;
-        var outputTxt = "";
-        var doDebug = false;
-        var OptionEnable = false;
-        var numshift = 0;
-		var invert = false;
-        var optionsList = ["wscinput", "numshift", "chardrop", "invert"];
-        var charactersList = [
-		" abcdefghijklmnopqrstuvwxyz", //abcdef = 0
-		" qwertyuiopasdfghjklzxcvbnm", //qwerty = 1
-		" qwertzuiopasdfghjklyxcvbnm", //qwertz = 2
-		" azertyuiopqsdfghjklmwxcvbn", //azerty = 3
-		" pyfgcrlaoeuidhtnsqjkxbmwvz", //dvorak = 4
-		" qwfpgjluyarstdhneiozxcvbkm" //colemak = 5
-		];
-        var characters = charactersList[0];
-		//options
-        function ToggleOptions() {
-            function ToggleVisibility(state) {
-                for (item of optionsList) {
-                    try {
-                        document.getElementById(item + "desc").style.display = state;
-                    } catch{ }
-                    try {
-                        document.getElementById(item).style.display = state;
-                    } catch{ }
-                    try {
-                        document.getElementById(item + "desc2").style.display = state;
-                    } catch{ }
-                }
-            }
-            if (OptionEnable == false) {
-                document.getElementById("Options").className = "button buttonsmall buttonsmallselected";
-                OptionEnable = true;
-                ToggleVisibility("inline");
-            } else {
-                document.getElementById("Options").className = "button buttonsmall";
-                OptionEnable = false;
-                ToggleVisibility("none");
-            }
-        }
-        function DoWsc() {
-            wsc = document.getElementById("wscinput").value;
-            Convert();
-        }
-        function NumShift() {
-            numshift = document.getElementById("numshift").value;
-            Convert();
-			RefreshExample();
-        }
-		function ChangeCharacters() {
-			characters = charactersList[document.getElementById("chardrop").value];
-			Convert();
-			RefreshExample();
-		}
-		function RefreshExample() {
-			var i = 0;
-			var a = "not_run_a";
-			var z = "not_run_z";
-			while (i <= 26){
-				if (characters[i] == "a"){
-					a = i + Number(numshift);
-				}
-				if (characters[i] == "z"){
-					z = i + Number(numshift);
-				}
-				i++;
-			}
-			a = Invert(a);
-			z = Invert(z);
-			document.getElementById("numshiftdesc2").innerHTML = "a = " + a + ", z = " + z;
-		}
-		function ChangeInvert(){
-			invert = !invert;
-			if (invert){
-				document.getElementById("invert").className = "button buttonsmall buttonsmallselected";
-			} else {
-				document.getElementById("invert").className = "button buttonsmall";
-			}
-			RefreshExample();
-			Convert();
-		}
-		function Invert(input){
-			if (invert){
-				output = 26 - Number(input);
-			} else {
-				output = input;
-			}
-			return output;
-		}
-		//main functions
-        function SelectToNumber() {
-            mode = 1;
-            document.getElementById("ButtonToNumber").className = "button buttonsmall buttonsmallselected";
-            document.getElementById("ButtonToLetter").className = "button buttonsmall";
-            Convert();
-        }
-        function SelectToLetter() {
-            mode = 2;
-            document.getElementById("ButtonToLetter").className = "button buttonsmall buttonsmallselected";
-            document.getElementById("ButtonToNumber").className = "button buttonsmall";
-            Convert();
-        }
-        function Convert() {
-            if (mode == 1) {
-                ConvertToNumber();
-            }
-            if (mode == 2) {
-                ConvertToLetter();
-            }
-        }
-        function ConvertToNumber() {
-            var keysentence = "";
-            var userinput = document.getElementById("numberletterinput").value;
-            var doloop = true;
-            for (x of userinput.toLowerCase()) {
-                let i = 0;
-                while (doloop) {
-                    if (x == "\n") {
-                        keysentence += ("\n");
-                        break
-                    }
-                    if (x == characters[i]) {
-                        keysentence += Invert(Number(i) + Number(numshift)) + wsc;
-                        break
-                    }
-                    i++;
-                    if (i > 26) {
-                        if (x != "\n") {
-                        }
-                        break
-                    }
-                }
-            }
-            document.getElementById("output_txt").innerHTML = keysentence;
-            outputTxt = keysentence;
-        }
-        function ConvertToLetter() {
-            var debug = "";
-            var numbers = ["-","0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-            var keysentence = "";
-            var keylist = [];
-            var ii = 0;
-            var next = false;
-            var firstcharacter = true;
-            var userinput = document.getElementById("numberletterinput").value;
-            for (x of userinput) {
-                if (x == wsc && firstcharacter) {
-                    debug += "Ignoring whitespace since character has not been added yet.<br>";
-                } else if (x == wsc) {
-                    next = true;
-                    debug += "Setting next to true because of whitespace.<br>";
-                } else if (numbers.includes(x)) {
-                    if (firstcharacter) {
-						keylist.push(x);
-						next = false;
-						firstcharacter = false;
-						debug += "First entered character.<br>";
-                    }else if (next) {
-						keylist.push(x);
-						ii++;
-						next = false;
-                        debug += "first character in array entry.<br>";
-                    } else {
-						var tempkeylist = keylist[ii];
-						if (tempkeylist[0] == "-"){
-							if (keylist[ii] == "-" && x != "-"){
-								keylist[ii] = 0 - Number(x);
-							} else if (x != "-"){
-								keylist[ii] = ((keylist[ii] * 10) - Number(x));
-							}
-						} else {
-							keylist[ii] = ((keylist[ii] * 10) + Number(x));
-							debug += "Multiplying array entry by 10 and adding character.<br>";
-						}
-                    }
-                } else {
-                    debug += "Ignoring unrecognized character.<br>"
-                }
-                lastkey = x;
-            }
-            for (x of keylist) {
-				if (invert){
-					var newx = Invert(Number(x) + Number(numshift));
-				} else {
-					var newx = Invert(Number(x) - Number(numshift));
-				}
-                if(characters[newx] != undefined){
-                    keysentence += characters[newx];
-                } else {
-                    debug += "OUTPUT: error. x out of range characters: " + x + ".<br>";
-                }
-				debug += "compiling x = " + Number(x) + " newx = " + Number(newx) + "<br>";
-            }
-			debug += "keylist = " + keylist;
-            keylist = [];
-            document.getElementById("output_txt").innerHTML = keysentence;
-            outputTxt = keysentence;
-            if (doDebug) { document.getElementById("debug_txt").innerHTML = debug; }
-        }
-        //Thanks to Kevin Marszalek for the copy text workaround tutorial (as shown below)! https://actualwizard.com/how-to-copy-text-to-the-clipboard-with-html-and-javascript
-        function CopyOutput() {
-            var hiddenElement = document.createElement("div"); //create hidden element
-            hiddenElement.innerHTML = outputTxt;
-            hiddenElement.style.position = "absolute";
-            hiddenElement.style.left = "-9999px";
-            document.body.appendChild(hiddenElement);
-            window.getSelection().removeRange(document.getSelection().getRangeAt(0)); //remove selection
-            var copy = document.createRange(); //copy hidden element
-            copy.selectNode(hiddenElement);
-            window.getSelection().addRange(copy);
-            document.execCommand("copy");
-            document.body.removeChild(hiddenElement);
-        }
-    </script>
-</body>
-</html>
+<!DOCTYPE html>
+<style>
+    h1 {
+        color: lightgreen;
+    }
+
+    h2 {
+        color: white;
+        font-size: 24px;
+    }
+
+    p {
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+
+    .link {
+        color: lightblue;
+        padding: 1px 2px;
+        border: 1px dashed #252525;
+    }
+
+        .link:hover {
+            color: lightblue;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+        .link:active {
+            color: white;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+    .button {
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 32px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #454545;
+        color: white;
+        border: 3px solid green;
+    }
+
+        .button:hover {
+            background-color: #606060;
+            color: white;
+            border: 3px solid lightgreen;
+        }
+
+        .button:active {
+            background-color: lightgreen;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .buttonselected {
+        background-color: green;
+        color: white;
+        border: 3px solid lightgreen;
+    }
+
+        .buttonselected:hover {
+            background-color: green;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .button:active {
+        background-color: lightgreen;
+        color: white;
+        border: 3px solid white;
+    }
+
+    .buttondl {
+        padding: 1px 2px;
+        font-size: 16px;
+        border: 1px solid green;
+        background-color: #454545;
+    }
+
+        .buttondl:hover {
+            background-color: #606060;
+            color: white;
+            border: 1px solid lightgreen;
+        }
+
+        .buttondl:active {
+            background-color: lightgreen;
+            border: 1px solid white;
+            color: white;
+        }
+
+    .border {
+        border: 2px solid lightgreen;
+    }
+
+    .buttonsmall {
+        padding: 2px 4px;
+        font-size: 20px;
+        border: 2px solid green;
+    }
+
+        .buttonsmall:hover {
+            background-color: #606060;
+            color: white;
+            border: 2px solid lightgreen;
+        }
+
+        .buttonsmall:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+        }
+
+    .buttonsmallselected {
+        background-color: green;
+        color: white;
+        border: 2px solid lightgreen;
+    }
+
+        .buttonsmallselected:hover {
+            background-color: green;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .buttonsmallselected:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+            color: white;
+        }
+
+    .textareainput {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
+    }
+
+        .textareainput:hover {
+            border: 2px solid lightgreen;
+        }
+</style>
+<title>Number-Letter Converter</title>
+<link rel="stylesheet" href="../dark_green.css">
+<html>
+<body style="background-color:#252525;">
+    <form>
+        <button class="button buttonsmall" type="button" onclick="ToggleOptions()" id="Options">Options</button>
+
+        <label style="color: white; display: none;" for="wscinput" id="wscinputdesc"><br>Numbers seperated by:</label>
+        <textarea style="resize: none; display: none;" class="textareainput" id="wscinput" oninput="DoWsc()" maxlength="1" cols="1" rows="1"></textarea>
+		
+		<label style="color: white; display: none;" for="chardrop" id="chardropdesc"><br>Alphabet:</label>
+        <select id="chardrop" class="button buttonsmall" style="font-size:16px; display: none;" oninput="ChangeCharacters()">
+            <option value="0">abcdef</option>
+            <option value="1">qwerty</option>
+			<option value="2">qwertz</option>
+			<option value="3">azerty</option>
+			<option value="4">dvorak</option>
+			<option value="5">colemak</option>
+        </select>
+		
+        <label style="color: white; display: none;" for="numshift" id="numshiftdesc"><br>Number shift:</label>
+        <textarea style="resize: none; display: none;" class="textareainput" id="numshift" value="0" oninput="NumShift()" maxlength="2" cols="1" rows="1"></textarea>
+		<button class="button buttonsmall" style="font-size:16px;display:none;" type="button" onclick="ChangeInvert()" id="invert">Invert</button>
+		<label style="color: white; display: none;" for="numshift" id="numshiftdesc2">a = 1, z = 26</label>
+		
+		<br>
+        <button class="button buttonsmall" type="button" onclick="SelectToNumber()" id="ButtonToNumber">To number</button>
+        <button class="button buttonsmall" type="button" onclick="SelectToLetter()" id="ButtonToLetter">To letter</button>
+        <br>
+        <label style="color: white;" for="numberletterinput">Input:</label>
+        <br>
+        <textarea class="textareainput" id="numberletterinput" oninput="Convert()" cols="30" rows="4" spellcheck="false"></textarea>
+        <br>
+    </form>
+    <button class="button buttonsmall" type="button" onclick="CopyOutput()" id="ButtonCopy">Copy output</button><br>
+    <label style="color: white;" for="output_txt">Output:</label>
+    <p id="output_txt"></p>
+    <p id="debug_txt"></p>
+    <script>
+		//variables
+        var wsc = " ";
+        var mode;
+        var outputTxt = "";
+        var doDebug = false;
+        var OptionEnable = false;
+        var numshift = 0;
+		var invert = false;
+        var optionsList = ["wscinput", "numshift", "chardrop", "invert"];
+        var charactersList = [
+		" abcdefghijklmnopqrstuvwxyz", //abcdef = 0
+		" qwertyuiopasdfghjklzxcvbnm", //qwerty = 1
+		" qwertzuiopasdfghjklyxcvbnm", //qwertz = 2
+		" azertyuiopqsdfghjklmwxcvbn", //azerty = 3
+		" pyfgcrlaoeuidhtnsqjkxbmwvz", //dvorak = 4
+		" qwfpgjluyarstdhneiozxcvbkm" //colemak = 5
+		];
+        var characters = charactersList[0];
+		//options
+        function ToggleOptions() {
+            function ToggleVisibility(state) {
+                for (item of optionsList) {
+                    try {
+                        document.getElementById(item + "desc").style.display = state;
+                    } catch{ }
+                    try {
+                        document.getElementById(item).style.display = state;
+                    } catch{ }
+                    try {
+                        document.getElementById(item + "desc2").style.display = state;
+                    } catch{ }
+                }
+            }
+            if (OptionEnable == false) {
+                document.getElementById("Options").className = "button buttonsmall buttonsmallselected";
+                OptionEnable = true;
+                ToggleVisibility("inline");
+            } else {
+                document.getElementById("Options").className = "button buttonsmall";
+                OptionEnable = false;
+                ToggleVisibility("none");
+            }
+        }
+        function DoWsc() {
+            wsc = document.getElementById("wscinput").value;
+            Convert();
+        }
+        function NumShift() {
+            numshift = document.getElementById("numshift").value;
+            Convert();
+			RefreshExample();
+        }
+		function ChangeCharacters() {
+			characters = charactersList[document.getElementById("chardrop").value];
+			Convert();
+			RefreshExample();
+		}
+		function RefreshExample() {
+			var i = 0;
+			var a = "not_run_a";
+			var z = "not_run_z";
+			while (i <= 26){
+				if (characters[i] == "a"){
+					a = i + Number(numshift);
+				}
+				if (characters[i] == "z"){
+					z = i + Number(numshift);
+				}
+				i++;
+			}
+			a = Invert(a);
+			z = Invert(z);
+			document.getElementById("numshiftdesc2").innerHTML = "a = " + a + ", z = " + z;
+		}
+		function ChangeInvert(){
+			invert = !invert;
+			if (invert){
+				document.getElementById("invert").className = "button buttonsmall buttonsmallselected";
+			} else {
+				document.getElementById("invert").className = "button buttonsmall";
+			}
+			RefreshExample();
+			Convert();
+		}
+		function Invert(input){
+			if (invert){
+				output = 26 - Number(input);
+			} else {
+				output = input;
+			}
+			return output;
+		}
+		//main functions
+        function SelectToNumber() {
+            mode = 1;
+            document.getElementById("ButtonToNumber").className = "button buttonsmall buttonsmallselected";
+            document.getElementById("ButtonToLetter").className = "button buttonsmall";
+            Convert();
+        }
+        function SelectToLetter() {
+            mode = 2;
+            document.getElementById("ButtonToLetter").className = "button buttonsmall buttonsmallselected";
+            document.getElementById("ButtonToNumber").className = "button buttonsmall";
+            Convert();
+        }
+        function Convert() {
+            if (mode == 1) {
+                ConvertToNumber();
+            }
+            if (mode == 2) {
+                ConvertToLetter();
+            }
+        }
+        function ConvertToNumber() {
+            var keysentence = "";
+            var userinput = document.getElementById("numberletterinput").value;
+            var doloop = true;
+            for (x of userinput.toLowerCase()) {
+                let i = 0;
+                while (doloop) {
+                    if (x == "\n") {
+                        keysentence += ("\n");
+                        break
+                    }
+                    if (x == characters[i]) {
+                        keysentence += Invert(Number(i) + Number(numshift)) + wsc;
+                        break
+                    }
+                    i++;
+                    if (i > 26) {
+                        if (x != "\n") {
+                        }
+                        break
+                    }
+                }
+            }
+            document.getElementById("output_txt").innerHTML = keysentence;
+            outputTxt = keysentence;
+        }
+        function ConvertToLetter() {
+            var debug = "";
+            var numbers = ["-","0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+            var keysentence = "";
+            var keylist = [];
+            var ii = 0;
+            var next = false;
+            var firstcharacter = true;
+            var userinput = document.getElementById("numberletterinput").value;
+            for (x of userinput) {
+                if (x == wsc && firstcharacter) {
+                    debug += "Ignoring whitespace since character has not been added yet.<br>";
+                } else if (x == wsc) {
+                    next = true;
+                    debug += "Setting next to true because of whitespace.<br>";
+                } else if (numbers.includes(x)) {
+                    if (firstcharacter) {
+						keylist.push(x);
+						next = false;
+						firstcharacter = false;
+						debug += "First entered character.<br>";
+                    }else if (next) {
+						keylist.push(x);
+						ii++;
+						next = false;
+                        debug += "first character in array entry.<br>";
+                    } else {
+						var tempkeylist = keylist[ii];
+						if (tempkeylist[0] == "-"){
+							if (keylist[ii] == "-" && x != "-"){
+								keylist[ii] = 0 - Number(x);
+							} else if (x != "-"){
+								keylist[ii] = ((keylist[ii] * 10) - Number(x));
+							}
+						} else {
+							keylist[ii] = ((keylist[ii] * 10) + Number(x));
+							debug += "Multiplying array entry by 10 and adding character.<br>";
+						}
+                    }
+                } else {
+                    debug += "Ignoring unrecognized character.<br>"
+                }
+                lastkey = x;
+            }
+            for (x of keylist) {
+				if (invert){
+					var newx = Invert(Number(x) + Number(numshift));
+				} else {
+					var newx = Invert(Number(x) - Number(numshift));
+				}
+                if(characters[newx] != undefined){
+                    keysentence += characters[newx];
+                } else {
+                    debug += "OUTPUT: error. x out of range characters: " + x + ".<br>";
+                }
+				debug += "compiling x = " + Number(x) + " newx = " + Number(newx) + "<br>";
+            }
+			debug += "keylist = " + keylist;
+            keylist = [];
+            document.getElementById("output_txt").innerHTML = keysentence;
+            outputTxt = keysentence;
+            if (doDebug) { document.getElementById("debug_txt").innerHTML = debug; }
+        }
+        //Thanks to Kevin Marszalek for the copy text workaround tutorial (as shown below)! https://actualwizard.com/how-to-copy-text-to-the-clipboard-with-html-and-javascript
+        function CopyOutput() {
+            var hiddenElement = document.createElement("div"); //create hidden element
+            hiddenElement.innerHTML = outputTxt;
+            hiddenElement.style.position = "absolute";
+            hiddenElement.style.left = "-9999px";
+            document.body.appendChild(hiddenElement);
+            window.getSelection().removeRange(document.getSelection().getRangeAt(0)); //remove selection
+            var copy = document.createRange(); //copy hidden element
+            copy.selectNode(hiddenElement);
+            window.getSelection().addRange(copy);
+            document.execCommand("copy");
+            document.body.removeChild(hiddenElement);
+        }
+    </script>
+</body>
+</html>

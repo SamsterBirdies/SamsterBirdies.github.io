@@ -1,6 +1,7 @@
-Additions/Fixes:
--add a comparing slider thingie to the shader comparer.
--Make the homepage not stupid.
-
-New projects:
+Additions/Fixes:
+-add a comparing slider thingie to the shader comparer.
+-Make the homepage not stupid.
+-linear pcm data size calculator
+
+New projects:
 -create reviews tab with some cheap reviews. (just a way to organize my thoughts and share them).

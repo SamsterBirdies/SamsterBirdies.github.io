@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="dark_green.css">
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="dark_green.css">
 	<title>Tables - SamsterBirdies</title>
 	<link rel="icon" href="./images/favicon.webp" />
 </head>
@@ -11,15 +11,20 @@
         <a class="button" href="./index.html">Home</a>
         <a class="button" href="./tools.html">Tools</a>
 		<a class="button buttonselected" href="./tables.html">Tables</a>
+		<a class="button" href="./post.html">Post</a>
         <a class="button" href="./repo.html">Repo</a>
 		<a class="button" href="./about.html">About</a>
     </nav>
-	
+	<!--search and other -->
 	<nav>
-		<button class="button buttonsmall" type="button" onclick="TableEnable('audiobitdepth','200px', '270px')" id="audiobitdepthButton">Audio Bit-Depth</button>
-		<button class="button buttonsmall" type="button" onclick="TableEnable('dbamp','400px', '470px')" id="dbampButton">dB to Amplitude</button>
-		<button class="button buttonsmall" type="button" onclick="TableEnable('morsecode','280px', '950px')" id="morsecodeButton">Morse Code</button>
-		<button class="button buttonsmall" type="button" onclick="TableEnable('int_types_csharp','500px', '320px')" id="int_types_csharpButton">C# Integer Types</button>
+		<textarea class="textareainput" id="searchInputBox" oninput="Search()" cols="30" rows="1" spellcheck="false" placeholder="Search tables" style="resize: none;"></textarea>
+		<button class="button buttonsmall" type="button" onclick="ToggleTableButtons()" id="tableToggleButton">Hide buttons</button>
+	</nav>
+	<nav> <!-- Table buttons -->
+		<button class="button buttonsmall buttontable" type="button" onclick="TableEnable('audiobitdepth','200px', '270px')" id="audiobitdepthButton">Audio Bit-Depth</button>
+		<button class="button buttonsmall buttontable" type="button" onclick="TableEnable('dbamp','400px', '470px')" id="dbampButton">dB to Amplitude</button>
+		<button class="button buttonsmall buttontable" type="button" onclick="TableEnable('morsecode','280px', '950px')" id="morsecodeButton">Morse Code</button>
+		<button class="button buttonsmall buttontable" type="button" onclick="TableEnable('int_types_csharp','500px', '320px')" id="int_types_csharpButton">C# Integer Types</button>
 	</nav>
 	
 	<p>Table Link: <a class="link" href="" id="tableLink"></a></p>
@@ -29,7 +34,7 @@
 	</div>
 </body>
 <script>
-	 function TableEnable(src, width, height) {
+	function TableEnable(src, width, height) {
 		document.getElementById("iframediv").style = "width:" + width + "; height:" + height;
 		document.getElementById("iFrame").title = document.getElementById(src+"Button");
 		document.getElementById("iFrame").src = "./tables/" + src + ".html";
@@ -39,6 +44,38 @@
 		document.getElementById(src + "Button").className = "button buttonsmall buttonsmallselected";
 		document.getElementById("tableLink").href = "https://www.samsterbirdies.com/tables/"+src;
 		document.getElementById("tableLink").innerHTML = "www.samsterbirdies.com/tables/"+src;
+	}
+	function Search(){
+		//Will hide buttons that dont match the search. Will be useful if a bunch of new tables ever get added in the future.
+		var searchWords = document.getElementById("searchInputBox").value.split(" ");
+		for (button of document.getElementsByClassName("buttontable")){
+			let matches = true;
+			for (word of searchWords){
+				if (button.innerHTML.toLowerCase().search(word.toLowerCase()) == -1){ //lowercase regex search
+					matches = false;
+				}
+			}
+			if (matches) {
+				button.style.display = "inline";
+			} else {
+				button.style.display = "none";
+			}
+		}
+	}
+	function ToggleTableButtons(){
+		//Toggles whether the table buttons will display or not. Will be useful if a bunch of new tables ever get added in the future.
+		for (button of document.getElementsByClassName("buttontable")){
+			if (document.getElementById("tableToggleButton").innerHTML == "Hide buttons"){
+				button.style.display = "none";
+			}else{
+				button.style.display = "inline";
+			}
+		}
+		if (document.getElementById("tableToggleButton").innerHTML == "Hide buttons"){
+			document.getElementById("tableToggleButton").innerHTML = "Show buttons";
+		}else{
+			document.getElementById("tableToggleButton").innerHTML = "Hide buttons";
+		}
 	}
 </script>
 </html>

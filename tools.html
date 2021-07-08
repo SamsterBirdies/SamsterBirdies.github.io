@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<style>
-	.buttontool {
-	}
-</style>
 <html>
 <head>
 	<link rel="stylesheet" href="dark_green.css">
@@ -15,9 +11,11 @@
         <a class="button" href="./index.html">Home</a>
         <a class="button buttonselected" href="./tools.html">Tools</a>
 		<a class="button" href="./tables.html">Tables</a>
+		<a class="button" href="./post.html">Post</a>
         <a class="button" href="./repo.html">Repo</a>
 		<a class="button" href="./about.html">About</a>
     </nav>
+	<!--search and other -->
 	<nav>
 		<textarea class="textareainput" id="searchInputBox" oninput="Search()" cols="30" rows="1" spellcheck="false" placeholder="Search tools" style="resize: none;"></textarea>
 		<button class="button buttonsmall" type="button" onclick="ToggleToolButtons()" id="toolToggleButton">Hide buttons</button>
@@ -26,7 +24,7 @@
     <nav>
 		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('aspectratio', 'Easily calculate resolutions for the aspect ratio','400px', '300px')" id="aspectratioButton">Aspect Ratio</button>
 		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('basenumconvert', 'Convert a number from one base to another.','400px', '400px')" id="basenumconvertButton">Base Number Converter</button>
-		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('dbconvert', 'Convert Decibels to Amplitude and vice versa.','375px', '570px')" id="dbconvertButton">dB/Amplitude</button>
+		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('dbconvert', 'Convert Decibels to Amplitude and vice versa.','375px', '570px')" id="dbconvertButton">dB/Amplitude</button>		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('lpcmdatasize', 'Calculate data or time for LPCM','675px', '500px')" id="lpcmdatasizeButton">LPCM datasize calculator</button>
 		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('morsecode', 'Turn text into morse code and vice versa.', '680px', '1200px')" id="morsecodeButton">Morse code/txt</button>
         <button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('numberletter', 'Convert numbers to letters and vice versa.', '500px', '500px')" id="numberletterButton">Number-Letter converter</button>
 		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('randomforts', 'Generate random commanders and weapons.', '475px', '675px')" id="randomfortsButton">Random Forts</button>
@@ -35,7 +33,6 @@
 		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('inflation', 'Convert USD prices across two given years, accounting for inflation.', '575px', '675px')" id="inflationButton">USD Inflation tool</button>
     </nav>
     <p id="ToolDesc"></p>
-
     <div id="iframediv" class="iframediv"><iframe id="iFrame" class="iframe" src="./tools/blank.html" title="Number-Letter converter"></iframe></div>
 	<p>Drag corner to resize window</p>
 	<p>Tool Link:

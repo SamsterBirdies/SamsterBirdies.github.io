@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<style>
+	h1 {
+		color: lightgreen;
+	}
+
+	h2 {
+		color: white;
+		font-size: 24px;
+	}
+
+	p {
+		color: white;
+	}
+
+	a {
+		color: white;
+	}
+
+	label {
+		color:white;
+	}
+
+	.link {
+		color: lightblue;
+		padding: 1px 2px;
+		border: 1px dashed #252525;
+	}
+
+		.link:hover {
+			color: lightblue;
+			padding: 1px 2px;
+			border: 1px dashed grey;
+		}
+
+		.link:active {
+			color: white;
+			padding: 1px 2px;
+			border: 1px dashed grey;
+		}
+
+	.button {
+		padding: 4px 8px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 32px;
+		margin: 4px 2px;
+		cursor: pointer;
+		background-color: #454545;
+		color: white;
+		border: 3px solid green;
+	}
+
+		.button:hover {
+			background-color: #606060;
+			color: white;
+			border: 3px solid lightgreen;
+		}
+
+		.button:active {
+			background-color: lightgreen;
+			color: white;
+			border: 3px solid white;
+		}
+
+	.buttonselected {
+		background-color: green;
+		color: white;
+		border: 3px solid lightgreen;
+	}
+
+		.buttonselected:hover {
+			background-color: green;
+			color: white;
+			border: 3px solid white;
+		}
+
+	.button:active {
+		background-color: lightgreen;
+		color: white;
+		border: 3px solid white;
+	}
+
+	.buttondl {
+		padding: 1px 2px;
+		font-size: 16px;
+		border: 1px solid green;
+		background-color: #454545;
+	}
+
+		.buttondl:hover {
+			background-color: #606060;
+			color: white;
+			border: 1px solid lightgreen;
+		}
+
+		.buttondl:active {
+			background-color: lightgreen;
+			border: 1px solid white;
+			color: white;
+		}
+
+	.border {
+		border: 2px solid lightgreen;
+	}
+
+	.buttonsmall {
+		padding: 2px 4px;
+		font-size: 20px;
+		border: 2px solid green;
+	}
+
+		.buttonsmall:hover {
+			background-color: #606060;
+			color: white;
+			border: 2px solid lightgreen;
+		}
+
+		.buttonsmall:active {
+			background-color: lightgreen;
+			border: 2px solid white;
+		}
+
+	.buttonsmallselected {
+		background-color: green;
+		color: white;
+		border: 2px solid lightgreen;
+	}
+
+		.buttonsmallselected:hover {
+			background-color: green;
+			color: white;
+			border: 2px solid white;
+		}
+
+		.buttonsmallselected:active {
+			background-color: lightgreen;
+			border: 2px solid white;
+			color: white;
+		}
+
+	.textareainput {
+		background-color: #191919;
+		color: white;
+		border: 2px solid green;
+	}
+
+		.textareainput:hover {
+			border: 2px solid lightgreen;
+		}
+</style>
+<title>Linear PCM data size calculator</title>
+<link rel="stylesheet" href="../dark_green.css">
+<html>
+<body style="background-color:#252525;">
+	<p>Find the data size for a duration of LPCM audio (typically .wav)</p>
+	<p><b>Important:</b> This only accounts for the size of the raw sound data. The total size for the file may vary slightly due to file formatting and varies between different recorders/exporters. (Adding a megabyte or subtracting 5 seconds is most likely to be safe)</p>
+	<label for="samplerateinput">Sample rate:</label>
+	<input id="samplerateinput" type="number" class="textareainput" placeholder="'44.1'"/>
+	<label for="samplerateinput">khz</label>
+	<br>
+	<label for="bitdepthinput">Bit depth:</label>
+	<input id="bitdepthinput" type="number" class="textareainput" placeholder="'16'"/>
+	<label for="bitdepthinput">bit</label>
+	<br>
+	<label for="numchannelsinput">Channels:</label>
+	<input id="numchannelsinput" type="number" class="textareainput" placeholder="'2'"/>
+	<br>
+	<!-- i/o time and size -->
+	<p>Conversion type:</p>
+	<label for="timeinput">Duration:</label>
+	<textarea class="textareainput" id="timeinput" rows=1 placeholder="'6:45:30.250'" oninput="CalcDuration()"></textarea>
+	<label for="timeinput">Format: years:months:weeks:days:hours:minutes:seconds</label>
+	<br>
+	<label for="sizeinput">Data size:</label>
+	<textarea class="textareainput" id="sizeinput" rows=1 placeholder="'5 GB'" oninput="CalcSize()"></textarea>
+	<label for="sizeinput">Accepts bytes, binary bytes, and bits.(5 GB, 5 GiB,5 Gb)</label>
+	<p id="output"></p>
+	<p id="status"></p>
+</body>
+<script>
+	//this code is messy and i hate it.
+	const timeMultiplier = [29030400, 2419200, 604800, 86400, 3600, 60, 1];
+	const metric = {"T":1000000000000,"G":1000000000,"M":1000000,"K":1000,"":1}
+	//consts used for string checking
+	const numbers = "1234567890.";
+	const strMetric = "KMGT";
+	const byteTypes = ["B","b"]
+	function ceil2(input,places){
+		//imagine a programming language without proper math functions.
+		var num = input * (10 ** places);
+		var num = Math.ceil(num);
+		return num / (10 ** places);
+	}
+	function floor2(input,places){
+		//imagine a programming language without proper math functions.
+		var num = input * (10 ** places);
+		var num = Math.floor(num);
+		return num / (10 ** places);
+	}
+	//main functions
+	function CalcDuration(){
+		//init
+		document.getElementById("status").innerHTML = ""; //clear status
+		var bitrate = (document.getElementById("samplerateinput").value * 1000) * document.getElementById("bitdepthinput").value * document.getElementById("numchannelsinput").value;
+		var timeList = document.getElementById("timeinput").value.split(":");
+		//calculate time in seconds
+		var time = 0;
+		for (i = 0; i < timeList.length; i++){
+			time += timeList[i] * timeMultiplier[7 - (timeList.length - i)];
+		}
+		console.log(time);
+		//calculate size in bytes
+		var size = bitrate * time / 8;
+		//Auto adjust metric
+		if (size >= metric["T"]){
+			var metricType = "T";
+		} else if (size >= metric["G"]){
+			var metricType = "G";
+		} else if (size >= metric["M"]){
+			var metricType = "M";
+		} else if (size >= metric["K"]){
+			var metricType = "K";
+		} else {
+			var metricType = "";
+		}
+		//print stats to output
+		var output = "";
+		output += ceil2(size / metric[metricType], 3) + metricType + "B, "; //bytes
+		output += ceil2(size / (1024 ** (Math.log10(metric[metricType]) / 3)), 3) + metricType + "iB, "; //binary bytes
+		output += Math.ceil(size) + "bytes, "; //bytes
+		output += ceil2(bitrate / 1000, 3) + "kbps " //bitrate
+		document.getElementById("output").innerHTML = output;
+	}
+	function CalcSize(){
+		//init
+		document.getElementById("status").innerHTML = ""; //clear status
+		var bitrate = (document.getElementById("samplerateinput").value * 1000) * document.getElementById("bitdepthinput").value * document.getElementById("numchannelsinput").value;
+		var size = "";
+		var metricType = "";
+		var byteType = "";
+		//process the string given
+		for (x of document.getElementById("sizeinput").value){
+			if (numbers.indexOf(x) != -1){
+				size += x;
+			}
+		}
+		for (x of strMetric){
+			if (document.getElementById("sizeinput").value.toUpperCase().indexOf(x) != -1){
+				metricType = x;
+			}
+		}
+		for (x of byteTypes){
+			if (document.getElementById("sizeinput").value.indexOf(x) != -1){
+				byteType = x;
+			}
+		}
+		//adjust size to metric and byte type.
+		//convert to binary metric if applicable
+		if (document.getElementById("sizeinput").value.indexOf("i") != -1){
+			size = size * (1024 ** (Math.log10(metric[metricType]) / 3)) 
+		} else {
+			size *= metric[metricType];
+		}
+		if (byteType == "B"){
+			//do nothing
+		} else if (byteType == "b"){
+			size /= 8;
+		} else {
+			document.getElementById("status").innerHTML = "Warning: Input is in an improper format.";
+		}
+		
+		//organize the time.
+		var time = size / (bitrate / 8);
+		var times = [];
+		var output ='';
+		//outputting
+		for (x of timeMultiplier){
+			times.push(Math.floor(time/x));
+			time = time % x;
+		}
+		var startThing = false;
+		for (i = 0; i < times.length; i++){
+			if (times[i] == 0 && startThing == false){
+				if (i == times.length - 2){
+					startThing = true;
+				}
+			} else if (i < times.length - 1){
+				startThing = true;
+				output += times[i] + ":";
+			} else {
+				output += (floor2(times[i]+time, 2));
+			}
+		}
+		document.getElementById("output").innerHTML = output;
+	}
+</script>
+</html>

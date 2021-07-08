@@ -1,288 +1,288 @@
-<!DOCTYPE html>
-<style>
-    h1 {
-        color: lightgreen;
-    }
-
-    h2 {
-        color: white;
-        font-size: 24px;
-    }
-
-    p {
-        color: white;
-    }
-
-    a {
-        color: white;
-    }
-
-    .link {
-        color: lightblue;
-        padding: 1px 2px;
-        border: 1px dashed #252525;
-    }
-
-        .link:hover {
-            color: lightblue;
-            padding: 1px 2px;
-            border: 1px dashed grey;
-        }
-
-        .link:active {
-            color: white;
-            padding: 1px 2px;
-            border: 1px dashed grey;
-        }
-
-    .button {
-        padding: 4px 8px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 32px;
-        margin: 4px 2px;
-        cursor: pointer;
-        background-color: #454545;
-        color: white;
-        border: 3px solid green;
-    }
-
-        .button:hover {
-            background-color: #606060;
-            color: white;
-            border: 3px solid lightgreen;
-        }
-
-        .button:active {
-            background-color: lightgreen;
-            color: white;
-            border: 3px solid white;
-        }
-
-    .buttonselected {
-        background-color: green;
-        color: white;
-        border: 3px solid lightgreen;
-    }
-
-        .buttonselected:hover {
-            background-color: green;
-            color: white;
-            border: 3px solid white;
-        }
-
-    .button:active {
-        background-color: lightgreen;
-        color: white;
-        border: 3px solid white;
-    }
-
-    .buttondl {
-        padding: 1px 2px;
-        font-size: 16px;
-        border: 1px solid green;
-        background-color: #454545;
-    }
-
-        .buttondl:hover {
-            background-color: #606060;
-            color: white;
-            border: 1px solid lightgreen;
-        }
-
-        .buttondl:active {
-            background-color: lightgreen;
-            border: 1px solid white;
-            color: white;
-        }
-
-    .border {
-        border: 2px solid lightgreen;
-    }
-
-    .buttonsmall {
-        padding: 2px 4px;
-        font-size: 20px;
-        border: 2px solid green;
-    }
-
-        .buttonsmall:hover {
-            background-color: #606060;
-            color: white;
-            border: 2px solid lightgreen;
-        }
-
-        .buttonsmall:active {
-            background-color: lightgreen;
-            border: 2px solid white;
-        }
-
-    .buttonsmallselected {
-        background-color: green;
-        color: white;
-        border: 2px solid lightgreen;
-    }
-
-        .buttonsmallselected:hover {
-            background-color: green;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .buttonsmallselected:active {
-            background-color: lightgreen;
-            border: 2px solid white;
-            color: white;
-        }
-
-    .textareainput {
-        background-color: #191919;
-        color: white;
-        border: 2px solid green;
-    }
-
-        .textareainput:hover {
-            border: 2px solid lightgreen;
-        }
-	.slider {
-		-webkit-appearance: none;
-		width: 255px;
-		height: 16px;
-		background: #454545;
-		color: green;
-		border: 2px solid green;
-	}
-	
-		.slider:hover {
-			border: 2px solid lightgreen;
-		}
-	
-		.slider::-webkit-slider-thumb {
-			-webkit-appearance: none;
-			width: 16px;
-			height: 16px;
-			background: green;
-			cursor: pointer;
-			border: 2px solid lightgreen;
-		}
-	
-			.slider::-webkit-slider-thumb:hover {
-				border: 2px solid white;
-			}
-	
-			.slider::-webkit-slider-thumb:active {
-				background: lightgreen;
-				border: 2px solid white;
-			}
-</style>
-<title>RGB/Hex color converter</title>
-<link rel="stylesheet" href="../dark_green.css">
-<html>
-<body style="background-color:#252525;">
-	<label style="color: red;" for="rBox" id="rBoxdesc">R:</label><textarea style="resize: none;" class="textareainput" id="rBox" oninput="RGBboxEntry()" maxlength="3" cols="3" rows="1" value ="0" placeholder="0"></textarea>
-	<input type="range" min="0" max="255" value="0" class="slider" id="redSlider" oninput="MoveSlider()">
-	<br>
-	<label style="color: lightgreen;" for="gBox" id="gBoxdesc">G:</label><textarea style="resize: none;" class="textareainput" id="gBox" oninput="RGBboxEntry()" maxlength="3" cols="3" rows="1" value="0" placeholder="0"></textarea>
-	<input type="range" min="0" max="255" value="0" class="slider" id="greenSlider" oninput="MoveSlider()">
-	<br>
-	<label style="color: lightblue;" for="bBox" id="bBoxdesc">B:</label><textarea style="resize: none;" class="textareainput" id="bBox" oninput="RGBboxEntry()" maxlength="3" cols="3" rows="1" value="0" placeholder="0"></textarea>
-	<input type="range" min="0" max="255" value="0" class="slider" id="blueSlider" oninput="MoveSlider()">
-	<br>
-	<br>
-	<label style="color: white;" for="hexBox" id="hexBoxdesc">Hex: #</label><textarea style="resize: none;" class="textareainput" id="hexBox" oninput="ConvertHex()" maxlength="6" cols="8" rows="1" value="000000" placeholder="000000"></textarea>
-	<br>
-	<br>
-	<label style="color: white;" for="colorDiv" id="colorDivdesc">Color sample:</label>
-	<div style="background-color:#000000;" id="colorDiv"><a style="color: white">white</a><a style="color:black">black</a></div>
-<script>
-	var hex = "000000";
-	var hexlist = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
-	var debug = false;
-	function Log(input){
-		if (debug){
-			console.log(input);
-		}
-	}
-	function RGBboxEntry(){
-		document.getElementById("redSlider").value = document.getElementById("rBox").value;
-		document.getElementById("greenSlider").value = document.getElementById("gBox").value;
-		document.getElementById("blueSlider").value = document.getElementById("bBox").value;
-		ConvertRGB();
-	}
-	function ConvertRGB(){
-		function ConvertValue(input){
-			var o1 = Math.floor(parseInt(input)/16);
-			Log("o1= "+o1);
-			var o2 = input%16;
-			Log("o2= "+o2);
-			var o3 = hexlist[o1] + hexlist[o2];
-			Log("o3="+o3);
-			return o3;
-		}
-		function InvalidInput(input){
-			if (input >= 0 && input <= 255){
-				return input;
-			}else if(input > 255){
-				return 255;
-			}else{
-				return 0;
-			}
-		}
-		var inRed = InvalidInput(parseInt(document.getElementById("rBox").value));
-		var inGreen = InvalidInput(parseInt(document.getElementById("gBox").value));
-		var inBlue = InvalidInput(parseInt(document.getElementById("bBox").value));
-		Log("After InvalidInput: inRed="+inRed+";inGreen="+inGreen+";inBlue="+inBlue);
-		hex = ConvertValue(inRed) + ConvertValue(inGreen) + ConvertValue(inBlue);
-		document.getElementById("hexBox").value = hex;
-		document.getElementById("colorDiv").style = "background-color:" + "#" + hex;
-	}
-	function ConvertHex(){
-		function ConvertValue(start){
-			var total = 0;
-			var i = 0;
-			for (x of hexlist){
-				if (x == hex[start]){
-					total = i*16;
-				}
-				i++;
-			}
-			i = 0;
-			for (x of hexlist){
-				if (x == hex[start + 1]){
-					total += i;
-				}
-				i++;
-			}
-			return total;
-		}
-		hex = document.getElementById("hexBox").value;
-		var i=0;
-		for (x of hex){
-			if (hexlist.includes(x)){
-				i += 1;
-			}
-		}
-		if (i==6 && hex.length == 6){
-			Log("Hex requirement satisfied, starting conversion process.");
-			var r = ConvertValue(0);
-			var g = ConvertValue(2);
-			var b = ConvertValue(4);
-			document.getElementById("rBox").value = r;
-			document.getElementById("gBox").value = g;
-			document.getElementById("bBox").value = b;
-			document.getElementById("redSlider").value = r;
-			document.getElementById("greenSlider").value = g;
-			document.getElementById("blueSlider").value = b;
-			document.getElementById("colorDiv").style = "background-color:" + "#" + hex;
-		}
-	}
-	function MoveSlider(){
-		document.getElementById("rBox").value = document.getElementById("redSlider").value;
-		document.getElementById("gBox").value = document.getElementById("greenSlider").value;
-		document.getElementById("bBox").value = document.getElementById("blueSlider").value;
-		ConvertRGB();
-	}
-</script>
-</body>
+<!DOCTYPE html>
+<style>
+    h1 {
+        color: lightgreen;
+    }
+
+    h2 {
+        color: white;
+        font-size: 24px;
+    }
+
+    p {
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+
+    .link {
+        color: lightblue;
+        padding: 1px 2px;
+        border: 1px dashed #252525;
+    }
+
+        .link:hover {
+            color: lightblue;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+        .link:active {
+            color: white;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+    .button {
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 32px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #454545;
+        color: white;
+        border: 3px solid green;
+    }
+
+        .button:hover {
+            background-color: #606060;
+            color: white;
+            border: 3px solid lightgreen;
+        }
+
+        .button:active {
+            background-color: lightgreen;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .buttonselected {
+        background-color: green;
+        color: white;
+        border: 3px solid lightgreen;
+    }
+
+        .buttonselected:hover {
+            background-color: green;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .button:active {
+        background-color: lightgreen;
+        color: white;
+        border: 3px solid white;
+    }
+
+    .buttondl {
+        padding: 1px 2px;
+        font-size: 16px;
+        border: 1px solid green;
+        background-color: #454545;
+    }
+
+        .buttondl:hover {
+            background-color: #606060;
+            color: white;
+            border: 1px solid lightgreen;
+        }
+
+        .buttondl:active {
+            background-color: lightgreen;
+            border: 1px solid white;
+            color: white;
+        }
+
+    .border {
+        border: 2px solid lightgreen;
+    }
+
+    .buttonsmall {
+        padding: 2px 4px;
+        font-size: 20px;
+        border: 2px solid green;
+    }
+
+        .buttonsmall:hover {
+            background-color: #606060;
+            color: white;
+            border: 2px solid lightgreen;
+        }
+
+        .buttonsmall:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+        }
+
+    .buttonsmallselected {
+        background-color: green;
+        color: white;
+        border: 2px solid lightgreen;
+    }
+
+        .buttonsmallselected:hover {
+            background-color: green;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .buttonsmallselected:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+            color: white;
+        }
+
+    .textareainput {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
+    }
+
+        .textareainput:hover {
+            border: 2px solid lightgreen;
+        }
+	.slider {
+		-webkit-appearance: none;
+		width: 255px;
+		height: 16px;
+		background: #454545;
+		color: green;
+		border: 2px solid green;
+	}
+	
+		.slider:hover {
+			border: 2px solid lightgreen;
+		}
+	
+		.slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			width: 16px;
+			height: 16px;
+			background: green;
+			cursor: pointer;
+			border: 2px solid lightgreen;
+		}
+	
+			.slider::-webkit-slider-thumb:hover {
+				border: 2px solid white;
+			}
+	
+			.slider::-webkit-slider-thumb:active {
+				background: lightgreen;
+				border: 2px solid white;
+			}
+</style>
+<title>RGB/Hex color converter</title>
+<link rel="stylesheet" href="../dark_green.css">
+<html>
+<body style="background-color:#252525;">
+	<label style="color: red;" for="rBox" id="rBoxdesc">R:</label><textarea style="resize: none;" class="textareainput" id="rBox" oninput="RGBboxEntry()" maxlength="3" cols="3" rows="1" value ="0" placeholder="0"></textarea>
+	<input type="range" min="0" max="255" value="0" class="slider" id="redSlider" oninput="MoveSlider()">
+	<br>
+	<label style="color: lightgreen;" for="gBox" id="gBoxdesc">G:</label><textarea style="resize: none;" class="textareainput" id="gBox" oninput="RGBboxEntry()" maxlength="3" cols="3" rows="1" value="0" placeholder="0"></textarea>
+	<input type="range" min="0" max="255" value="0" class="slider" id="greenSlider" oninput="MoveSlider()">
+	<br>
+	<label style="color: lightblue;" for="bBox" id="bBoxdesc">B:</label><textarea style="resize: none;" class="textareainput" id="bBox" oninput="RGBboxEntry()" maxlength="3" cols="3" rows="1" value="0" placeholder="0"></textarea>
+	<input type="range" min="0" max="255" value="0" class="slider" id="blueSlider" oninput="MoveSlider()">
+	<br>
+	<br>
+	<label style="color: white;" for="hexBox" id="hexBoxdesc">Hex: #</label><textarea style="resize: none;" class="textareainput" id="hexBox" oninput="ConvertHex()" maxlength="6" cols="8" rows="1" value="000000" placeholder="000000"></textarea>
+	<br>
+	<br>
+	<label style="color: white;" for="colorDiv" id="colorDivdesc">Color sample:</label>
+	<div style="background-color:#000000;" id="colorDiv"><a style="color: white">white</a><a style="color:black">black</a></div>
+<script>
+	var hex = "000000";
+	var hexlist = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
+	var debug = false;
+	function Log(input){
+		if (debug){
+			console.log(input);
+		}
+	}
+	function RGBboxEntry(){
+		document.getElementById("redSlider").value = document.getElementById("rBox").value;
+		document.getElementById("greenSlider").value = document.getElementById("gBox").value;
+		document.getElementById("blueSlider").value = document.getElementById("bBox").value;
+		ConvertRGB();
+	}
+	function ConvertRGB(){
+		function ConvertValue(input){
+			var o1 = Math.floor(parseInt(input)/16);
+			Log("o1= "+o1);
+			var o2 = input%16;
+			Log("o2= "+o2);
+			var o3 = hexlist[o1] + hexlist[o2];
+			Log("o3="+o3);
+			return o3;
+		}
+		function InvalidInput(input){
+			if (input >= 0 && input <= 255){
+				return input;
+			}else if(input > 255){
+				return 255;
+			}else{
+				return 0;
+			}
+		}
+		var inRed = InvalidInput(parseInt(document.getElementById("rBox").value));
+		var inGreen = InvalidInput(parseInt(document.getElementById("gBox").value));
+		var inBlue = InvalidInput(parseInt(document.getElementById("bBox").value));
+		Log("After InvalidInput: inRed="+inRed+";inGreen="+inGreen+";inBlue="+inBlue);
+		hex = ConvertValue(inRed) + ConvertValue(inGreen) + ConvertValue(inBlue);
+		document.getElementById("hexBox").value = hex;
+		document.getElementById("colorDiv").style = "background-color:" + "#" + hex;
+	}
+	function ConvertHex(){
+		function ConvertValue(start){
+			var total = 0;
+			var i = 0;
+			for (x of hexlist){
+				if (x == hex[start]){
+					total = i*16;
+				}
+				i++;
+			}
+			i = 0;
+			for (x of hexlist){
+				if (x == hex[start + 1]){
+					total += i;
+				}
+				i++;
+			}
+			return total;
+		}
+		hex = document.getElementById("hexBox").value;
+		var i=0;
+		for (x of hex){
+			if (hexlist.includes(x)){
+				i += 1;
+			}
+		}
+		if (i==6 && hex.length == 6){
+			Log("Hex requirement satisfied, starting conversion process.");
+			var r = ConvertValue(0);
+			var g = ConvertValue(2);
+			var b = ConvertValue(4);
+			document.getElementById("rBox").value = r;
+			document.getElementById("gBox").value = g;
+			document.getElementById("bBox").value = b;
+			document.getElementById("redSlider").value = r;
+			document.getElementById("greenSlider").value = g;
+			document.getElementById("blueSlider").value = b;
+			document.getElementById("colorDiv").style = "background-color:" + "#" + hex;
+		}
+	}
+	function MoveSlider(){
+		document.getElementById("rBox").value = document.getElementById("redSlider").value;
+		document.getElementById("gBox").value = document.getElementById("greenSlider").value;
+		document.getElementById("bBox").value = document.getElementById("blueSlider").value;
+		ConvertRGB();
+	}
+</script>
+</body>
 </html>

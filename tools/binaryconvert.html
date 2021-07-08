@@ -1,203 +1,203 @@
-<!DOCTYPE html>
-<style>
-    h1 {
-        color: lightgreen;
-    }
-
-    h2 {
-        color: white;
-        font-size: 24px;
-    }
-
-    p {
-        color: white;
-    }
-
-    a {
-        color: white;
-    }
-
-    .link {
-        color: lightblue;
-        padding: 1px 2px;
-        border: 1px dashed #252525;
-    }
-
-        .link:hover {
-            color: lightblue;
-            padding: 1px 2px;
-            border: 1px dashed grey;
-        }
-
-        .link:active {
-            color: white;
-            padding: 1px 2px;
-            border: 1px dashed grey;
-        }
-
-    .button {
-        padding: 4px 8px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 32px;
-        margin: 4px 2px;
-        cursor: pointer;
-        background-color: #454545;
-        color: white;
-        border: 3px solid green;
-    }
-
-        .button:hover {
-            background-color: #606060;
-            color: white;
-            border: 3px solid lightgreen;
-        }
-
-        .button:active {
-            background-color: lightgreen;
-            color: white;
-            border: 3px solid white;
-        }
-
-    .buttonselected {
-        background-color: green;
-        color: white;
-        border: 3px solid lightgreen;
-    }
-
-        .buttonselected:hover {
-            background-color: green;
-            color: white;
-            border: 3px solid white;
-        }
-
-    .button:active {
-        background-color: lightgreen;
-        color: white;
-        border: 3px solid white;
-    }
-
-    .buttondl {
-        padding: 1px 2px;
-        font-size: 16px;
-        border: 1px solid green;
-        background-color: #454545;
-    }
-
-        .buttondl:hover {
-            background-color: #606060;
-            color: white;
-            border: 1px solid lightgreen;
-        }
-
-        .buttondl:active {
-            background-color: lightgreen;
-            border: 1px solid white;
-            color: white;
-        }
-
-    .border {
-        border: 2px solid lightgreen;
-    }
-
-    .buttonsmall {
-        padding: 2px 4px;
-        font-size: 20px;
-        border: 2px solid green;
-    }
-
-        .buttonsmall:hover {
-            background-color: #606060;
-            color: white;
-            border: 2px solid lightgreen;
-        }
-
-        .buttonsmall:active {
-            background-color: lightgreen;
-            border: 2px solid white;
-        }
-
-    .buttonsmallselected {
-        background-color: green;
-        color: white;
-        border: 2px solid lightgreen;
-    }
-
-        .buttonsmallselected:hover {
-            background-color: green;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .buttonsmallselected:active {
-            background-color: lightgreen;
-            border: 2px solid white;
-            color: white;
-        }
-
-    .textareainput {
-        background-color: #191919;
-        color: white;
-        border: 2px solid green;
-    }
-
-        .textareainput:hover {
-            border: 2px solid lightgreen;
-        }
-</style>
-<title>Binary Converter</title>
-<link rel="stylesheet" href="../dark_green.css">
-<html>
-<body style="background-color:#252525;">
-    <form>
-		<label style="color: white;" for="wscinput" id="wscinputdesc"><br>Seperated by:</label>
-		<textarea style="resize: none;" class="textareainput" id="wscinput" oninput="DoWsc()" maxlength="1" cols="1" rows="1"></textarea>
-		<br>
-		<select id="Optionid" class="button buttonsmall" style="font-size:16px;" oninput="ChangeInput()">
-			<option value="num">Number</option>
-			<option value="letter">Letter</option>
-		</select>
-		<button class="button buttonsmall" style="font-size:16px;" type="button" onclick="InvertInput()" id="InvertInputid">to</button>
-		<a>Binary</a>
-		<br>
-		<label style="color: white;" for="input">Input:</label>
-		<br>
-		<textarea class="textareainput" id="input" oninput="Convert()" cols="30" rows="4" spellcheck="false"></textarea>
-		<br>
-    </form>
-	<label style="color: white;" for="output_txt">Output:</label>
-    <p id="output_txt"></p>
-<script>
-	//variables
-	var debug = true; function Log(info){if (debug){console.log(info);}}
-	var invert = false;
-	var option = "num";
-	var wsc = " "
-	//options
-	function InvertInput(){
-        invert = !invert;
-		if (invert){
-			document.getElementById("InvertInputid").innerHTML = "from";
-		} else {
-			document.getElementById("InvertInputid").innerHTML = "to";
-		}
-		Log("invert="+invert);
-    }
-    function DoWsc() {
-		wsc = document.getElementById("wscinput").value;
-		Log("wsc="+wsc);
-    }
-    function ChangeInput() {
-		option = document.getElementById("Optionid").value
-		Log("'option' set to "+option);
-    }
-    //main functions
-    function Convert() {
-
-    }
-	//change "to binary" to dropdown with signed 8bit, unsigned16bit,32, etc. Also a hex option.
-	//create function for sorting accepted values into a list seperated by wsc.
-</script>
-</body>
+<!DOCTYPE html>
+<style>
+    h1 {
+        color: lightgreen;
+    }
+
+    h2 {
+        color: white;
+        font-size: 24px;
+    }
+
+    p {
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+
+    .link {
+        color: lightblue;
+        padding: 1px 2px;
+        border: 1px dashed #252525;
+    }
+
+        .link:hover {
+            color: lightblue;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+        .link:active {
+            color: white;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+    .button {
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 32px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #454545;
+        color: white;
+        border: 3px solid green;
+    }
+
+        .button:hover {
+            background-color: #606060;
+            color: white;
+            border: 3px solid lightgreen;
+        }
+
+        .button:active {
+            background-color: lightgreen;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .buttonselected {
+        background-color: green;
+        color: white;
+        border: 3px solid lightgreen;
+    }
+
+        .buttonselected:hover {
+            background-color: green;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .button:active {
+        background-color: lightgreen;
+        color: white;
+        border: 3px solid white;
+    }
+
+    .buttondl {
+        padding: 1px 2px;
+        font-size: 16px;
+        border: 1px solid green;
+        background-color: #454545;
+    }
+
+        .buttondl:hover {
+            background-color: #606060;
+            color: white;
+            border: 1px solid lightgreen;
+        }
+
+        .buttondl:active {
+            background-color: lightgreen;
+            border: 1px solid white;
+            color: white;
+        }
+
+    .border {
+        border: 2px solid lightgreen;
+    }
+
+    .buttonsmall {
+        padding: 2px 4px;
+        font-size: 20px;
+        border: 2px solid green;
+    }
+
+        .buttonsmall:hover {
+            background-color: #606060;
+            color: white;
+            border: 2px solid lightgreen;
+        }
+
+        .buttonsmall:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+        }
+
+    .buttonsmallselected {
+        background-color: green;
+        color: white;
+        border: 2px solid lightgreen;
+    }
+
+        .buttonsmallselected:hover {
+            background-color: green;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .buttonsmallselected:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+            color: white;
+        }
+
+    .textareainput {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
+    }
+
+        .textareainput:hover {
+            border: 2px solid lightgreen;
+        }
+</style>
+<title>Binary Converter</title>
+<link rel="stylesheet" href="../dark_green.css">
+<html>
+<body style="background-color:#252525;">
+    <form>
+		<label style="color: white;" for="wscinput" id="wscinputdesc"><br>Seperated by:</label>
+		<textarea style="resize: none;" class="textareainput" id="wscinput" oninput="DoWsc()" maxlength="1" cols="1" rows="1"></textarea>
+		<br>
+		<select id="Optionid" class="button buttonsmall" style="font-size:16px;" oninput="ChangeInput()">
+			<option value="num">Number</option>
+			<option value="letter">Letter</option>
+		</select>
+		<button class="button buttonsmall" style="font-size:16px;" type="button" onclick="InvertInput()" id="InvertInputid">to</button>
+		<a>Binary</a>
+		<br>
+		<label style="color: white;" for="input">Input:</label>
+		<br>
+		<textarea class="textareainput" id="input" oninput="Convert()" cols="30" rows="4" spellcheck="false"></textarea>
+		<br>
+    </form>
+	<label style="color: white;" for="output_txt">Output:</label>
+    <p id="output_txt"></p>
+<script>
+	//variables
+	var debug = true; function Log(info){if (debug){console.log(info);}}
+	var invert = false;
+	var option = "num";
+	var wsc = " "
+	//options
+	function InvertInput(){
+        invert = !invert;
+		if (invert){
+			document.getElementById("InvertInputid").innerHTML = "from";
+		} else {
+			document.getElementById("InvertInputid").innerHTML = "to";
+		}
+		Log("invert="+invert);
+    }
+    function DoWsc() {
+		wsc = document.getElementById("wscinput").value;
+		Log("wsc="+wsc);
+    }
+    function ChangeInput() {
+		option = document.getElementById("Optionid").value
+		Log("'option' set to "+option);
+    }
+    //main functions
+    function Convert() {
+
+    }
+	//change "to binary" to dropdown with signed 8bit, unsigned16bit,32, etc. Also a hex option.
+	//create function for sorting accepted values into a list seperated by wsc.
+</script>
+</body>
 </html>

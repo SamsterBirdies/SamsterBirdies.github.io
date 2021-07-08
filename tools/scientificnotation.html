@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<style>
+    h1 {
+        color: lightgreen;
+    }
+
+    h2 {
+        color: white;
+        font-size: 24px;
+    }
+
+    p {
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+
+    .link {
+        color: lightblue;
+        padding: 1px 2px;
+        border: 1px dashed #252525;
+    }
+
+        .link:hover {
+            color: lightblue;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+        .link:active {
+            color: white;
+            padding: 1px 2px;
+            border: 1px dashed grey;
+        }
+
+    .button {
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 32px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #454545;
+        color: white;
+        border: 3px solid green;
+    }
+
+        .button:hover {
+            background-color: #606060;
+            color: white;
+            border: 3px solid lightgreen;
+        }
+
+        .button:active {
+            background-color: lightgreen;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .buttonselected {
+        background-color: green;
+        color: white;
+        border: 3px solid lightgreen;
+    }
+
+        .buttonselected:hover {
+            background-color: green;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .button:active {
+        background-color: lightgreen;
+        color: white;
+        border: 3px solid white;
+    }
+
+    .buttondl {
+        padding: 1px 2px;
+        font-size: 16px;
+        border: 1px solid green;
+        background-color: #454545;
+    }
+
+        .buttondl:hover {
+            background-color: #606060;
+            color: white;
+            border: 1px solid lightgreen;
+        }
+
+        .buttondl:active {
+            background-color: lightgreen;
+            border: 1px solid white;
+            color: white;
+        }
+
+    .border {
+        border: 2px solid lightgreen;
+    }
+
+    .buttonsmall {
+        padding: 2px 4px;
+        font-size: 20px;
+        border: 2px solid green;
+    }
+
+        .buttonsmall:hover {
+            background-color: #606060;
+            color: white;
+            border: 2px solid lightgreen;
+        }
+
+        .buttonsmall:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+        }
+
+    .buttonsmallselected {
+        background-color: green;
+        color: white;
+        border: 2px solid lightgreen;
+    }
+
+        .buttonsmallselected:hover {
+            background-color: green;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .buttonsmallselected:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+            color: white;
+        }
+
+    .textareainput {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
+    }
+
+        .textareainput:hover {
+            border: 2px solid lightgreen;
+        }
+	.slider {
+		-webkit-appearance: none;
+		width: 255px;
+		height: 16px;
+		background: #454545;
+		color: green;
+		border: 2px solid green;
+	}
+	
+		.slider:hover {
+			border: 2px solid lightgreen;
+		}
+	
+		.slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			width: 16px;
+			height: 16px;
+			background: green;
+			cursor: pointer;
+			border: 2px solid lightgreen;
+		}
+	
+			.slider::-webkit-slider-thumb:hover {
+				border: 2px solid white;
+			}
+	
+			.slider::-webkit-slider-thumb:active {
+				background: lightgreen;
+				border: 2px solid white;
+			}
+</style>
+<title>Scientific Notation</title>
+<link rel="stylesheet" href="../dark_green.css">
+<html>
+<body style="background-color:#252525;">
+    <label for="inputbox">Scientific notation</label><br>
+    <textarea oninput="ConvertNotation()" class="textareainput" id="inputbox" placeholder="Example:4.0234E-7" cols=30 rows=1></textarea>
+    <label for="outputbox">Normal numbers</label>
+    <textatrea oninput="ConvertNumber()" class="textareainput" id="outputbox" placeholder="Example: 0000000.40234" cols=50 rows=2></textatrea>
+</body>
+<script>
+    var validNum = '1234567890';
+
+    function PrintError(){
+        document.getElementById("outputbox").value = "Not a valid notation";
+    }
+
+    function ConvertNotation(){
+        var numString = document.getElementById("inputbox").value;
+        var dotIndex = numString.search(".");
+        var eIndex= numstring.toLowerCase().search("e");
+        var err = false;
+        //get the value of E
+        if (eIndex != -1){
+            var eNum = "-";
+            for (i=eIndex+2;i<numString.length;i++){
+                if (validNum.search(numString[i]) != -1){
+                    eNum += numString[i];
+                } else {
+                    err = true;
+                }
+            }
+            if (eIndex + 1 == "-"){
+                eNum = "-" + eNum;
+            } else if (eIndex + 1 == "+"){
+                //do nothing
+            } else {
+                err = true;
+            }
+            if (!err){
+                eNum = eNum.toNumber();
+            }
+        } else {
+            err = true;
+        }
+        //move the dot and output
+        if (dotIndex != -1 && !err) {
+            let outputNum = numString.slice(0,eIndex);
+        }
+    }
+
+    function ConvertNumber(){
+
+    }
+</script>
+</html>
