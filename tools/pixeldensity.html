@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<style>
+    p {
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+    .button {
+        padding: 4px 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 32px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #454545;
+        color: white;
+        border: 3px solid green;
+    }
+
+        .button:hover {
+            background-color: #606060;
+            color: white;
+            border: 3px solid lightgreen;
+        }
+
+        .button:active {
+            background-color: lightgreen;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .buttonselected {
+        background-color: green;
+        color: white;
+        border: 3px solid lightgreen;
+    }
+
+        .buttonselected:hover {
+            background-color: green;
+            color: white;
+            border: 3px solid white;
+        }
+
+    .button:active {
+        background-color: lightgreen;
+        color: white;
+        border: 3px solid white;
+    }
+    .border {
+        border: 2px solid lightgreen;
+    }
+
+    .buttonsmall {
+        padding: 2px 4px;
+        font-size: 20px;
+        border: 2px solid green;
+    }
+
+        .buttonsmall:hover {
+            background-color: #606060;
+            color: white;
+            border: 2px solid lightgreen;
+        }
+
+        .buttonsmall:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+        }
+
+    .buttonsmallselected {
+        background-color: green;
+        color: white;
+        border: 2px solid lightgreen;
+    }
+
+        .buttonsmallselected:hover {
+            background-color: green;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .buttonsmallselected:active {
+            background-color: lightgreen;
+            border: 2px solid white;
+            color: white;
+        }
+
+    .textareainput {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
+    }
+
+        .textareainput:hover {
+            border: 2px solid lightgreen;
+        }
+</style>
+<title>Pixel density tool</title>
+<link rel="stylesheet" href="../dark_green.css">
+<html>
+<body style="background-color:#252525;">
+	<p>Length/distance can use whatever unit inch/feet/centimeter/whatever, but keep it consistent.</p>
+
+	<label style="color: white;" for="xResBox">Width pixels:</label>
+	<input type="number" class="textareainput" id="xResBox" oninput="Clear()" placeholder="Example: 1920"/>
+	<label style="color: white;" for="yResBox">Height pixels:</label>
+	<input type="number" class="textareainput" id="yResBox" oninput="Clear()" placeholder="Example: 1080"/>
+	<br>
+	<label style="color: white;" for="dlBox">Diagonal length:</label>
+	<input type="number" class="textareainput" id="dlBox" oninput="CalcPPI()" placeholder="Example: 24"/>
+
+	<p>Pixels per unit: <a id="ppuOut"></a></p>
+
+	<label style="color: white;" for="dlBox">Viewing distance:</label>
+	<input type="number" class="textareainput" id="vdBox" oninput="CalcPPDfov()" placeholder="Example: 20"/>
+
+	<p>Pixels in one degree of FOV: <a id="ppdfovOut"></a></p>
+</body>
+</html>
+<script>
+	var docid = function( id ) { return document.getElementById( id ); };
+	// Calculate raw pixel density (probably pixels per inch)
+	function CalcPPI(){ //I couldve done this easier but oh well.
+		//input values
+		var xRes = docid("xResBox").value;
+		var yRes = docid("yResBox").value;
+		var dialen = docid("dlBox").value;
+		//get angle
+		var angle = Math.atan( yRes / xRes );
+		//construct vertical height
+		var yLen = Math.sin(angle) * dialen;
+		//output pixel per unit
+		docid("ppuOut").innerHTML = yRes / yLen;
+		//clear ppdfovOut
+		docid("ppdfovOut").innerHTML = "";
+	}
+	//calculate pixels per degree of FOV
+	function CalcPPDfov(){
+		//input values
+		var ppu = Number(docid("ppuOut").innerHTML);
+		var viewdist = docid("vdBox").value;
+		//calculate unit length at viewdist with 1 degree.
+		var viewableLen = Math.tan(1/(180/Math.PI)) * viewdist;
+		//multiply ppu by viewableLen to get pixels per degree of fov.
+		var ppd = ppu * viewableLen;
+		//output
+		docid("ppdfovOut").innerHTML = ppd;
+	}
+	function Clear(){
+		//removes output
+		docid("ppuOut").innerHTML = "";
+		docid("ppdfovOut").innerHTML = "";
+	}
+	console.log(Math.tan(1));
+	console.log((180/Math.PI));
+	console.log(Math.tan(1) / (180/Math.PI));
+	console.log(Math.tan(1/(180/Math.PI)));
+</script>
