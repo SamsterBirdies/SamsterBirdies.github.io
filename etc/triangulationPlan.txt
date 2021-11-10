@@ -1,0 +1,13 @@
+inputs: input x, y, and d.
+
+take inputs and calculate for each side. for example with 4 points: 1-2,1-3,1-4 . 2-3,2-4 . 3-4.
+
+calculate triangles.
+
+gather x,y coordinate from triangle points.
+
+exclude 1/2 of the points which are outliers and take mean of the other half.
+
+output: coordinate point ^
+
+draw diagram?
