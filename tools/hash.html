@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<style>
+	p {
+		color: white;
+	}
+	label {
+		color:white;
+	}
+	.button {
+		padding: 4px 8px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+		background-color: #454545;
+		color: white;
+		border: 3px solid green;
+	}
+
+		.button:hover {
+			background-color: #606060;
+			color: white;
+			border: 3px solid lightgreen;
+		}
+
+		.button:active {
+			background-color: lightgreen;
+			color: white;
+			border: 3px solid white;
+		}
+	input {
+		background-color: #191919;
+		color: white;
+		border: 2px solid green;
+	}
+
+		input:hover {
+			border: 2px solid lightgreen;
+		}
+	textarea {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
+    }
+        textarea:hover {
+            border: 2px solid lightgreen;
+        }
+	.buttonselected {
+		background-color: green;
+		color: white;
+		border: 3px solid lightgreen;
+	}
+		.buttonselected:hover {
+			background-color: green;
+			color: white;
+			border: 3px solid white;
+		}
+</style>
+<title>Hash text and files</title>
+<link rel="stylesheet" href="../dark_green.css">
+<html>
+<body style="background-color:#252525;">
+	<p>Hash text or files</p>
+	<a>Input method:</a>
+	
+	<input type="radio" id="radioTextarea" name="radioInputMethod" onclick="changeInputMode('textarea')">
+		<label for="radioTextarea">Text area</label>
+	<input type="radio" id="radioFile" name="radioInputMethod" onclick="changeInputMode('file')">
+		<label for="radioFile">File</label>
+	<br>
+	<label for="selectHashType">Algorithm:</label>
+	<select id="selectHashType" class="button buttonsmall" style="font-size:16px" oninput="refresh()">
+		<option value="SHA-256">SHA-256</option>
+		<option value="SHA-384">SHA-384</option>
+		<option value="SHA-512">SHA-512</option>
+	</select>
+	<br>
+	<textarea hidden id="inputTextarea" oninput="HashTextarea()" cols="30" rows="4" spellcheck="false"></textarea>
+	<input hidden type="file" multiple=true id="inputFile" oninput="HashFile()">
+	<p>Hash:<a id='output'></a></p>
+</body>
+</html>
+<script>
+	const docid = function( id ) { return document.getElementById( id ); }; //for less typing
+	var inputmode = 'text';
+	//functions
+	//hash
+	async function hashTxt(message, type) {
+		const msgUint8 = new TextEncoder().encode(message); // encode as (utf-8) Uint8Array
+		const hashBuffer = await crypto.subtle.digest(type, msgUint8); // hash the message
+		const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert buffer to byte array
+		const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+		return hashHex;
+	}
+	//put hash on screen
+	async function outputTxt(message, filename = " "){
+		const text = await hashTxt(message, docid('selectHashType').value);
+		docid('output').innerHTML += filename + text;
+	}
+	//read file
+	function readText(file) {
+		var fileReader = new FileReader()
+		fileReader.readAsText(file, 'utf-8');
+		fileReader.onload = function() {
+			outputTxt(fileReader.result, "<br>" + file.name + ": ");
+        }; 
+	}
+	//refreshes hash
+	function refresh(){
+		if (inputmode == 'text'){
+			docid('output').innerHTML = "";
+			HashTextarea();
+		} else if (inputmode == 'file'){
+			docid('output').innerHTML = "";
+			HashFile();
+		}
+	}
+	//input functions
+	//change input mode
+	function changeInputMode(mode){
+		if (mode == 'textarea'){
+			docid('inputTextarea').hidden = false;
+			docid('inputFile').hidden = true;
+			inputmode = 'text';
+			refresh();
+		} else if (mode == 'file'){
+			docid('inputTextarea').hidden = true;
+			docid('inputFile').hidden = false;
+			inputmode = 'file';
+			refresh();
+		}
+	}
+	//text entered
+	function HashTextarea(){
+		docid('output').innerHTML = "";
+		outputTxt(docid('inputTextarea').value);
+	}
+	//on upload
+	function HashFile(){
+		docid('output').innerHTML = "";
+		const files = docid('inputFile');
+		for (file of files.files) {
+			readText(file);
+		}
+	}
+</script>
