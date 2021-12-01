@@ -77,8 +77,12 @@
 		<option value="SHA-512">SHA-512</option>
 	</select>
 	<br>
-	<textarea hidden id="inputTextarea" oninput="HashTextarea()" cols="30" rows="4" spellcheck="false"></textarea>
+	<textarea hidden id="inputTextarea" oninput="HashTextarea(0)" cols="30" rows="4" spellcheck="false"></textarea>
 	<input hidden type="file" multiple=true id="inputFile" oninput="HashFile()">
+	<input hidden type="checkbox" id="checkInstantmode" name="checkInstantmode" value="instant" checked=true oninput='checkboxSwitch()'>
+	<label hidden id='checkInstantmodeLabel' for="checkInstantmode">Instant mode</label>
+	<br>
+	<button type="button" style='display: none' class='button buttonsmall' style="font-size:16px" onclick="HashTextarea(1)" id='hashBtn'>Hash</button>
 	<p>Hash:<a id='output'></a></p>
 </body>
 </html>
@@ -111,7 +115,7 @@
 	function refresh(){
 		if (inputmode == 'text'){
 			docid('output').innerHTML = "";
-			HashTextarea();
+			HashTextarea(1);
 		} else if (inputmode == 'file'){
 			docid('output').innerHTML = "";
 			HashFile();
@@ -122,20 +126,28 @@
 	function changeInputMode(mode){
 		if (mode == 'textarea'){
 			docid('inputTextarea').hidden = false;
+			docid('checkInstantmode').hidden = false;
+			docid('checkInstantmodeLabel').hidden = false;
+			if (docid('checkInstantmode').checked){docid('hashBtn').style.display = 'none';} else {docid('hashBtn').style.display = 'inline';}
 			docid('inputFile').hidden = true;
 			inputmode = 'text';
 			refresh();
 		} else if (mode == 'file'){
 			docid('inputTextarea').hidden = true;
+			docid('checkInstantmode').hidden = true;
+			docid('checkInstantmodeLabel').hidden = true;
+			docid('hashBtn').style.display = 'none';
 			docid('inputFile').hidden = false;
 			inputmode = 'file';
 			refresh();
 		}
 	}
 	//text entered
-	function HashTextarea(){
+	function HashTextarea(inputElement){ //0 = only hash on instant mode. 1 = always hash.
 		docid('output').innerHTML = "";
-		outputTxt(docid('inputTextarea').value);
+		if (docid('checkInstantmode').checked || inputElement == 1){ //only hashes if instant mode is on, or if parameter is 1 (always hash).
+			outputTxt(docid('inputTextarea').value);
+		}
 	}
 	//on upload
 	function HashFile(){
@@ -143,6 +155,14 @@
 		const files = docid('inputFile');
 		for (file of files.files) {
 			readText(file);
+		}
+	}
+	//triggers on checkbox click.
+	function checkboxSwitch(){
+		if (docid('checkInstantmode').checked){
+			docid('hashBtn').style.display = 'none';
+		} else {
+			docid('hashBtn').style.display = 'inline';
 		}
 	}
 </script>
