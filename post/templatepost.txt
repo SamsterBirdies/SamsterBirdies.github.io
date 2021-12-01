@@ -4,18 +4,28 @@
 	<link rel="stylesheet" href="./../dark_green.css">
 	<title>enter title here</title>
 	<link rel="icon" href="./../images/favicon.webp" />
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
 </head>
-<body style="background-color:#252525;">
-		<h1><img class="border" src="./../images/sb.webp" alt="sb.webp" width="50" height="50" > SamsterBirdies Post</h1>
+<body>
+	<div class='sidebar' id='aside'>
+		<img class="border" src="./../images/sb.webp" alt="sb.webp" width="97%" >
+		<h1 style='font-size: 22.5px; color: white'>SamsterBirdies</h1>
 		<nav>
-			<a class="button" href="./../index.html">Home</a>
-			<a class="button" href="./../tools.html">Tools</a>
-			<a class="button" href="./../tables.html">Tables</a>
-			<a class="button" href="./../post.html">Post</a>
-			<a class="button" href="./../repo.html">Repo</a>
-			<a class="button" href="./../about.html">About</a>
+			<a class="button buttonaside" href="./../index.html">Home</a><br>
+			<a class="button buttonaside" href="./../tools.html">Tools</a><br>
+			<a class="button buttonaside" href="./../tables.html">Tables</a><br>
+			<a class="button buttonaside buttonselected" href="./../post.html">Post</a><br>
+			<a class="button buttonaside" href="./../repo.html">Repo</a><br>
+			<a class="button buttonaside" href="./../about.html">About</a><br>
 		</nav>
-		<!-- page start -->
+	</div>
+	<div class='borderDecor borderDecorL'></div> <div class='borderDecor borderDecorR'></div> <!--just for decoration-->
+	<!-- page start -->
+	<div class='main'>
 		<h2>Enter title here</h2>
+		
+	</div>
 </body>
+<script src="./../scripts/cookieAPI.js"></script>
 </html>

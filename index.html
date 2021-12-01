@@ -3,21 +3,29 @@
 <head>
 	<link rel="stylesheet" href="dark_green.css">
 	<title>SamsterBirdies</title>
-	<link rel="icon" href="./images/favicon.webp" />
+	<link rel="icon" href="./images/favicon.webp"/>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
 </head>
-<body style="background-color:#252525;">
-		<h1><img class="border" src="./images/sb.webp" alt="sb.webp" width="50" height="50" > SamsterBirdies Home</h1>
+<body>
+	<div class='sidebar' id='aside'>
+		<img class="border" src="./images/sb.webp" alt="sb.webp" width="97%" >
+		<h1 style='font-size: 22.5px; color: white'>SamsterBirdies</h1>
 		<nav>
-			<a class="button buttonselected" href="./index.html">Home</a>
-			<a class="button" href="./tools.html">Tools</a>
-			<a class="button" href="./tables.html">Tables</a>
-			<a class="button" href="./post.html">Post</a>
-			<a class="button" href="./repo.html">Repo</a>
-			<a class="button" href="./about.html">About</a>
+			<a class="button buttonaside buttonselected" href="./index.html">Home</a><br>
+			<a class="button buttonaside" href="./tools.html">Tools</a><br>
+			<a class="button buttonaside" href="./tables.html">Tables</a><br>
+			<a class="button buttonaside" href="./post.html">Post</a><br>
+			<a class="button buttonaside" href="./repo.html">Repo</a><br>
+			<a class="button buttonaside" href="./about.html">About</a><br>
 		</nav>
-		<!-- page start -->
-		<p>This is a home page. There are some cool tools and charts and fun things to download in this wobsite.</p>
-		
+	</div>
+	<div class='borderDecor borderDecorL'></div> <div class='borderDecor borderDecorR'></div> <!--just for decoration-->
+	<!-- page start -->
+	<div class='main'>
+		<p style='font-size: 18px;'>This is a home page. There are some cool tools and charts and fun things to download in this wobsite.</p>
+		<h2>News:</h2>
+		<p>Website is now undergoing a visual overhaul! Is still WIP. Hope its an improvement!</p>
 		<h2 style="color: lightgreen">Recent thingies:</h2>
 			<a class="link" href="./tools/hash.html">Hash text/files</a> <br>
 			<a class="link" href="./tools/pixeldensity.html">Pixel density calculator</a> <br>
@@ -28,5 +36,26 @@
 			<a class="link" href="./tools/randomforts.html">Random Forts Commanders and Weapons.</a> <br>
 			<a class="link" href="./repo/files/savelogonexit.py">Forts log archiver.</a> <br>
 			<a class="link" href="https://www.samsterbirdies.com/tools/aspectratio.html">Aspect ratio tool.</a>
+		<h3>Site style presets:</h3>
+		<a>Changing this will save cookies.</a>
+		<select id='styleSelect' class='button buttonsmall' onchange='changeStyle()'>
+			<option value='current'>Current</option>
+			<option value='original'>Original</option>
+			<option value='background1'>Dark forest</option>
+			<option value='space'>Space</option>
+		</select>
+	</div>
 </body>
+<script src="./scripts/cookieAPI.js"></script>
 </html>
+<script>
+	const docid = function( id ) { return document.getElementById( id ); }; //for less typing
+	//change style for site. Saves a cookie
+	function changeStyle(){
+		let styleVal = docid('styleSelect').value;
+		if ( styleVal != 'current'){
+			cookieWrite('style', styleVal);
+			cookieChangeStyle();
+		}
+	}
+</script>

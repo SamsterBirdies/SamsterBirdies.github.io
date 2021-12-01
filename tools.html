@@ -3,45 +3,56 @@
 <head>
 	<link rel="stylesheet" href="dark_green.css">
 	<title>Tools - SamsterBirdies</title>
-	<link rel="icon" href="./images/favicon.webp" />
+	<link rel="icon" href="./images/favicon.webp"/>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
 </head>
-<body style="background-color:#252525;">
-    <h1><img class="border" src="./images/sb.webp" alt="sb.webp" width="50" height="50"> SamsterBirdies Tools</h1>
-    <nav>
-        <a class="button" href="./index.html">Home</a>
-        <a class="button buttonselected" href="./tools.html">Tools</a>
-		<a class="button" href="./tables.html">Tables</a>
-		<a class="button" href="./post.html">Post</a>
-        <a class="button" href="./repo.html">Repo</a>
-		<a class="button" href="./about.html">About</a>
-    </nav>
-	<!--search and other -->
-	<nav>
-		<textarea class="textareainput" id="searchInputBox" oninput="Search()" cols="30" rows="1" spellcheck="false" placeholder="Search tools" style="resize: none;"></textarea>
-		<button class="button buttonsmall" type="button" onclick="ToggleToolButtons()" id="toolToggleButton">Hide buttons</button>
-	</nav>
-	<!--tool buttons-->
-    <nav>
-		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('aspectratio', 'Easily calculate resolutions for the aspect ratio','400px', '300px')" id="aspectratioButton">Aspect Ratio</button>
-		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('basenumconvert', 'Convert a number from one base to another.','400px', '400px')" id="basenumconvertButton">Base Number Converter</button>
-		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('dbconvert', 'Convert Decibels to Amplitude and vice versa.','375px', '570px')" id="dbconvertButton">dB/Amplitude</button>
-		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('fortspivots', 'Used for calculating pivots in Forts modding','550px', '600px')" id="fortspivotsButton">Forts Pivots</button>
-		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('hash', 'Hashing is used to verify the integrity of data','1200px', '670px')" id="hashButton">Hash text/files</button>		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('lpcmdatasize', 'Calculate data or time for LPCM','675px', '500px')" id="lpcmdatasizeButton">LPCM datasize calculator</button>
-		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('morsecode', 'Turn text into morse code and vice versa.', '680px', '1200px')" id="morsecodeButton">Morse code/txt</button>
-        <button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('numberletter', 'Convert numbers to letters and vice versa.', '500px', '500px')" id="numberletterButton">Number-Letter converter</button>
-		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('pixeldensity', 'Calculate pixel density for a screen with resolution, screen size, and viewing distance.', '650px', '350px')" id="pixeldensityButton">Pixel Density calculator</button>
-		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('randomforts', 'Generate random commanders and weapons.', '475px', '675px')" id="randomfortsButton">Random Forts</button>
-		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('rgbhex', 'Convert RGB values into Hex HTML color values and preview color. And vice versa.','370px', '250px')" id="rgbhexButton">RGB/Hex Color picker</button>
-        <button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('shadercompare', 'Compare different Minecraft shader packs. Drag corner to resize window','1200px', '800px')" id="shadercompareButton">Shader Comparer</button>
-		<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('inflation', 'Convert USD prices across two given years, accounting for inflation.', '575px', '675px')" id="inflationButton">USD Inflation tool</button>
-    </nav>
-    <p id="ToolDesc"></p>
-    <div id="iframediv" class="iframediv"><iframe id="iFrame" class="iframe" src="./tools/blank.html" title="Number-Letter converter"></iframe></div>
-	<p>Drag corner to resize window</p>
-	<p>Tool Link:
-	<a class="link" href="" id="toolLink"></a></p>
+<body>
+    <div class='sidebar' id='aside'>
+		<img class="border" src="./images/sb.webp" alt="sb.webp" width="97%" >
+		<h1 style='font-size: 22.5px; color: white'>SamsterBirdies</h1>
+		<nav>
+			<a class="button buttonaside" href="./index.html">Home</a><br>
+			<a class="button buttonaside buttonselected" href="./tools.html">Tools</a><br>
+			<a class="button buttonaside" href="./tables.html">Tables</a><br>
+			<a class="button buttonaside" href="./post.html">Post</a><br>
+			<a class="button buttonaside" href="./repo.html">Repo</a><br>
+			<a class="button buttonaside" href="./about.html">About</a><br>
+		</nav>
+	</div>
+	<div class='borderDecor borderDecorL'></div> <div class='borderDecor borderDecorR'></div> <!--just for decoration-->
+	<div class='main'>
+		<!--search and other -->
+		<nav>
+			<textarea class="textareainput" id="searchInputBox" oninput="Search()" cols="30" rows="1" spellcheck="false" placeholder="Search tools" style="resize: none;"></textarea>
+			<button class="button buttonsmall" type="button" onclick="ToggleToolButtons()" id="toolToggleButton">Hide buttons</button>
+		</nav>
+		<!--tool buttons-->
+		<nav>
+			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('aspectratio', 'Easily calculate resolutions for the aspect ratio','400px', '300px')" id="aspectratioButton">Aspect Ratio</button>
+			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('basenumconvert', 'Convert a number from one base to another.','400px', '400px')" id="basenumconvertButton">Base Number Converter</button>
+			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('dbconvert', 'Convert Decibels to Amplitude and vice versa.','375px', '570px')" id="dbconvertButton">dB/Amplitude</button>
+			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('fortspivots', 'Used for calculating pivots in Forts modding','550px', '600px')" id="fortspivotsButton">Forts Pivots</button>
+			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('hash', 'Hashing is used to verify the integrity of data','1200px', '670px')" id="hashButton">Hash text/files</button>			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('lpcmdatasize', 'Calculate data or time for LPCM','675px', '500px')" id="lpcmdatasizeButton">LPCM datasize calculator</button>
+			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('morsecode', 'Turn text into morse code and vice versa.', '680px', '1200px')" id="morsecodeButton">Morse code/txt</button>
+			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('numberletter', 'Convert numbers to letters and vice versa.', '500px', '500px')" id="numberletterButton">Number-Letter converter</button>
+			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('pixeldensity', 'Calculate pixel density for a screen with resolution, screen size, and viewing distance.', '650px', '350px')" id="pixeldensityButton">Pixel Density calculator</button>
+			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('randomforts', 'Generate random commanders and weapons.', '475px', '675px')" id="randomfortsButton">Random Forts</button>
+			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('rgbhex', 'Convert RGB values into Hex HTML color values and preview color. And vice versa.','370px', '250px')" id="rgbhexButton">RGB/Hex Color picker</button>
+			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('shadercompare', 'Compare different Minecraft shader packs. Drag corner to resize window','1200px', '800px')" id="shadercompareButton">Shader Comparer</button>
+			<button class="button buttonsmall buttontool" type="button" onclick="ToolEnable('inflation', 'Convert USD prices across two given years, accounting for inflation.', '575px', '675px')" id="inflationButton">USD Inflation tool</button>
+		</nav>
+		<p id="ToolDesc"></p>
+		<div id="iframediv" class="iframediv"><iframe id="iFrame" class="iframe" src="./tools/blank.html" title="Number-Letter converter"></iframe></div>
+		<p>Drag corner to resize window</p>
+		<p>Tool Link:
+		<a class="link" href="" id="toolLink"></a></p>
+	</div>
 </body>
+<script src="./scripts/cookieAPI.js"></script>
+</html>
 <script>
+	cookieChangeStyle();
     function ToolEnable(src, desc, width, height) {
 		//Enables a tool and shows it in the window.
         document.getElementById("ToolDesc").innerHTML = desc;
@@ -89,4 +100,4 @@
 		}
 	}
 </script>
-</html>
+
