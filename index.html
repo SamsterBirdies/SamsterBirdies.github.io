@@ -36,14 +36,25 @@
 			<a class="link" href="./tools/randomforts.html">Random Forts Commanders and Weapons.</a> <br>
 			<a class="link" href="./repo/files/savelogonexit.py">Forts log archiver.</a> <br>
 			<a class="link" href="https://www.samsterbirdies.com/tools/aspectratio.html">Aspect ratio tool.</a>
-		<h3>Site style presets:</h3>
-		<a>Changing this will save cookies.</a>
+		<br><br><br><br>
+		<a>Site style presets. Changing this will save cookies:</a>
 		<select id='styleSelect' class='button buttonsmall' onchange='changeStyle()'>
 			<option value='current'>Current</option>
 			<option value='original'>Original</option>
+			<option value='gradient'>Gradient</option>
 			<option value='background1'>Dark forest</option>
 			<option value='space'>Space</option>
+			<option value='schematic'>Schematic</option>
 		</select>
+		<div hidden id='gradientDiv'>
+			<a>Angle:</a><input type="number" class='textareaI' id="gAngle" value=0/>
+			<br>
+			<a>Color1:</a><input type="number" class='textareaI' id="gColor1r" value=0/><input type="number" class='textareaI' id="gColor1g" value=0/><input type="number" class='textareaI' id="gColor1b" value=0/>
+			<br>
+			<a>Color2:</a><input type="number" class='textareaI' id="gColor2r" value=0/><input type="number" class='textareaI' id="gColor2g" value=0/><input type="number" class='textareaI' id="gColor2b" value=0/>
+			<br>
+			<button type='button' class='button buttonsmall' onclick='changeGradient()'>Change</button>
+		</div>
 	</div>
 </body>
 <script src="./scripts/cookieAPI.js"></script>
@@ -56,6 +67,40 @@
 		if ( styleVal != 'current'){
 			cookieWrite('style', styleVal);
 			cookieChangeStyle();
+		} else {}
+		if (styleVal == 'gradient'){
+			docid('gradientDiv').hidden = false;
+		} else {
+			docid('gradientDiv').hidden = true;
 		}
+	}
+	function changeGradient(){
+		//get settings.
+		console.log('ran func');
+		let angle = docid('gAngle').value;
+		let color1 = []; let color2 = [];
+		color1[0] = docid('gColor1r').value; color1[1] = docid('gColor1g').value; color1[2] = docid('gColor1b').value;
+		color2[0] = docid('gColor2r').value; color2[1] = docid('gColor2g').value; color2[2] = docid('gColor2b').value;
+		//make sure no numbers are nil.
+		if (Number(angle) > 0){} else {
+			angle = 0;
+		}
+		let i=0;
+		for (x of color1){
+			if (Number(x) > 0 && Number(x) < 256){} else {
+				color1[i] = 0;
+			}
+			i++;
+		}
+		i=0;
+		for (x of color2){
+			if (Number(x) > 0 && Number(x) < 256){} else {
+				color2[i] = 0;
+			}
+			i++;
+		}
+		//save
+		cookieWrite('gradient', angle+'^^^'+color1[0]+'^^^'+color1[1]+'^^^'+color1[2]+'^^^'+color2[0]+'^^^'+color2[1]+'^^^'+color2[2]);
+		changeStyle();
 	}
 </script>
