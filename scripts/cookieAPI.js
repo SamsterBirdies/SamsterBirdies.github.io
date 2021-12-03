@@ -47,6 +47,8 @@ function cookieChangeStyle(globalpath = false){
 		setBG('backgroundschematic');
 	} else if (style == 'gradient') {
 		gradient();
+		setBG('none');
+		gradient();
 	} else {
 		setBG('none');
 	}
