@@ -34,7 +34,6 @@ function cookieChangeStyle(globalpath = false){
 	}
 	function gradient(){
 		let gd = cookieRead('gradient').split('^^^');
-		console.log(gd);
 		document.body.style.backgroundImage = 'linear-gradient('+gd[0]+'deg, rgba('+gd[1]+','+gd[2]+','+gd[3]+',1), rgba('+gd[4]+','+gd[5]+','+gd[6]+',1))';
 		document.body.style.backgroundRepeat= 'no-repeat';
 		document.body.style.backgroundAttachment= 'fixed';
@@ -48,8 +47,6 @@ function cookieChangeStyle(globalpath = false){
 	} else if (style == 'schematic') {
 		setBG('backgroundschematic');
 	} else if (style == 'gradient') {
-		gradient();
-		setBG('none');
 		gradient();
 	} else {
 		setBG('none');
