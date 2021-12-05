@@ -16,7 +16,7 @@ function cookieRead(k){
 //function for changing style option
 function cookieChangeStyle(globalpath = false){
 	let style = cookieRead('style');
-	//start changing stuff
+	//functions for changing stuff
 	function setBG(type){
 		if (type != 'none'){
 			if (globalpath){
@@ -34,11 +34,13 @@ function cookieChangeStyle(globalpath = false){
 	}
 	function gradient(){
 		let gd = cookieRead('gradient').split('^^^');
+		console.log(gd);
 		document.body.style.backgroundImage = 'linear-gradient('+gd[0]+'deg, rgba('+gd[1]+','+gd[2]+','+gd[3]+',1), rgba('+gd[4]+','+gd[5]+','+gd[6]+',1))';
 		document.body.style.backgroundRepeat= 'no-repeat';
 		document.body.style.backgroundAttachment= 'fixed';
 		document.body.style.backgroundSize= 'cover';
 	}
+	//get style and change background accordingly.
 	if (style == 'background1'){
 		setBG('background1');
 	} else if (style == 'space'){
@@ -53,4 +55,5 @@ function cookieChangeStyle(globalpath = false){
 		setBG('none');
 	}
 }
+//Change the background on page load.
 cookieChangeStyle();

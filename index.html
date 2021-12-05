@@ -65,7 +65,7 @@
 	function changeStyle(){
 		let styleVal = docid('styleSelect').value;
 		if ( styleVal != 'current'){
-			cookieWrite('style', styleVal);
+			cookieWrite('style', styleVal); //cookie functions from ./scripts/cookieAPI.js
 			cookieChangeStyle();
 		} else {}
 		if (styleVal == 'gradient'){
@@ -74,6 +74,7 @@
 			docid('gradientDiv').hidden = true;
 		}
 	}
+	//for gradient background option
 	function changeGradient(){
 		//get settings.
 		console.log('ran func');
