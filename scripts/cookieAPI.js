@@ -7,7 +7,7 @@ function cookieWrite(k, v){
 function cookieRead(k){
 	let cookieData = document.cookie.split(';');
 	for (x of cookieData){
-		if (x.indexOf(k) != -1){
+		if (x.indexOf(k) != -1 && x.indexOf(k) < x.indexOf('=')){
 			return x.substr(x.indexOf('=')+1);
 		}
 	}
