@@ -56,7 +56,13 @@
 <body style="background-color:#252525;">
 	<p>Pivot adjusts the point where the component rotates on its parent component. (You would use the image size and pixel coordinate for the parent sprite)</p>
 	<p>PivotOffset adjusts the point where the component rotates on itself. (You would use the image size and pixel coordinate for the component's own sprite)</p>
-	<p>Component "Hardpoint0" marks the start of the barrel. The weapon has a BarrelLength property that defines the length in units from hardpoint0 where the projectile will spawn. Each unit is ~2.6674 pixels</p>
+	<p>Component "Hardpoint0" marks the start of the barrel. The weapon has a BarrelLength property that defines the length in units from hardpoint0 where the projectile will spawn. Each pixel is 0.375 units</p>
+	<p>For more help, see the detailed guide:
+		<button id="guideBtn" type="button" class="button" onclick="ToggleGuide()" style="font-size: 18px">Show/Hide Detailed Guide</button>
+	</p>
+	
+	<br>
+	
   	<input type="radio" id="radioPivot" name="radiocalctype" value="PIVOT" onclick="radioVal('PIVOT')">
   	<label for="radioPivot">Pivot</label><br>
   	<input type="radio" id="radioPivotOffset" name="radiocalctype" value="PIVOTOFFSET" onclick="radioVal('PIVOTOFFSET')">
@@ -74,10 +80,16 @@
 	<button id="submitBtn" type="button" class="button" onclick="Main()" style="font-size: 18px">Calculate pivot point</button>
 	<p>Output:</p>
 	<p id="output"></p>
+	<br>
+	
+	<img id="guide" src="./assets/fortspivotguide.webp" alt="fortspivotguide.webp"/>
 </body>
 <script>
 	//init
+	const docid = function( id ) { return document.getElementById( id ); }; //for less typing
+	docid('guide').hidden = true;
 	var pivotType = "";
+	
 	function radioVal(value)
 	{
 		pivotType = value;
@@ -108,6 +120,15 @@
 			}
 			output += " = {" + outputPivot[0] + ", " + outputPivot[1] + "}";
 			document.getElementById("output").innerHTML = output;
+		}
+	}
+	function ToggleGuide()
+	{
+		if (docid('guide').hidden == true)
+		{
+			docid('guide').hidden = false;
+		} else {
+			docid('guide').hidden = true;
 		}
 	}
 </script>
