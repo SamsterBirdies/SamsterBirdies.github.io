@@ -117,7 +117,8 @@
 	<label style="color: white;" for="dlBox">Viewing distance:</label>
 	<input type="number" class="textareainput" id="vdBox" oninput="CalcPPDfov()" placeholder="Example: 20"/>
 
-	<p>Pixels in one degree of FOV: <a id="ppdfovOut"></a></p>
+	<p>Pixels per degree of FOV (PPD): <a id="ppdfovOut"></a></p>
+	<p>Angular separation per pixel: <a id="aspOut"></a></p>
 </body>
 </html>
 <script>
@@ -148,14 +149,26 @@
 		var ppd = ppu * viewableLen;
 		//output
 		docid("ppdfovOut").innerHTML = ppd;
+		CalcASP();
+	}
+	
+	function CalcASP(){
+		var ppd = docid("ppdfovOut").innerHTML;
+		var degrees = 1/ppd;
+		var arcminutes = degrees;
+		degrees = Math.floor(degrees);
+		arcminutes -= degrees;
+		arcminutes *= 60;
+		var arcseconds = arcminutes;
+		arcminutes = Math.floor(arcminutes);
+		arcseconds -= arcminutes;
+		arcseconds *= 60;
+		docid("aspOut").innerHTML = degrees + "°" + arcminutes + "'" + arcseconds + '"';
 	}
 	function Clear(){
 		//removes output
 		docid("ppuOut").innerHTML = "";
 		docid("ppdfovOut").innerHTML = "";
+		docid("aspOut").innerHTML = "";
 	}
-	console.log(Math.tan(1));
-	console.log((180/Math.PI));
-	console.log(Math.tan(1) / (180/Math.PI));
-	console.log(Math.tan(1/(180/Math.PI)));
 </script>
