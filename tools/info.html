@@ -59,11 +59,12 @@
 			border: 3px solid white;
 		}
 </style>
-<title>Browser Information</title>
+<title>User Information</title>
 <link rel="stylesheet" href="../dark_green.css">
 <html>
 <body style="background-color:#252525;" onresize="RefreshWindow1()">
 	<h1>User Information</h1>
+	<p id='mobile'/>
 	<p id="userAgent"/>
 	<p id="online"/>
 	<p id="publicIP" onclick="ShowIP();"><b>Public IP:</b> (Click to retrieve)</p>
@@ -80,6 +81,8 @@
 </html>
 <script>
 	const docid = function( id ) { return document.getElementById( id ); }; //for less typing
+	//mobile
+	docid('mobile').innerHTML = "<b>Browser is mobile:</b> " + navigator.userAgentData.mobile;
 	//user agent
 	docid("userAgent").innerHTML = "<b>User Agent:</b> " + navigator.userAgent;
 	//window
