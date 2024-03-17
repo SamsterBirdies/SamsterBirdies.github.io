@@ -48,8 +48,10 @@ function cookieChangeStyle(globalpath = false){
 		setBG('backgroundschematic');
 	} else if (style == 'gradient') {
 		gradient();
-	} else {
+	} else if (style == 'original'){
 		setBG('none');
+	} else {
+		setBG('background1');
 	}
 }
 //Change the background on page load.
