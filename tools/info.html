@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<style>
+	p {
+		color: white;
+		line-height: 1em;
+	}
+	label {
+		color:white;
+	}
+	.button {
+		padding: 4px 8px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+		background-color: #454545;
+		color: white;
+		border: 3px solid green;
+	}
+
+		.button:hover {
+			background-color: #606060;
+			color: white;
+			border: 3px solid lightgreen;
+		}
+
+		.button:active {
+			background-color: lightgreen;
+			color: white;
+			border: 3px solid white;
+		}
+	input {
+		background-color: #191919;
+		color: white;
+		border: 2px solid green;
+	}
+
+		input:hover {
+			border: 2px solid lightgreen;
+		}
+	textarea {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
+    }
+        textarea:hover {
+            border: 2px solid lightgreen;
+        }
+	.buttonselected {
+		background-color: green;
+		color: white;
+		border: 3px solid lightgreen;
+	}
+		.buttonselected:hover {
+			background-color: green;
+			color: white;
+			border: 3px solid white;
+		}
+</style>
+<title>Browser Information</title>
+<link rel="stylesheet" href="../dark_green.css">
+<html>
+<body style="background-color:#252525;" onresize="RefreshWindow1()">
+	<h1>User Information</h1>
+	<p id="userAgent"/>
+	<p id="online"/>
+	<p id="publicIP" onclick="ShowIP();"><b>Public IP:</b> (Click to retrieve)</p>
+	<p id="geolocation" onclick="ShowLocation();"><b>Location:</b> (Click to retrieve)</p>
+	<p id="window0"/>
+	<p id="window1" onclick="RefreshWindow1();"/>
+	<p id="colorDepth"/>
+	<p id="pixelDepth"/>
+	<p id="cookies"/>
+	<p id="platform"/>
+	<p id="language"/>
+	<p id='java'/>
+</body>
+</html>
+<script>
+	const docid = function( id ) { return document.getElementById( id ); }; //for less typing
+	//user agent
+	docid("userAgent").innerHTML = "<b>User Agent:</b> " + navigator.userAgent;
+	//window
+	docid("window0").innerHTML = "<b>Screen resolution:</b> " + window.screen.width + " x " + window.screen.height;
+	RefreshWindow1();
+	docid('colorDepth').innerHTML = "<b>Screen color depth:</b> " + screen.colorDepth;
+	docid('pixelDepth').innerHTML = "<b>Screen pixel depth:</b> " + screen.pixelDepth;
+	docid('cookies').innerHTML = "<b>Cookies enabled:</b> " + navigator.cookieEnabled;
+	docid('platform').innerHTML = "<b>Platform:</b> " + navigator.platform;
+	docid('language').innerHTML = "<b>Language:</b> " + navigator.language;
+	docid('online').innerHTML = "<b>Browser is online:</b> " + navigator.onLine;
+	docid('java').innerHTML = "<b>Java enabled:</b> " + navigator.javaEnabled();
+	//events
+	//IP
+	function ShowIP(){
+		docid('publicIP').innerHTML = '<b>Public IP:</b> . . .';
+		fetch('https://api.ipify.org?format=json')
+		.then(response => response.json())
+		.then(data => {
+			docid('publicIP').innerHTML = '<b>Public IP:</b> ' + data.ip;
+		})
+	}
+	//location
+	function ShowLocation(){
+		docid('geolocation').innerHTML = '<b>Location:</b> . . .';
+		if (navigator.geolocation) { 
+			navigator.geolocation.getCurrentPosition(GetLocation);
+		} else {
+			docid('geolocation').innerHTML = '<b>Location:</b> failed';
+		}
+	}
+	function GetLocation(pos){
+		docid('geolocation').innerHTML = '<b>Location:</b> Lat: ' + pos.coords.latitude + ", Long: " + pos.coords.longitude;
+	}
+	//refreshes
+	function RefreshWindow1(){
+		docid("window1").innerHTML = "<b>Window resolution:</b> " + window.innerWidth + " x " + window.innerHeight;
+	}
+</script>

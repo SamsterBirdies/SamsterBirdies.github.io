@@ -24,19 +24,18 @@
 	<!-- page start -->
 	<div class='main'>
 		<p style='font-size: 18px;'>This is a home page. There are some cool tools and charts and fun things to download in this wobsite.</p>
+		<!--General information-->
+		<p>The Tools page has a bunch of fun little random useful tools. The Tables page has some tables with some random useful data or information. The Post page has some random posts with random information. The Repo page has some random things to download. The About page has some random things about me.</p>
+		<!--News goes here-->
 		<h2>News:</h2>
-		<p>Website is now undergoing a visual overhaul! Is still WIP. Hope its an improvement!</p>
+		<p>No news :(</p>
+		<!--Recent additions listed here-->
 		<h2 style="color: lightgreen">Recent thingies:</h2>
-			<a class="link" href="./tools/hash.html">Hash text/files</a> <br>
-			<a class="link" href="./tools/pixeldensity.html">Pixel density calculator</a> <br>
-			<a class="link" href="./tools/fortspivots.html">Forts Pivot modding tool</a> <br>
-			<a class="link" href="./post/soundresources.html">Free sound resources (post)</a> <br>			<a>Posts tab (articles).</a> <br>			<a class="link" href="https://www.samsterbirdies.com/tools/lpcmdatasize.html">LPCM datasize calculator.</a> <br>
-			<a>New fonts.</a> <br>
-			<a>Tools search bar.</a> <br>
-			<a class="link" href="./tools/randomforts.html">Random Forts Commanders and Weapons.</a> <br>
-			<a class="link" href="./repo/files/savelogonexit.py">Forts log archiver.</a> <br>
-			<a class="link" href="https://www.samsterbirdies.com/tools/aspectratio.html">Aspect ratio tool.</a>
+			<a class="link" href="./tools/info.html">User Information</a> <br>
+		
+		<!--Bottom page, site style options-->
 		<br><br><br><br>
+		
 		<a>Site style presets. Changing this will save cookies:</a>
 		<select id='styleSelect' class='button buttonsmall' onchange='changeStyle()'>
 			<option value='current'>Current</option>
@@ -55,6 +54,8 @@
 			<br>
 			<button type='button' class='button buttonsmall' onclick='changeGradient()'>Change</button>
 		</div>
+		<br/>
+		<button type="button" class='button buttonsmall' id='funbutton'>Fun button</button>
 	</div>
 </body>
 <script src="./scripts/cookieAPI.js"></script>
