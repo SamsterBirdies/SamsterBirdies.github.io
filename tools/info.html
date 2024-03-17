@@ -64,7 +64,8 @@
 <html>
 <body style="background-color:#252525;" onresize="RefreshWindow1()">
 	<h1>User Information</h1>
-	<p id='mobile'/>
+	<p id="time"><b>Time:</b> </p>
+	<p id='mobile'>Browser is mobile: unknown</p>
 	<p id="userAgent"/>
 	<p id="online"/>
 	<p id="publicIP" onclick="ShowIP();"><b>Public IP:</b> (Click to retrieve)</p>
@@ -80,12 +81,26 @@
 </body>
 </html>
 <script>
+	//stuff
 	const docid = function( id ) { return document.getElementById( id ); }; //for less typing
-	//mobile
-	docid('mobile').innerHTML = "<b>Browser is mobile:</b> " + navigator.userAgentData.mobile;
-	//user agent
-	docid("userAgent").innerHTML = "<b>User Agent:</b> " + navigator.userAgent;
+	function sleep(ms) {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+	function Timezone(){
+		let date = new Date();
+		let offset = date.getTimezoneOffset();
+		offset = Math.round(offset / 60);
+		let plusorminus = "-";
+		if (offset < 0) {
+			plusorminus = "+";
+			offset = Math.abs(offset);
+		}
+		return "UTC" + plusorminus + offset;
+	}
+	//do things
+	IsMobile();
 	//window
+	docid('userAgent').innerHTML = "<b>User Agent:</b> " + navigator.userAgent;
 	docid("window0").innerHTML = "<b>Screen resolution:</b> " + window.screen.width + " x " + window.screen.height;
 	RefreshWindow1();
 	docid('colorDepth').innerHTML = "<b>Screen color depth:</b> " + screen.colorDepth;
@@ -95,6 +110,8 @@
 	docid('language').innerHTML = "<b>Language:</b> " + navigator.language;
 	docid('online').innerHTML = "<b>Browser is online:</b> " + navigator.onLine;
 	docid('java').innerHTML = "<b>Java enabled:</b> " + navigator.javaEnabled();
+	Timezone();
+	TimeUpdate();
 	//events
 	//IP
 	function ShowIP(){
@@ -120,5 +137,17 @@
 	//refreshes
 	function RefreshWindow1(){
 		docid("window1").innerHTML = "<b>Window resolution:</b> " + window.innerWidth + " x " + window.innerHeight;
+	}
+	function IsMobile(){
+		docid('mobile').innerHTML = "<b>Browser is mobile:</b> " + navigator.userAgentData.mobile;
+	}
+
+	async function TimeUpdate(){
+		while (true) {
+			let date = new Date();
+			let timeString = date.toLocaleString();
+			docid('time').innerHTML = "<b>Time:</b> " + timeString + " " + Timezone();
+			await sleep(100);
+		}
 	}
 </script>
