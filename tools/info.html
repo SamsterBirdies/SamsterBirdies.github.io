@@ -98,7 +98,7 @@
 		return "UTC" + plusorminus + offset;
 	}
 	//do things
-	IsMobile();
+	
 	//window
 	docid('userAgent').innerHTML = "<b>User Agent:</b> " + navigator.userAgent;
 	docid("window0").innerHTML = "<b>Screen resolution:</b> " + window.screen.width + " x " + window.screen.height;
@@ -112,6 +112,7 @@
 	docid('java').innerHTML = "<b>Java enabled:</b> " + navigator.javaEnabled();
 	Timezone();
 	TimeUpdate();
+	IsMobile();
 	//events
 	//IP
 	function ShowIP(){
@@ -138,7 +139,7 @@
 	function RefreshWindow1(){
 		docid("window1").innerHTML = "<b>Window resolution:</b> " + window.innerWidth + " x " + window.innerHeight;
 	}
-	function IsMobile(){
+	async function IsMobile(){
 		docid('mobile').innerHTML = "<b>Browser is mobile:</b> " + navigator.userAgentData.mobile;
 	}
 
