@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="./../dark_green.css">
+	<title>Good file formats</title>
+	<link rel="icon" href="./../images/favicon.webp" />
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+</head>
+<body>
+	<div class='sidebar' id='aside'>
+		<img class="border" src="./../images/sb.webp" alt="sb.webp" width="97%" >
+		<h1 style='font-size: 22.5px; color: white'>SamsterBirdies</h1>
+		<nav>
+			<a class="button buttonaside" href="./../index.html">Home</a><br>
+			<a class="button buttonaside" href="./../tools.html">Tools</a><br>
+			<a class="button buttonaside" href="./../tables.html">Tables</a><br>
+			<a class="button buttonaside buttonselected" href="./../post.html">Post</a><br>
+			<a class="button buttonaside" href="./../repo.html">Repo</a><br>
+			<a class="button buttonaside" href="./../about.html">About</a><br>
+		</nav>
+	</div>
+	<div class='borderDecor borderDecorL'></div> <div class='borderDecor borderDecorR'></div> <!--just for decoration-->
+	<!-- page start -->
+	<div class='main'>
+		<h1>Good file formats</h1>
+		<p>List of good containers and codecs with pros and cons of each.<br/>
+		If something is not on here, then either it's new or probably sucks lol.
+		<h2>List of lists:</h2>
+			<a style="font-size: 20px;"><b>- </b></a><b><a href="#Audio" style='color: lightblue'>Audio</a></b><br/>
+			<a style="font-size: 20px;"><b>- </b></a><b><a href="#Image" style='color: lightblue'>Image</a></b><br/>
+			<a style="font-size: 20px;"><b>- </b></a><b><a href="#Video" style='color: lightblue'>Video</a></b><br/>
+			<a style="font-size: 20px;"><b>- </b></a><b><a href="#Text" style='color: lightblue'>Text</a></b><br/>
+		</p>
+		<h1><a name="Audio" style='font-size: 28px; color: lightgreen'>Audio:</a></h1>
+		<p>Typically all audio formats will sound the same, because they are usually stored with a bitrate high enough for transparency.</p>
+		<table width="80%">
+			<tr><td>
+				<h2 style='color: lightgreen'>.mp3</h2>
+				<p><b><i>Lossy audio to use when wide compatibility is a must.</i></b></p>
+				<p>
+					
+					A lossy format released in 1991. Because of its age, basically everything will accept mp3. However, that also means its compression is very dated and has poor compression.<br/>
+					For me, it sounds transparent at 192kbps. 128kbps and below starts having nasty artifacts with higher frequencies.<br/>
+				</p>
+				<p><b>Pros:</b></p>
+				<ul>
+					<li>Very widely compatible.</li>
+				</ul>
+				<p><b>Cons:</b></p>
+				<ul>
+					<li>Inefficient lossy compression.</li>
+				</ul>
+			</td></tr>
+			<tr><td>
+				<h2 style='color: lightgreen'>.wav</h2>
+				<p><b><i>Wide compatibility and with no compression.</i></b></p>
+				<p>
+					Usually contains Linear PCM audio.
+				</p>
+				<p><b>Pros:</b></p>
+				<ul>
+					<li>Lossless audio quality.</li>
+					<li>Very widely compatible.</li>
+				</ul>
+				<p><b>Cons:</b></p>
+				<ul>
+					<li>No compression means large file sizes.</li>
+				</ul>
+			</td></tr>
+			<tr><td>
+				<h2 style='color: lightgreen'>.ogg</h2>
+				<p><b><i>Good compression lossy codec to use when Opus is not supported.</i></b></p>
+				<p>
+					Contains Vorbis codec released in 2000. It is lossy and has good compression.<br/>
+					The Vorbis codec is superseded by the Opus codec. However, Vorbis has higher compatibility at the moment.<br/>
+					I think it sounds transparent at about Q3 (112kbps). However, Vorbis does not handle square waves well and will sound noisy with them.
+				</p>
+				<p><b>Pros:</b></p>
+				<ul>
+					<li>Good compression</li>
+					<li>Decent compatibility</li>
+				</ul>
+				<p><b>Cons:</b></p>
+				<ul>
+					<li>Not as widely supported as .mp3</li>
+					<li>Superseded by Opus</li>
+				</ul>
+			</td></tr>
+			<tr><td>
+				<h2 style='color: lightgreen'>.flac</h2>
+				<p><b><i>Good lossless compressed audio codec.</i></b></p>
+				<p>
+					Free Lossless Audio Codec was released in 2001. This codec offers lossless compression. It has good compatibility, but not as much as .wav.
+				</p>
+				<p><b>Pros:</b></p>
+				<ul>
+					<li>Lossless compression</li>
+					<li>Decent compatibility</li>
+				</ul>
+				<p><b>Cons:</b></p>
+				<ul>
+					<li>Not as widely supported as .wav</li>
+				</ul>
+			</td></tr>
+			<tr><td>
+				<h2 style='color: lightgreen'>.opus</h2>
+				<p><b><i>Best lossy compression.</i></b></p>
+				<p>
+					Opus codec currently has the best lossy compression. It was released in 2012.<br/>
+					This is the codec used often in audio streaming services.<br/>
+					It sounds very good, even at 64kbps.<br/> 
+					Unfortunately, it is not widely compatible since it is relatively new. Ogg Vorbis is a good alternative.
+				</p>
+				<p><b>Pros:</b></p>
+				<ul>
+					<li>Amazing compression</li>
+				</ul>
+				<p><b>Cons:</b></p>
+				<ul>
+					<li>Low compatibility due to its recency.</li>
+				</ul>
+			</td></tr>
+		</table>
+		<h1><a name="Image" style='font-size: 28px; color: lightgreen'>Image:</a></h1>
+		<table width="80%">
+			<tr><td>
+				<h2>.jpg</h2>
+				<p><b><i>Super widely compatible lossy format</i></b></p>
+				<p>
+					It sucks but its compatible everywhere.
+				</p>
+				<p><b>Pros:</b></p>
+				<ul>
+					<li>Wide compatibility</li>
+					<li>Fast compression / decompression speed</li>
+				</ul>
+				<p><b>Cons:</b></p>
+				<ul>
+					<li>Bad compression</li>
+				</ul>
+			</td></tr>
+			<tr><td>
+				<h2>.</h2>
+				<p><b><i> </i></b></p>
+				<p>
+					
+				</p>
+				<p><b>Pros:</b></p>
+				<ul>
+					<li> </li>
+				</ul>
+				<p><b>Cons:</b></p>
+				<ul>
+					<li> </li>
+				</ul>
+			</td></tr>
+		</table>
+	</div>
+</body>
+<script src="./../scripts/cookieAPI.js"></script>
+</html>
+<script>
+	cookieChangeStyle(true);
+</script>

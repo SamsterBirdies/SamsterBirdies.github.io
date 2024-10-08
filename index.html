@@ -55,7 +55,7 @@
 			<button type='button' class='button buttonsmall' onclick='changeGradient()'>Change</button>
 		</div>
 		<br/>
-		<!--<button class='button buttonsmall' onclick='FunButton()'>Fun button</button>-->
+		<!--<button class='button buttonsmall' onclick='FunButton()' id='funbutton'>Fun button</button>-->
 	</div>
 </body>
 <script src="./scripts/cookieAPI.js"></script>
@@ -107,9 +107,18 @@
 		changeStyle();
 	}
 	//fun button
+	var funX = 0;
+	var funY = 0;
 	function FunButton(){
 		if (funstyle == 0){
-			
+			window.requestAnimationFrame(CursorFollow);
 		}
+	}
+	function CursorFollow(timestamp){
+		funX += (Math.random() - 0.5) * 30;
+		funY += (Math.random() - 0.5) * 30;
+		docid('funbutton').style.transform = `translateX(${funX}px)`;
+		//docid('funbutton').style.transform = `translateY(${funY}px)`;
+		window.requestAnimationFrame(CursorFollow)
 	}
 </script>
