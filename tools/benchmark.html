@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<style>
+	p {
+		color: white;
+	}
+	label {
+		color:white;
+	}
+	.button {
+		padding: 4px 8px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+		background-color: #454545;
+		color: white;
+		border: 3px solid green;
+	}
+
+		.button:hover {
+			background-color: #606060;
+			color: white;
+			border: 3px solid lightgreen;
+		}
+
+		.button:active {
+			background-color: lightgreen;
+			color: white;
+			border: 3px solid white;
+		}
+	input {
+		background-color: #191919;
+		color: white;
+		border: 2px solid green;
+	}
+
+		input:hover {
+			border: 2px solid lightgreen;
+		}
+	textarea {
+        background-color: #191919;
+        color: white;
+        border: 2px solid green;
+    }
+        textarea:hover {
+            border: 2px solid lightgreen;
+        }
+	.buttonselected {
+		background-color: green;
+		color: white;
+		border: 3px solid lightgreen;
+	}
+		.buttonselected:hover {
+			background-color: green;
+			color: white;
+			border: 3px solid white;
+		}
+</style>
+<title>Benchmark</title>
+<link rel="stylesheet" href="../dark_green.css">
+<html>
+<body style="background-color:#252525;">
+	<table style="border-collapse: collapse" width="100%">
+		<tr>
+			<td width="50%">
+				Test type
+			</td>
+			<td width="50%">
+				Results
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: Top;">
+				<!--fibonachi-->
+				<h2>Fibonnachi</h2>
+				<label style="color: white" for="fibBox">Value:</label>
+				<input type="number" class="textareainput" id="fibBox" placeholder="35"/>
+				<button type="button" class='button buttonsmall' style="font-size:16px" onclick="FibRun()" id='fibBtn'>Run</button>
+				<!--HASHING-->
+				<h2>Hash</h2>
+				<label for="selectHashType">Algorithm:</label>
+				<select id="selectHashType" class="button buttonsmall" style="font-size:16px">
+					<option value="SHA-256">SHA-256</option>
+					<option value="SHA-384">SHA-384</option>
+					<option value="SHA-512">SHA-512</option>
+				</select>
+				<label style="color: white" for="lenBox">Length (2^power):</label>
+				<input type="number" class="textareainput" id="lenBox" placeholder="27"/>
+				<button type="button" class='button buttonsmall' style="font-size:16px" onclick="HashTextarea(1)" id='hashBtn'>Run</button>
+			</td>
+			<td style="vertical-align: Top;">
+				<p><a id='output' style="white-space: pre-line;"></a></p>
+			</td>
+		<tr>
+	</table>
+</body>
+</html>
+<script>
+	const docid = function( id ) { return document.getElementById( id ); }; //for less typing
+	//functions fib
+	function fib(n) {
+		if (n <= 1){
+			return n;
+		}
+		
+		return fib(n - 1) + fib(n - 2);
+	}
+	function FibRun(){
+		var result;
+		var value = docid('fibBox').value;
+		var t0 = performance.now();
+
+		result = fib(value);
+		
+		var t1 = performance.now();
+		
+		docid('output').innerHTML += '\nFib'+ value + ": Time=" + ((t1-t0) / 1000) + "sec, result=" + result;
+	}
+	//functions hash
+	async function hashTxt(message, type) {
+		const msgUint8 = new TextEncoder().encode(message); // encode as (utf-8) Uint8Array
+		const hashBuffer = await crypto.subtle.digest(type, msgUint8); // hash the message
+		const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert buffer to byte array
+		const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+		return hashHex;
+	}
+	function HashTextarea(inputElement){ //0 = only hash on instant mode. 1 = always hash.
+		var hashStr = '0'.repeat(2**docid('lenBox').value);
+		outputTxt(hashStr);
+	}
+	async function outputTxt(message){
+		var t0 = performance.now();
+		const text = await hashTxt(message, docid('selectHashType').value);
+		var t1 = performance.now();
+		docid('output').innerHTML += "\nHash " + docid('selectHashType').value + " len" + docid('lenBox').value + ": Time=" + ((t1-t0)/1000) + "sec";
+	}
+</script>
